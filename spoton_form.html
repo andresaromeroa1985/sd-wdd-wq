@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SpotOn — Website Questionnaire</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:#1769ff;--bd:#1256d4;--bg:rgba(23,105,255,0.18);
+  --black:#000;--white:#fff;
+  --sd:#0d0d0d;--sd2:#181818;--brd:rgba(255,255,255,0.10);
+  --tw:#fff;--tp:#a6b0bf;--tg:#6A7586;
+  --r:6px;--rl:12px;--f:'Poppins',-apple-system,sans-serif
+}
+body{font-family:var(--f);background:var(--black);color:var(--tw);min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:0 16px 100px}
+.topbar{width:100%;max-width:960px;display:flex;align-items:center;justify-content:space-between;padding:24px 0 44px}
+.logo{display:flex;align-items:center;text-decoration:none}
+.topbar-right{display:flex;align-items:center;gap:16px}
+.lang-toggle{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:20px;padding:4px}
+.lang-btn{display:flex;align-items:center;gap:6px;padding:5px 12px;border-radius:16px;border:none;background:none;cursor:pointer;font-family:var(--f);font-size:13px;font-weight:500;color:var(--tp);transition:all .2s}
+.lang-btn .flag{font-size:16px;line-height:1}
+.lang-btn.active{background:var(--blue);color:#fff}
+.lang-btn:not(.active):hover{color:#fff;background:rgba(255,255,255,0.08)}
+.tl{font-size:13px;color:var(--tg)}
+.ph{width:100%;max-width:960px;margin-bottom:36px}
+.ey{font-size:12px;font-weight:500;letter-spacing:.10em;text-transform:uppercase;color:var(--blue);margin-bottom:14px}
+.pt{font-size:clamp(26px,3.5vw,40px);font-weight:600;letter-spacing:-.02em;line-height:1.15;color:var(--tw);margin-bottom:10px}
+.pt span{color:var(--tg)}
+.ps{font-size:14px;color:var(--tp);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pw{width:100%;max-width:960px;margin-bottom:28px}
+.dots{display:flex;gap:5px;margin-bottom:10px}
+.dot{height:4px;flex:1;border-radius:2px;background:rgba(255,255,255,0.10);transition:background .3s,transform .15s}
+.dot.active{background:var(--blue)}
+.dot.done{background:rgba(23,105,255,0.45);cursor:pointer}
+.dot.done:hover{background:var(--blue);transform:scaleY(1.6)}
+.sm{display:flex;justify-content:space-between;font-size:12px}
+.sm .n{color:var(--tp);font-weight:500}
+.sm .c{color:var(--tg)}
+.layout{width:100%;max-width:960px;display:grid;grid-template-columns:260px 1fr;gap:20px;align-items:start}
+.card{background:var(--white);border-radius:var(--rl);padding:40px 44px 36px;color:#111}
+.stitle{font-size:20px;font-weight:600;letter-spacing:-.02em;color:#111;margin-bottom:6px}
+.sdesc{font-size:14px;color:var(--tg);margin-bottom:32px;line-height:1.65}
+.field{margin-bottom:20px}
+.field label{display:block;font-size:13px;font-weight:500;color:#333;margin-bottom:7px}
+.req{color:var(--blue);margin-left:2px}
+.opt{font-weight:400;color:#aaa;margin-left:4px;font-size:12px}
+input[type=text],input[type=email],input[type=url],input[type=tel],textarea{
+  width:100%;padding:10px 13px;font-size:14px;font-family:var(--f);
+  color:#111;background:#fff;border:1.5px solid #e0e3e9;border-radius:var(--r);
+  outline:none;transition:border-color .15s,box-shadow .15s;appearance:none
+}
+input::placeholder,textarea::placeholder{color:#bbb}
+input:hover,textarea:hover{border-color:#c0c7d4}
+input:focus,textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px var(--bg)}
+textarea{resize:vertical;min-height:88px;line-height:1.6}
+.hint{font-size:12px;color:var(--tg);margin-top:5px;line-height:1.5}
+.rg,.cg{display:flex;flex-direction:column;gap:8px}
+.ro,.co{display:flex;align-items:center;gap:12px;padding:11px 14px;border:1.5px solid #e0e3e9;border-radius:var(--r);cursor:pointer;font-size:14px;color:#444;transition:border-color .15s,background .15s;user-select:none;line-height:1.4}
+.ro:hover,.co:hover{border-color:#c0c7d4;background:#f7f9ff}
+.ro input,.co input{accent-color:var(--blue);width:16px;height:16px;flex-shrink:0;cursor:pointer}
+.ro.sel,.co.sel{border-color:var(--blue);background:#f0f5ff;color:#111}
+.cao{align-items:flex-start;padding:14px 16px}
+.cao input{margin-top:2px}
+.cot{font-size:14px;font-weight:500;color:#111;margin-bottom:3px}
+.cod{font-size:12px;color:var(--tg);line-height:1.5}
+.cao.sel .cod{color:#555}
+.epl{font-size:13px;font-weight:500;color:#333}
+.eps{font-size:12px;color:var(--tg);margin-left:6px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:var(--blue);color:#fff;border-radius:var(--r);font-size:14px;font-weight:500;text-decoration:none;font-family:var(--f);transition:background .15s;border:none;cursor:pointer}
+.btn:hover{background:var(--bd)}
+.warn{display:flex;gap:12px;padding:14px 16px;background:#fff8f0;border:1.5px solid #f5c07a;border-radius:var(--r);align-items:flex-start}
+.wt{font-size:13px;color:#7a4a00;line-height:1.7}
+.wt strong{display:block;margin-bottom:4px}
+.div{border:none;border-top:1.5px solid #f0f2f5;margin:28px 0}
+.cond{display:none}
+.cond.on{display:block}
+.sp{display:none}
+.sp.active{display:block}
+.nav{display:flex;align-items:center;justify-content:space-between;margin-top:32px;padding-top:24px;border-top:1.5px solid #f0f2f5}
+.bbk{font-size:14px;color:var(--tg);background:none;border:none;cursor:pointer;font-family:var(--f);padding:10px 0;font-weight:500;transition:color .15s}
+.bbk:hover{color:#111}
+.bnx{padding:11px 30px;background:var(--blue);color:#fff;border:none;border-radius:var(--r);font-size:14px;font-weight:600;font-family:var(--f);cursor:pointer;transition:background .15s,transform .1s}
+.bnx:hover{background:var(--bd)}
+.bnx:active{transform:scale(.98)}
+.bsb{display:none;padding:11px 30px;background:var(--blue);color:#fff;border:none;border-radius:var(--r);font-size:14px;font-weight:600;font-family:var(--f);cursor:pointer;transition:background .15s}
+.bsb:hover{background:var(--bd)}
+.bsb.on{display:block}
+.err{font-size:12px;color:#ef4444;margin-top:5px;display:none}
+.field.inv input,.field.inv textarea{border-color:#f87171}
+.field.inv .err{display:block}
+.ddi:hover{background:#f0f5ff}
+.pgc{font-size:12px;font-weight:500;color:var(--tg);margin-top:6px}
+.pgc.ov{color:#e07a00}
+.tbox{background:#f8f9fb;border:1.5px solid #e0e3e9;border-radius:var(--r);padding:16px;max-height:160px;overflow-y:auto;font-size:12px;color:#555;line-height:1.7;margin-bottom:14px}
+.fr{display:flex;gap:8px;align-items:center;margin-bottom:8px}
+.fr input{flex:1}
+.fn{width:24px;height:24px;border-radius:50%;background:var(--blue);color:#fff;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.fc{font-size:12px;color:var(--tg);margin-top:6px}
+.fc.full{color:#e07a00}
+.mopt{border:1.5px solid #e0e3e9;border-radius:var(--r);overflow:hidden;cursor:pointer;transition:border-color .15s,background .15s;margin-bottom:8px}
+.mopt:last-child{margin-bottom:0}
+.mor{display:flex;align-items:center;gap:12px;padding:11px 14px}
+.mor input{accent-color:var(--blue);width:16px;height:16px;flex-shrink:0;cursor:pointer}
+.mor span{font-size:14px;font-weight:500;color:#333}
+.mod{font-size:12px;color:var(--tg);padding:0 14px 11px 42px;line-height:1.5}
+.mopt.feat{border-color:var(--blue);background:#f0f5ff}
+.mopt.feat .mor span{color:var(--blue)}
+.mopt.act{border-color:var(--blue);background:#f0f5ff}
+.tpopt{border:1.5px solid #e0e3e9;border-radius:var(--r);overflow:hidden;transition:border-color .15s,background .15s}
+.tpopt label{display:flex;align-items:center;gap:12px;padding:11px 14px;cursor:pointer;font-size:14px;color:#444;user-select:none}
+.tpopt label input{accent-color:var(--blue);width:16px;height:16px;flex-shrink:0}
+.tpopt.act{border-color:var(--blue);background:#f0f5ff}
+.tpurl{display:none;padding:0 14px 14px}
+.tpurl.on{display:block}
+.tpurl input.err-inp{border-color:#f87171}
+.sb{display:flex;flex-direction:column;gap:16px}
+.sbc{background:var(--sd);border:1px solid var(--brd);border-radius:var(--rl);padding:24px}
+.sbc h3{font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--tg);margin-bottom:16px}
+.ss{display:flex;align-items:flex-start;gap:12px;padding:10px 6px;border-bottom:1px solid var(--brd);border-radius:var(--r);transition:background .15s}
+.ss:last-child{border-bottom:none}
+.ss.cl{cursor:pointer}
+.ss.cl:hover{background:rgba(255,255,255,0.04)}
+.sn{width:22px;height:22px;border-radius:50%;background:var(--sd2);border:1px solid var(--brd);font-size:11px;font-weight:600;color:var(--tg);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;transition:all .2s}
+.sn.active{background:var(--blue);border-color:var(--blue);color:#fff}
+.sn.done{background:rgba(23,105,255,0.15);border-color:rgba(23,105,255,0.4);color:var(--blue)}
+.stt{font-size:13px;font-weight:500;color:#fff;line-height:1.3}
+.stt.m{color:var(--tg);font-weight:400}
+.ssb{font-size:12px;color:var(--tg);margin-top:2px}
+.hc{background:var(--sd);border:1px solid var(--brd);border-radius:var(--rl);padding:24px}
+.hc h3{font-size:13px;font-weight:600;color:#fff;margin-bottom:8px}
+.hc p{font-size:13px;color:var(--tp);line-height:1.65;margin-bottom:14px}
+.hl{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:500;color:var(--blue);text-decoration:none;margin-bottom:10px}
+.hl:last-child{margin-bottom:0}
+.hl:hover{text-decoration:underline}
+.hl svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2}
+.stnav{position:fixed;bottom:0;left:0;right:0;background:rgba(0,0,0,0.92);backdrop-filter:blur(8px);border-top:1px solid rgba(255,255,255,0.08);padding:12px 24px;display:flex;align-items:center;justify-content:center;z-index:100}
+.stni{width:100%;max-width:960px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.stl{font-size:12px;color:var(--tg);white-space:nowrap}
+.sb2{padding:8px 22px;border-radius:var(--r);font-size:13px;font-weight:600;font-family:var(--f);cursor:pointer;border:none;transition:background .15s}
+.sb2.bk{background:rgba(255,255,255,0.07);color:var(--tp)}
+.sb2.bk:hover{background:rgba(255,255,255,0.12);color:#fff}
+.sb2.nx{background:var(--blue);color:#fff}
+.sb2.nx:hover{background:var(--bd)}
+.succ{display:none;text-align:center;padding:40px 0 24px}
+.succ-ico{width:58px;height:58px;border-radius:50%;background:#f0f5ff;border:1.5px solid rgba(23,105,255,0.25);display:flex;align-items:center;justify-content:center;margin:0 auto 22px}
+.succ-ico svg{width:26px;height:26px;stroke:var(--blue);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.succ h2{font-size:22px;font-weight:600;letter-spacing:-.02em;color:#111;margin-bottom:10px}
+.succ p{font-size:14px;color:var(--tg);line-height:1.65;max-width:380px;margin:0 auto}
+@media(max-width:700px){.layout{grid-template-columns:1fr}.sb{order:2}.card{order:1;padding:28px 22px 24px}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a class="logo" href="#"><img src="https://www.spoton.com/_next/static/media/spoton-logo-white.f07227e6.svg" alt="SpotOn" style="height:28px;width:auto"></a>
+  <div class="topbar-right">
+    <span class="tl" id="topbar-label">Website questionnaire</span>
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="btn-en" onclick="setLang('en')"><span class="flag">🇺🇸</span> EN</button>
+      <button class="lang-btn" id="btn-es" onclick="setLang('es')"><span class="flag">🇲🇽</span> ES</button>
+    </div>
+  </div>
+</div>
+
+<div class="ph">
+  <div class="ey" id="ph-eyebrow">Website services</div>
+  <div class="pt" id="ph-title">Let's build your <span id="ph-title-span">website</span></div>
+  <div class="ps" id="ph-sub">Tell us about your business and we'll take it from there. Takes about 5 minutes.</div>
+</div>
+
+<div class="pw" id="pw">
+  <div class="dots" id="dots"></div>
+  <div class="sm"><span class="n" id="slabel"></span><span class="c" id="scounter"></span></div>
+</div>
+
+<div class="layout">
+  <div class="sb">
+    <div class="sbc"><h3 id="sb-steps-title">Steps</h3><div id="sbsteps"></div></div>
+    <div class="hc">
+      <h3 id="help-title">Need help?</h3>
+      <p id="help-body">Have questions about your website? Reach out to our team.</p>
+      <a class="hl" href="mailto:websiteimp@spoton.com" style="display:flex" id="help-email">Email us <svg viewBox="0 0 12 12"><path d="M2 10L10 2M10 2H5M10 2v5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a class="hl" href="https://calendar.app.google/1pvzRL4x8KP5dqPZA" target="_blank" style="display:flex" id="help-call">Book a call <svg viewBox="0 0 12 12"><path d="M2 10L10 2M10 2H5M10 2v5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+  </div>
+
+  <div class="card">
+  <form id="wf" name="Website Questionnaire" method="POST">
+
+  <!-- STEP 1 -->
+  <div class="sp active" id="step1">
+    <div class="stitle" data-en="Business information" data-es="Información del negocio"></div>
+    <div class="sdesc" data-en="This information will appear directly on your website — please make sure everything is exactly how you'd like it displayed to customers." data-es="Esta información aparecerá directamente en su sitio web — asegúrese de que todo esté exactamente como desea que se muestre a sus clientes."></div>
+
+    <div class="field" id="f-bn">
+      <label data-en="Business name <span class='req'>*</span>" data-es="Nombre del negocio <span class='req'>*</span>"></label>
+      <input type="text" name="business-name" id="bizname" data-en-ph="e.g. Main Street Pizza" data-es-ph="ej. Pizzería Calle Principal">
+      <div class="err" data-en="Please enter your business name." data-es="Por favor ingrese el nombre de su negocio."></div>
+    </div>
+
+    <div class="field" id="f-ba">
+      <label data-en="Business address <span class='req'>*</span>" data-es="Dirección del negocio <span class='req'>*</span>"></label>
+      <input type="text" name="business-address" id="bizaddr" data-en-ph="123 Main St, City, State, ZIP" data-es-ph="Calle 123, Ciudad, Estado, CP">
+      <div class="err" data-en="Please enter your business address." data-es="Por favor ingrese la dirección de su negocio."></div>
+    </div>
+
+    <div class="field">
+      <label data-en="Email addresses <span class='req'>*</span>" data-es="Direcciones de correo electrónico <span class='req'>*</span>"></label>
+      <div class="hint" id="email-hint" data-en="You can use one email for all, or specify different ones. Separate multiple with a comma." data-es="Puede usar un correo para todo, o especificar diferentes. Separe múltiples con una coma." style="margin-bottom:14px"></div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div>
+          <div style="margin-bottom:5px"><span class="epl" data-en="Public contact" data-es="Contacto público"></span><span class="eps" data-en="Shown on your website — leave blank to hide" data-es="Visible en su sitio web — déjelo en blanco para ocultar"></span></div>
+          <input type="text" name="email-public" data-en-ph="e.g. hello@yourbusiness.com" data-es-ph="ej. hola@sunegocio.com">
+        </div>
+        <div>
+          <div style="margin-bottom:5px"><span class="epl" data-en="Form replies <span class='req'>*</span>" data-es="Respuestas del formulario <span class='req'>*</span>"></span><span class="eps" data-en="Where contact form submissions are sent" data-es="A dónde se envían los mensajes del formulario de contacto"></span></div>
+          <input type="text" name="email-forms" id="eforms" data-en-ph="e.g. info@yourbusiness.com" data-es-ph="ej. info@sunegocio.com">
+          <div class="err" id="err-eforms" style="display:none" data-en="Please enter at least one email for form replies." data-es="Por favor ingrese al menos un correo para las respuestas del formulario."></div>
+        </div>
+        <div>
+          <div style="margin-bottom:5px"><span class="epl" data-en="Content editors" data-es="Editores de contenido"></span><span class="eps" data-en="Can edit text &amp; images, not the design" data-es="Pueden editar texto e imágenes, no el diseño"></span></div>
+          <input type="text" name="email-editors" data-en-ph="e.g. jane@yourbusiness.com" data-es-ph="ej. ana@sunegocio.com">
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label data-en="Business phone <span class='opt'>optional — leave blank to hide on site</span>" data-es="Teléfono del negocio <span class='opt'>opcional — déjelo en blanco para ocultar</span>"></label>
+      <input type="tel" name="business-phone" data-en-ph="(555) 000-0000" data-es-ph="(555) 000-0000">
+    </div>
+
+    <div class="field" id="f-bh">
+      <label data-en="Business hours <span class='req'>*</span>" data-es="Horario de atención <span class='req'>*</span>"></label>
+      <textarea name="business-hours" id="bizhours" data-en-ph="e.g. Mon–Fri 9am–9pm&#10;Sat–Sun 10am–6pm" data-es-ph="ej. Lun–Vie 9am–9pm&#10;Sáb–Dom 10am–6pm"></textarea>
+      <div class="err" data-en="Please enter your business hours." data-es="Por favor ingrese el horario de su negocio."></div>
+    </div>
+
+    <div class="field">
+      <label data-en="Business type <span class='req'>*</span>" data-es="Tipo de negocio <span class='req'>*</span>"></label>
+      <div style="display:flex;gap:10px" id="btype-group">
+        <label class="co" style="flex:1" id="opt-rest"><input type="checkbox" name="biz-type-restaurant" id="cb-rest" value="restaurant"> <span data-en="Restaurant" data-es="Restaurante"></span></label>
+        <label class="co" style="flex:1" id="opt-ret"><input type="checkbox" name="biz-type-retail" id="cb-ret" value="retail"> <span data-en="Retail" data-es="Tienda minorista"></span></label>
+      </div>
+    </div>
+    <div class="cond field" id="rest-sub-wrap">
+      <label data-en="Restaurant category" data-es="Categoría de restaurante"></label>
+      <div style="position:relative"><input type="text" id="rss" name="restaurant-subcategory" data-en-ph="Type to search (e.g. Italian, Sushi…)" data-es-ph="Escriba para buscar (ej. Italiana, Sushi…)"><div id="rsd" style="display:none;position:absolute;top:100%;left:0;right:0;background:#fff;border:1.5px solid var(--blue);border-top:none;border-radius:0 0 6px 6px;max-height:220px;overflow-y:auto;z-index:100;box-shadow:0 4px 12px rgba(0,0,0,0.08)"></div></div>
+    </div>
+    <div class="cond field" id="ret-sub-wrap">
+      <label data-en="Retail category" data-es="Categoría de tienda"></label>
+      <div style="position:relative"><input type="text" id="res" name="retail-subcategory" data-en-ph="Type to search (e.g. Clothing, Electronics…)" data-es-ph="Escriba para buscar (ej. Ropa, Electrónica…)"><div id="red" style="display:none;position:absolute;top:100%;left:0;right:0;background:#fff;border:1.5px solid var(--blue);border-top:none;border-radius:0 0 6px 6px;max-height:220px;overflow-y:auto;z-index:100;box-shadow:0 4px 12px rgba(0,0,0,0.08)"></div></div>
+    </div>
+
+    <div class="field" id="f-about">
+      <label data-en="Tell us about your business <span class='req'>*</span>" data-es="Cuéntenos sobre su negocio <span class='req'>*</span>"></label>
+      <div class="hint" id="about-hint" style="margin-bottom:8px" data-en="Help us understand who you are, what you stand for, and what makes your business unique. We use this to guide the entire design and content of your website. If you don't provide one, we'll use an AI-generated template as a starting point." data-es="Ayúdenos a entender quiénes son, qué representan y qué hace único a su negocio. Usamos esto para guiar el diseño y contenido de su sitio web. Si no lo proporciona, usaremos una plantilla generada por IA como punto de partida."></div>
+      <textarea name="about-business" id="about-biz" style="min-height:120px" data-en-ph="e.g. We're a family-owned Italian restaurant in downtown Austin…" data-es-ph="ej. Somos un restaurante familiar italiano en el centro de Austin…"></textarea>
+      <div class="err" data-en="Please tell us a bit about your business." data-es="Por favor cuéntenos un poco sobre su negocio."></div>
+    </div>
+
+    <div class="field">
+      <label data-en="Would you like us to optimize your &quot;About Us&quot; copy? <span class='req'>*</span>" data-es="¿Le gustaría que optimicemos su texto &quot;Sobre nosotros&quot;? <span class='req'>*</span>"></label>
+      <div class="hint" id="optimize-hint" style="margin-bottom:8px" data-en="We can polish your text for SEO and readability." data-es="Podemos mejorar su texto para SEO y legibilidad."></div>
+      <div class="rg" id="opt-about-group">
+        <label class="ro"><input type="radio" name="optimize-about" value="yes"> <span data-en="Yes, please optimize it" data-es="Sí, por favor optimícenlo"></span></label>
+        <label class="ro"><input type="radio" name="optimize-about" value="no"> <span data-en="No, use it as-is" data-es="No, úsenlo tal como está"></span></label>
+      </div>
+    </div>
+
+    <hr class="div">
+
+    <div class="field">
+      <label data-en="Primary display language <span class='req'>*</span>" data-es="Idioma principal del sitio <span class='req'>*</span>"></label>
+      <div class="rg" id="lang-group">
+        <label class="ro"><input type="radio" name="primary-lang" value="english"> <span data-en="English" data-es="Inglés"></span></label>
+        <label class="ro"><input type="radio" name="primary-lang" value="spanish"> <span data-en="Spanish" data-es="Español"></span></label>
+        <label class="ro"><input type="radio" name="primary-lang" value="other"> <span data-en="Other" data-es="Otro"></span></label>
+      </div>
+      <div class="cond" id="lang-other-wrap" style="margin-top:10px"><input type="text" name="primary-lang-other" data-en-ph="Please specify the language…" data-es-ph="Por favor especifique el idioma…"></div>
+    </div>
+
+    <div class="field">
+      <label data-en="Would you like a language translation option on your website? <span class='req'>*</span>" data-es="¿Le gustaría una opción de traducción en su sitio web? <span class='req'>*</span>"></label>
+      <div class="hint" id="translate-hint" style="margin-bottom:10px" data-en="We use the Google Translate widget — at no extra cost." data-es="Usamos el widget de Google Translate — sin costo adicional."></div>
+      <div class="rg" id="translate-group">
+        <label class="ro"><input type="radio" name="translate" value="no"> <span data-en="No thanks" data-es="No, gracias"></span></label>
+        <label class="ro"><input type="radio" name="translate" value="yes"> <span data-en="Yes — specify languages" data-es="Sí — especifique los idiomas"></span></label>
+      </div>
+      <div class="cond" id="translate-wrap" style="margin-top:10px"><input type="text" name="translate-langs" data-en-ph="e.g. French, Portuguese, Mandarin…" data-es-ph="ej. Francés, Portugués, Mandarín…"></div>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="sp" id="step2">
+    <div class="stitle" data-en="Your domain" data-es="Su dominio"></div>
+    <div class="sdesc" data-en="Let us know if you already have a website or domain, and how you'd like to manage it going forward." data-es="Díganos si ya tiene un sitio web o dominio, y cómo le gustaría administrarlo."></div>
+
+    <div class="field">
+      <label data-en="Do you currently have a website? <span class='req'>*</span>" data-es="¿Actualmente tiene un sitio web? <span class='req'>*</span>"></label>
+      <div class="rg" id="hw-group">
+        <label class="ro"><input type="radio" name="has-website" value="yes"> <span data-en="Yes, I have an existing website" data-es="Sí, tengo un sitio web existente"></span></label>
+        <label class="ro"><input type="radio" name="has-website" value="no"> <span data-en="No, this will be a new site" data-es="No, este será un sitio nuevo"></span></label>
+      </div>
+    </div>
+
+    <div class="cond" id="existing-wrap">
+      <div class="field">
+        <label data-en="Current website URL" data-es="URL de su sitio web actual"></label>
+        <input type="url" name="existing-url" data-en-ph="https://www.yourbusiness.com" data-es-ph="https://www.sunegocio.com">
+        <div class="hint" data-en="We'll use this as a reference during the design process." data-es="Lo usaremos como referencia durante el proceso de diseño."></div>
+      </div>
+      <div class="field" style="background:#f8f9fb;border:1.5px solid #e0e3e9;border-radius:var(--r);padding:16px">
+        <label style="margin-bottom:10px" data-en="Would you like us to use your current website's content and images? <span class='req'>*</span>" data-es="¿Le gustaría que usemos el contenido e imágenes de su sitio actual? <span class='req'>*</span>"></label>
+        <div class="rg" id="usecontent-group">
+          <label class="ro"><input type="radio" name="use-existing-content" value="yes"> <span data-en="Yes, use my existing content" data-es="Sí, usen mi contenido existente"></span></label>
+          <label class="ro"><input type="radio" name="use-existing-content" value="no"> <span data-en="No, I'll provide new content" data-es="No, proporcionaré contenido nuevo"></span></label>
+        </div>
+        <div class="cond" id="upload-content-wrap" style="margin-top:12px">
+          <a href="https://spoton-website-contents.tiiny.site/" target="_blank" class="btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg><span data-en="Upload contents" data-es="Subir contenido"></span></a>
+          <div class="hint" style="margin-top:8px" data-en="You'll be taken to our secure upload page — come back here once done." data-es="Será llevado a nuestra página segura de carga — regrese aquí cuando termine."></div>
+        </div>
+        <div style="margin-top:12px;font-size:12px;color:var(--tg);line-height:1.6;padding-top:12px;border-top:1px solid #e8eaf0" data-en="By selecting &quot;Yes&quot; you confirm that you own or have permission to use the text, images, and other content on your current website." data-es="Al seleccionar &quot;Sí&quot; confirma que es propietario o tiene permiso para usar el texto, imágenes y otro contenido de su sitio web actual."></div>
+      </div>
+    </div>
+
+    <div class="cond" id="domain-q-wrap">
+      <div class="field" style="margin-top:28px">
+        <label data-en="Do you own a domain? <span class='req'>*</span>" data-es="¿Tiene un dominio propio? <span class='req'>*</span>"></label>
+        <div class="rg" id="hd-group">
+          <label class="ro"><input type="radio" name="has-domain" value="yes"> <span data-en="Yes, I already have a domain" data-es="Sí, ya tengo un dominio"></span></label>
+          <label class="ro"><input type="radio" name="has-domain" value="no"> <span data-en="No, I need one <span style='color:var(--tg);font-size:13px'>(included in your subscription)</span>" data-es="No, necesito uno <span style='color:var(--tg);font-size:13px'>(incluido en su suscripción)</span>"></span></label>
+        </div>
+      </div>
+      <div class="cond field" id="new-domain-wrap">
+        <label data-en="Preferred domain name <span class='opt'>optional</span>" data-es="Nombre de dominio preferido <span class='opt'>opcional</span>"></label>
+        <input type="text" name="domain-preferred" data-en-ph="e.g. yourbusiness.com" data-es-ph="ej. sunegocio.com">
+        <div class="hint" data-en="Let us know your preferred domain and we'll register it for you." data-es="Díganos su dominio preferido y lo registraremos por usted."></div>
+      </div>
+    </div>
+
+    <div class="cond" id="domain-owned-wrap">
+      <div class="cond field" id="domain-name-wrap" style="margin-top:28px">
+        <label data-en="Your domain name" data-es="Su nombre de dominio"></label>
+        <input type="text" name="domain-name" data-en-ph="e.g. yourbusiness.com" data-es-ph="ej. sunegocio.com">
+      </div>
+      <div class="field">
+        <label data-en="Would you like to transfer your domain to us, or keep ownership? <span class='req'>*</span>" data-es="¿Le gustaría transferirnos su dominio o conservar la propiedad? <span class='req'>*</span>"></label>
+        <div class="rg" id="dt-group">
+          <label class="ro cao"><input type="radio" name="domain-transfer" value="transfer"><div><div class="cot" data-en="Transfer to SpotOn" data-es="Transferir a SpotOn"></div><div class="cod" data-en="We handle renewals, security, and upkeep at no extra cost. If you leave, we transfer it straight back. Transfers take 5–7 days but we can connect your site before it's complete." data-es="Nosotros nos encargamos de las renovaciones, seguridad y mantenimiento sin costo adicional. Si se va, se lo transferimos de vuelta. Las transferencias toman 5–7 días pero podemos conectar su sitio antes de que se complete."></div></div></label>
+          <label class="ro cao"><input type="radio" name="domain-transfer" value="keep"><div><div class="cot" data-en="Keep ownership" data-es="Conservar la propiedad"></div><div class="cod" data-en="You continue renewing through your current registrar (e.g. GoDaddy, Namecheap). We'll just need access to update your DNS settings." data-es="Continúa renovando a través de su registrador actual (ej. GoDaddy, Namecheap). Solo necesitaremos acceso para actualizar su configuración DNS."></div></div></label>
+        </div>
+      </div>
+      <div class="cond field" id="transfer-code-wrap">
+        <label data-en="Domain transfer code <span class='opt'>you can share this later</span>" data-es="Código de transferencia de dominio <span class='opt'>puede compartirlo después</span>"></label>
+        <input type="text" name="domain-transfer-code" data-en-ph="e.g. AB12CD34EF" data-es-ph="ej. AB12CD34EF">
+        <div class="hint" data-en="Also called an EPP or authorization code — find it in your domain registrar's settings." data-es="También llamado código EPP o de autorización — encuéntrelo en la configuración de su registrador de dominio."></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="sp" id="step3">
+    <div class="stitle" data-en="Your brand" data-es="Su marca"></div>
+    <div class="sdesc" data-en="Tell us about your brand so we can design a site that feels authentically yours." data-es="Cuéntenos sobre su marca para que podamos diseñar un sitio que se sienta auténticamente suyo."></div>
+
+    <div class="field">
+      <label data-en="Do you have a logo? <span class='req'>*</span>" data-es="¿Tiene un logotipo? <span class='req'>*</span>"></label>
+      <div class="rg" id="logo-group">
+        <label class="ro"><input type="radio" name="has-logo" value="yes"> <span data-en="Yes, I have a logo" data-es="Sí, tengo un logotipo"></span></label>
+        <label class="ro"><input type="radio" name="has-logo" value="need-standard"> <span data-en="No — I'd like a standard logo <span style='color:var(--tg);font-size:13px'>($99 USD)</span>" data-es="No — me gustaría un logotipo estándar <span style='color:var(--tg);font-size:13px'>($99 USD)</span>"></span></label>
+        <label class="ro"><input type="radio" name="has-logo" value="need-custom"> <span data-en="No — I'd like a custom logo <span style='color:var(--tg);font-size:13px'>($299 USD)</span>" data-es="No — me gustaría un logotipo personalizado <span style='color:var(--tg);font-size:13px'>($299 USD)</span>"></span></label>
+        <label class="ro"><input type="radio" name="has-logo" value="no"> <span data-en="No logo needed" data-es="No necesito logotipo"></span></label>
+      </div>
+    </div>
+
+    <div class="cond field" id="logo-upload-wrap">
+      <a href="https://spoton-website-contents.tiiny.site/" target="_blank" class="btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg><span data-en="Upload logo" data-es="Subir logotipo"></span></a>
+      <div class="hint" style="margin-top:8px" data-en="You'll be taken to our secure upload page — come back here once done." data-es="Será llevado a nuestra página segura de carga — regrese aquí cuando termine."></div>
+    </div>
+    <div class="cond field" id="standard-logo-wrap">
+      <a href="https://drive.google.com/file/d/1dP1l0zxl4Q4JksHNiYxD2pWIwQBOTzeP/view?usp=sharing" target="_blank" class="btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span data-en="Standard logo examples" data-es="Ejemplos de logotipo estándar"></span></a>
+      <div class="warn" style="margin-top:10px"><span style="font-size:18px;flex-shrink:0;line-height:1.3">⚠️</span><div class="wt" data-en="By selecting this option, you'll receive a proposal to review and sign before we proceed. Once approved, you'll be charged $99 USD and we'll begin the design process." data-es="Al seleccionar esta opción, recibirá una propuesta para revisar y firmar antes de proceder. Una vez aprobado, se le cobrará $99 USD y comenzaremos el proceso de diseño."></div></div>
+    </div>
+    <div class="cond field" id="custom-logo-wrap">
+      <a href="https://drive.google.com/file/d/1LnR0Szeu9Q2zqk_GCThQcjhzwPSc5Kw0/view?usp=drive_link" target="_blank" class="btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span data-en="Custom logo examples" data-es="Ejemplos de logotipo personalizado"></span></a>
+      <div class="warn" style="margin-top:10px"><span style="font-size:18px;flex-shrink:0;line-height:1.3">⚠️</span><div class="wt" data-en="By selecting this option, you'll receive a proposal to review and sign before we proceed. Once approved, you'll be charged $299 USD and we'll begin the design process." data-es="Al seleccionar esta opción, recibirá una propuesta para revisar y firmar antes de proceder. Una vez aprobado, se le cobrará $299 USD y comenzaremos el proceso de diseño."></div></div>
+    </div>
+    <div class="cond field" id="logo-notes-wrap">
+      <label data-en="Logo design notes <span class='opt'>optional</span>" data-es="Notas de diseño del logotipo <span class='opt'>opcional</span>"></label>
+      <textarea name="logo-design-notes" data-en-ph="Describe the style, symbols, or ideas you'd like…" data-es-ph="Describa el estilo, símbolos o ideas que le gustaría…"></textarea>
+    </div>
+    <div class="cond" id="no-logo-wrap">
+      <div class="warn" style="margin-bottom:20px"><span style="font-size:20px;flex-shrink:0;line-height:1.3">⚠️</span><div class="wt"><strong data-en="We recommend having a logo." data-es="Recomendamos tener un logotipo."></strong><span data-en="A logo is the foundation of your brand identity — it's what customers recognize and remember. Without one, your website may feel less professional. Our standard logo starts at just $99." data-es="Un logotipo es la base de la identidad de su marca — es lo que los clientes reconocen y recuerdan. Sin uno, su sitio puede verse menos profesional. Nuestro logotipo estándar comienza en solo $99."></span></div></div>
+    </div>
+
+    <div class="field">
+      <label data-en="What colors would you like on your website? <span class='req'>*</span>" data-es="¿Qué colores le gustaría en su sitio web? <span class='req'>*</span>"></label>
+      <div class="hint" id="colors-hint" style="margin-bottom:10px" data-en="If you have a specific palette, email it to websiteimp@spoton.com" data-es="Si tiene una paleta específica, envíela a websiteimp@spoton.com"></div>
+      <div class="cg" id="colors-group">
+        <label class="co"><input type="checkbox" name="colors-logo" value="logo"> <span data-en="The same colors as my logo" data-es="Los mismos colores que mi logotipo"></span></label>
+        <label class="co"><input type="checkbox" name="colors-website" value="website"> <span data-en="The same colors as my current website" data-es="Los mismos colores que mi sitio web actual"></span></label>
+        <label class="co" id="colors-other-opt"><input type="checkbox" name="colors-other-cb" id="colors-other-cb" value="other"> <span data-en="Other" data-es="Otro"></span></label>
+      </div>
+      <div class="cond" id="colors-other-wrap" style="margin-top:10px"><input type="text" name="colors-other-text" data-en-ph="Describe your preferred colors or palette…" data-es-ph="Describa sus colores o paleta preferida…"></div>
+    </div>
+
+    <div class="field">
+      <label data-en="How would you like your website to look and feel? <span class='req'>*</span>" data-es="¿Cómo le gustaría que se vea y sienta su sitio web? <span class='req'>*</span>"></label>
+      <div class="hint" style="margin-bottom:10px" data-en="Pick the vibe that best matches your brand." data-es="Elija el estilo que mejor represente su marca."></div>
+      <div class="rg" id="vibe-group">
+        <label class="ro"><input type="radio" name="vibe" value="fun-perky"> <span data-en="🎉 Fun &amp; perky" data-es="🎉 Divertido y animado"></span></label>
+        <label class="ro"><input type="radio" name="vibe" value="serious-professional"> <span data-en="💼 Serious &amp; professional" data-es="💼 Serio y profesional"></span></label>
+        <label class="ro"><input type="radio" name="vibe" value="playful-whimsical"> <span data-en="🎨 Playful &amp; whimsical" data-es="🎨 Juguetón y caprichoso"></span></label>
+        <label class="ro"><input type="radio" name="vibe" value="elegant-luxurious"> <span data-en="✨ Elegant &amp; luxurious" data-es="✨ Elegante y lujoso"></span></label>
+        <label class="ro"><input type="radio" name="vibe" value="laid-back-casual"> <span data-en="😎 Laid-back &amp; casual" data-es="😎 Relajado y casual"></span></label>
+        <label class="ro"><input type="radio" name="vibe" value="creative-liberty"> <span data-en="🎭 Let SpotOn take creative liberties" data-es="🎭 Dejar que SpotOn tome libertades creativas"></span></label>
+        <label class="ro"><input type="radio" name="vibe" value="other"> <span data-en="Other" data-es="Otro"></span></label>
+      </div>
+      <div class="cond" id="vibe-other-wrap" style="margin-top:10px"><input type="text" name="vibe-other-text" data-en-ph="Describe the look and feel you're going for…" data-es-ph="Describa el estilo que busca…"></div>
+    </div>
+
+    <div class="field">
+      <label data-en="Do you have example websites or visual styles for inspiration? <span class='opt'>optional</span>" data-es="¿Tiene sitios web de ejemplo o estilos visuales para inspiración? <span class='opt'>opcional</span>"></label>
+      <div id="inspiration-desc" style="font-size:13px;color:var(--tg);line-height:1.65;margin-bottom:10px"></div>
+      <textarea name="inspiration-urls" data-en-ph="Paste links or describe the styles you like…" data-es-ph="Pegue enlaces o describa los estilos que le gustan…"></textarea>
+    </div>
+  </div>
+
+  <!-- STEP 4 -->
+  <div class="sp" id="step4">
+    <div class="stitle" data-en="Pages &amp; content" data-es="Páginas y contenido"></div>
+    <div class="sdesc" data-en="Select which pages you'd like. Your subscription includes 6 pages — additional pages are $50 USD each." data-es="Seleccione qué páginas desea. Su suscripción incluye 6 páginas — las páginas adicionales cuestan $50 USD cada una."></div>
+
+    <div class="field">
+      <label data-en="Where would you like us to source images? <span class='req'>*</span>" data-es="¿De dónde le gustaría que obtengamos las imágenes? <span class='req'>*</span>"></label>
+      <div style="font-size:13px;color:var(--tg);margin-bottom:12px" data-en="Select all that apply." data-es="Seleccione todas las que apliquen."></div>
+      <div class="cg" id="images-group">
+        <label class="co"><input type="checkbox" name="images-social" value="social"> <span data-en="From my social media" data-es="De mis redes sociales"></span></label>
+        <label class="co" id="images-website-opt" style="display:none"><input type="checkbox" name="images-website" value="current-website"> <span data-en="From my current website" data-es="De mi sitio web actual"></span></label>
+        <label class="co"><input type="checkbox" name="images-stock" value="stock"> <span data-en="From stock images" data-es="De imágenes de banco de imágenes"></span></label>
+        <label class="co"><input type="checkbox" name="images-upload" id="images-upload-cb" value="upload"> <span data-en="I'll upload my own images" data-es="Subiré mis propias imágenes"></span></label>
+      </div>
+      <div class="cond" id="images-upload-wrap" style="margin-top:12px">
+        <a href="https://spoton-website-contents.tiiny.site/" target="_blank" class="btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg><span data-en="Upload your images here" data-es="Suba sus imágenes aquí"></span></a>
+        <div class="hint" style="margin-top:8px" data-en="You'll be taken to our secure upload page — come back here once done." data-es="Será llevado a nuestra página segura de carga — regrese aquí cuando termine."></div>
+      </div>
+      <div id="images-disclaimer" style="font-size:12px;color:var(--tg);line-height:1.6;margin-top:12px;padding:12px;background:#f8f9fb;border-radius:var(--r);border:1px solid #e8eaf0"></div>
+      <div class="err" id="images-err" style="display:none" data-en="Please select at least one option." data-es="Por favor seleccione al menos una opción."></div>
+    </div>
+
+    <hr class="div">
+
+    <div class="field">
+      <label data-en="Which pages would you like on your site? <span class='req'>*</span>" data-es="¿Qué páginas le gustaría en su sitio? <span class='req'>*</span>"></label>
+      <div class="cg" id="pages-group">
+        <label class="co"><input type="checkbox" name="page-home" value="home" class="pcb"> <span data-en="Home" data-es="Inicio"></span></label>
+        <label class="co"><input type="checkbox" name="page-about" value="about" class="pcb"> <span data-en="About us" data-es="Sobre nosotros"></span></label>
+        <label class="co"><input type="checkbox" name="page-menu" value="menu" class="pcb"> <span data-en="Menu / services" data-es="Menú / servicios"></span></label>
+        <label class="co"><input type="checkbox" name="page-gallery" value="gallery" class="pcb"> <span data-en="Gallery / photos" data-es="Galería / fotos"></span></label>
+        <label class="co"><input type="checkbox" name="page-contact" value="contact" class="pcb"> <span data-en="Contact" data-es="Contacto"></span></label>
+        <label class="co"><input type="checkbox" name="page-blog" value="blog" class="pcb"> <span data-en="Blog / news" data-es="Blog / noticias"></span></label>
+        <label class="co"><input type="checkbox" name="page-careers" value="careers" class="pcb"> <span data-en="Careers" data-es="Empleos"></span></label>
+        <label class="co"><input type="checkbox" name="page-faq" value="faq" class="pcb"> <span data-en="FAQ" data-es="Preguntas frecuentes"></span></label>
+        <label class="co" id="page-other-opt"><input type="checkbox" name="page-other-cb" id="page-other-cb" class="pcb" value="other"> <span data-en="Other — specify below" data-es="Otro — especifique abajo"></span></label>
+      </div>
+      <div class="cond" id="page-other-wrap" style="margin-top:10px">
+        <input type="text" name="page-other-text" data-en-ph="e.g. Events, Press, Catering, Locations…" data-es-ph="ej. Eventos, Prensa, Catering, Sucursales…">
+        <div class="hint" data-en="Separate multiple page names with a comma." data-es="Separe múltiples nombres de página con una coma."></div>
+      </div>
+      <div class="pgc" id="pgc"></div>
+      <div class="cond" id="extra-pages-warn" style="margin-top:10px"><div class="warn"><span style="font-size:20px;flex-shrink:0;line-height:1.3">💰</span><div class="wt"><strong id="epm"></strong><span id="extra-pages-body"></span></div></div></div>
+      <div class="err" id="pages-err" style="display:none" data-en="Please select at least one page." data-es="Por favor seleccione al menos una página."></div>
+    </div>
+
+    <div class="cond field" id="menu-page-wrap" style="background:#f8f9fb;border:1.5px solid #e0e3e9;border-radius:var(--r);padding:16px">
+      <label style="margin-bottom:10px" data-en="How would you like us to build your menu page? <span class='req'>*</span>" data-es="¿Cómo le gustaría que construyamos su página de menú? <span class='req'>*</span>"></label>
+      <div style="font-size:13px;color:var(--tg);margin-bottom:12px;line-height:1.6" data-en="If your menu isn't ready yet, we'll display a &quot;coming soon&quot; placeholder." data-es="Si su menú no está listo todavía, mostraremos un aviso de &quot;próximamente&quot;."></div>
+      <div id="menu-type-group">
+        <div class="mopt feat" id="mopt-ordering"><div class="mor"><input type="radio" name="menu-type" value="online-ordering"><span data-en="⭐ Link directly to my online ordering" data-es="⭐ Enlazar directamente a mi pedido en línea"></span></div><div class="mod" data-en="Recommended — helps boost sales, easiest menu updates, no page build needed." data-es="Recomendado — ayuda a aumentar ventas, actualizaciones más fáciles del menú, sin necesidad de construir una página."></div></div>
+        <div class="mopt" id="mopt-spoton"><div class="mor"><input type="radio" name="menu-type" value="spoton-sync"><span data-en="Sync with my SpotOn online ordering" data-es="Sincronizar con mi pedido en línea de SpotOn"></span></div><div class="mod" data-en="Easier updates, but doesn't display modifiers." data-es="Actualizaciones más fáciles, pero no muestra modificadores."></div></div>
+        <div class="mopt" id="mopt-image"><div class="mor"><input type="radio" name="menu-type" value="image"><span data-en="Display my menu as an image or PDF" data-es="Mostrar mi menú como imagen o PDF"></span></div><div class="mod" data-en="Note: not ADA compliant." data-es="Nota: no cumple con los estándares ADA."></div></div>
+        <div class="mopt" id="mopt-other"><div class="mor"><input type="radio" name="menu-type" value="other"><span data-en="Other" data-es="Otro"></span></div></div>
+      </div>
+      <div class="cond" id="menu-upload-wrap" style="margin-top:12px"><a href="https://spoton-website-contents.tiiny.site/" target="_blank" class="btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg><span data-en="Upload your menu here" data-es="Suba su menú aquí"></span></a></div>
+      <div class="cond" id="menu-other-wrap" style="margin-top:10px"><input type="text" name="menu-type-other" data-en-ph="Describe how you'd like your menu displayed…" data-es-ph="Describa cómo le gustaría mostrar su menú…"></div>
+    </div>
+
+    <div class="cond field" id="featured-wrap">
+      <label data-en="What dishes or products would you like featured on your home page? <span class='opt'>optional</span>" data-es="¿Qué platillos o productos le gustaría destacar en su página de inicio? <span class='opt'>opcional</span>"></label>
+      <div style="font-size:13px;color:var(--tg);line-height:1.6;margin-bottom:10px" data-en="Think of your bestsellers or most requested items. You can add up to 6." data-es="Piense en sus más vendidos o los más solicitados. Puede agregar hasta 6."></div>
+      <div id="feat-list">
+        <div class="fr"><div class="fn">1</div><input type="text" name="featured-1" data-en-ph="e.g. Margherita Pizza" data-es-ph="ej. Pizza Margherita"></div>
+        <div class="fr"><div class="fn">2</div><input type="text" name="featured-2" data-en-ph="e.g. Tiramisu" data-es-ph="ej. Tiramisú"></div>
+        <div class="fr"><div class="fn">3</div><input type="text" name="featured-3" data-en-ph="e.g. House Lasagna" data-es-ph="ej. Lasaña de la casa"></div>
+      </div>
+      <button type="button" class="btn" id="add-feat-btn" onclick="addFeat()" style="margin-top:8px"><span data-en="＋ Add item" data-es="＋ Agregar artículo"></span></button>
+      <div class="fc" id="feat-counter"></div>
+    </div>
+
+    <div class="field">
+      <label data-en="Is there anything specific you'd like added to your pages? <span class='opt'>optional</span>" data-es="¿Hay algo específico que le gustaría agregar a sus páginas? <span class='opt'>opcional</span>"></label>
+      <div id="page-specifics-hint" style="font-size:13px;color:var(--tg);line-height:1.65;margin-bottom:8px"></div>
+      <textarea name="page-specifics" data-en-ph="Describe any specific content or links per page…" data-es-ph="Describa el contenido específico o enlaces por página…"></textarea>
+    </div>
+    <div class="field">
+      <label data-en="Anything else about your website needs? <span class='opt'>optional</span>" data-es="¿Algo más sobre las necesidades de su sitio web? <span class='opt'>opcional</span>"></label>
+      <textarea name="anything-else" data-en-ph="Any other details, requests, or ideas…" data-es-ph="Cualquier otro detalle, solicitud o idea…"></textarea>
+    </div>
+  </div>
+
+  <!-- STEP 5 -->
+  <div class="sp" id="step5">
+    <div class="stitle" data-en="Integrations &amp; social" data-es="Integraciones y redes sociales"></div>
+    <div class="sdesc" data-en="Tell us about your social profiles and any third-party platforms you use." data-es="Cuéntenos sobre sus perfiles en redes sociales y las plataformas de terceros que usa."></div>
+
+    <div class="field">
+      <label data-en="Social media profiles <span class='opt'>paste your URLs</span>" data-es="Perfiles en redes sociales <span class='opt'>pegue sus URLs</span>"></label>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <input type="url" name="social-facebook" data-en-ph="Facebook URL" data-es-ph="URL de Facebook">
+        <input type="url" name="social-instagram" data-en-ph="Instagram URL" data-es-ph="URL de Instagram">
+        <input type="url" name="social-twitter" data-en-ph="X / Twitter URL" data-es-ph="URL de X / Twitter">
+        <input type="url" name="social-yelp" data-en-ph="Yelp listing URL" data-es-ph="URL de Yelp">
+        <input type="url" name="social-tiktok" data-en-ph="TikTok URL" data-es-ph="URL de TikTok">
+      </div>
+    </div>
+
+    <hr class="div">
+
+    <div class="field">
+      <label data-en="Do you have any third-party integrations? <span class='opt'>select all that apply</span>" data-es="¿Tiene alguna integración de terceros? <span class='opt'>seleccione todas las que apliquen</span>"></label>
+      <div class="hint" id="tp-hint" style="margin-bottom:12px" data-en="Select any platforms you use and paste the link so we can connect them to your site." data-es="Seleccione las plataformas que usa y pegue el enlace para que podamos conectarlas a su sitio."></div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div class="tpopt" id="tp-ordering-opt"><label><input type="checkbox" name="tp-ordering-cb" id="tp-ordering-cb" value="online-ordering"> <span data-en="Online Ordering" data-es="Pedidos en línea"></span></label><div class="tpurl" id="tp-ordering-url-wrap"><input type="url" name="tp-ordering-url" id="tp-ordering-url" data-en-ph="Paste the link to your online ordering platform…" data-es-ph="Pegue el enlace a su plataforma de pedidos en línea…"></div></div>
+        <div class="tpopt" id="tp-res-opt"><label><input type="checkbox" name="tp-res-cb" id="tp-res-cb" value="reservations"> <span data-en="Reservations / Experiences" data-es="Reservaciones / Experiencias"></span></label><div class="tpurl" id="tp-res-url-wrap"><input type="url" name="tp-res-url" id="tp-res-url" data-en-ph="Paste the link to your reservations platform…" data-es-ph="Pegue el enlace a su plataforma de reservaciones…"></div></div>
+        <div class="tpopt" id="tp-gc-opt"><label><input type="checkbox" name="tp-gc-cb" id="tp-gc-cb" value="gift-cards"> <span data-en="E-gift Cards" data-es="Tarjetas de regalo electrónicas"></span></label><div class="tpurl" id="tp-gc-url-wrap"><input type="url" name="tp-gc-url" id="tp-gc-url" data-en-ph="Paste the link to your gift card platform…" data-es-ph="Pegue el enlace a su plataforma de tarjetas de regalo…"></div></div>
+        <div class="tpopt" id="tp-loyalty-opt"><label><input type="checkbox" name="tp-loyalty-cb" id="tp-loyalty-cb" value="loyalty"> <span data-en="Loyalty Program" data-es="Programa de lealtad"></span></label><div class="tpurl" id="tp-loyalty-url-wrap"><input type="url" name="tp-loyalty-url" id="tp-loyalty-url" data-en-ph="Paste the link to your loyalty platform…" data-es-ph="Pegue el enlace a su plataforma de lealtad…"></div></div>
+        <div class="tpopt" id="tp-other-opt"><label><input type="checkbox" name="tp-other-cb" id="tp-other-cb" value="other"> <span data-en="Other" data-es="Otro"></span></label><div class="tpurl" id="tp-other-url-wrap"><input type="text" name="tp-other-text" id="tp-other-text" data-en-ph="Describe the platform and paste the link…" data-es-ph="Describa la plataforma y pegue el enlace…"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 6 -->
+  <div class="sp" id="step6">
+    <div class="stitle" data-en="Almost done!" data-es="¡Casi terminamos!"></div>
+    <div class="sdesc" data-en="Just a couple of last things before we get started." data-es="Solo un par de cosas más antes de comenzar."></div>
+
+    <div class="cond field" id="autopublish-wrap">
+      <label data-en="Would you like your site to be auto-published? <span class='req'>*</span>" data-es="¿Le gustaría que su sitio se publique automáticamente? <span class='req'>*</span>"></label>
+      <div id="autopublish-desc" style="font-size:13px;color:var(--tg);line-height:1.65;margin-bottom:10px"></div>
+      <div class="rg" id="autopublish-group">
+        <label class="ro"><input type="radio" name="autopublish" value="yes"> <span data-en="Yes, auto-publish if I don't respond" data-es="Sí, publicar automáticamente si no respondo"></span></label>
+        <label class="ro"><input type="radio" name="autopublish" value="no"> <span data-en="No, put my subscription on hold until I respond" data-es="No, pausar mi suscripción hasta que responda"></span></label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label data-en="Any final thoughts? <span class='opt'>optional</span>" data-es="¿Algún comentario final? <span class='opt'>opcional</span>"></label>
+      <textarea name="final-thoughts" data-en-ph="Anything else you'd like us to know before we start building your site…" data-es-ph="¿Algo más que le gustaría que supiéramos antes de comenzar a construir su sitio?"></textarea>
+    </div>
+
+    <hr class="div">
+
+    <div class="field">
+      <label data-en="Terms &amp; conditions <span class='req'>*</span>" data-es="Términos y condiciones <span class='req'>*</span>"></label>
+      <div class="tbox">
+        <strong>SpotOn Website Services — Terms &amp; Conditions</strong><br><br>
+        <strong>1. Subscription &amp; Billing.</strong> Your SpotOn website subscription is billed monthly. The first charge occurs when you approve the start of the website build process.<br><br>
+        <strong>2. Included pages.</strong> Your subscription includes up to 6 custom-designed pages. Additional pages are charged at $50 USD per page, subject to your written approval before work begins.<br><br>
+        <strong>3. Content ownership.</strong> You confirm that you own or have the legal right to use all text, images, logos, and other content you provide to SpotOn for use on your website.<br><br>
+        <strong>4. Logo design.</strong> If you request a logo ($99 standard / $299 custom), a proposal will be sent for your review and signature before any work or charges begin.<br><br>
+        <strong>5. Domain.</strong> If SpotOn registers a domain on your behalf, it remains your property. Upon cancellation, the domain will be transferred back to you at no cost.<br><br>
+        <strong>6. Revisions.</strong> Your subscription includes 2 revision rounds per month (up to 3 line items per revision). Additional revision rounds are available at $75 USD each.<br><br>
+        <strong>7. Auto-publishing.</strong> If you select auto-publishing, SpotOn will attempt to reach you at least 5 times before publishing your site.<br><br>
+        <strong>8. Cancellation.</strong> You may cancel at any time by emailing <a href="mailto:websiteimp@spoton.com" style="color:var(--blue)">websiteimp@spoton.com</a>. If you cancel after design work has begun without an active subscription, a $350 design fee may apply.<br><br>
+        <strong>9. Support.</strong> Post-launch edits are handled by our support team. SpotOn provides support Monday–Friday, 9am–6pm EST.
+      </div>
+      <label class="co" id="terms-opt"><input type="checkbox" name="terms-agreed" id="terms-agreed"> <span data-en="I have read and agree to the terms &amp; conditions" data-es="He leído y acepto los términos y condiciones"></span></label>
+      <div class="err" id="terms-err" style="display:none" data-en="You must agree to the terms &amp; conditions to continue." data-es="Debe aceptar los términos y condiciones para continuar."></div>
+    </div>
+  </div>
+
+  <div class="succ" id="succ">
+    <div class="succ-ico"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <h2 data-en="Questionnaire submitted!" data-es="¡Cuestionario enviado!"></h2>
+    <p data-en="Thanks — we'll confirm receipt within 2 business days and notify you when your site moves into the design queue." data-es="Gracias — confirmaremos la recepción dentro de 2 días hábiles y le notificaremos cuando su sitio entre en la cola de diseño."></p>
+  </div>
+
+  <div class="nav" id="navBar">
+    <button type="button" class="bbk" id="btnBack" onclick="goBack()"><span data-en="← Back" data-es="← Atrás"></span></button>
+    <button type="button" class="bnx" id="btnNext" onclick="goNext()"><span data-en="Continue" data-es="Continuar"></span></button>
+    <button type="submit" class="bsb" id="btnSubmit"><span data-en="Submit questionnaire" data-es="Enviar cuestionario"></span></button>
+  </div>
+
+  </form>
+  </div>
+</div>
+
+<div class="stnav">
+  <div class="stni">
+    <button type="button" id="stickyBack" class="sb2 bk" onclick="goBack()"><span data-en="← Back" data-es="← Atrás"></span></button>
+    <span id="stickyLabel" class="stl"></span>
+    <button type="button" id="stickyNext" class="sb2 nx"><span data-en="Continue" data-es="Continuar"></span></button>
+  </div>
+</div>
+
+<script>
+var STEPS=6,cur=1,needNewDomain=false,featCount=3,lang='en';
+function $(id){return document.getElementById(id);}
+function on(el,evt,fn){if(el)el.addEventListener(evt,fn);}
+function tog(id,v){var el=$(id);if(el)el.classList.toggle('on',!!v);}
+function show(id){tog(id,true);}
+function hide(id){tog(id,false);}
+function selRG(gId,inp){var g=$(gId);if(!g)return;g.querySelectorAll('.ro').forEach(function(o){o.classList.remove('sel');});if(inp)inp.closest('.ro').classList.add('sel');}
+
+var SM={
+  en:[
+    {l:'Business info',s:'Name, address, about us'},
+    {l:'Your domain',s:'Existing site, domain setup'},
+    {l:'Your brand',s:'Logo, colors, look & feel'},
+    {l:'Pages & content',s:'Pages, images, features'},
+    {l:'Integrations',s:'Social, third-party'},
+    {l:'Final details',s:'Publishing, notes, T&C'}
+  ],
+  es:[
+    {l:'Información del negocio',s:'Nombre, dirección, sobre nosotros'},
+    {l:'Su dominio',s:'Sitio existente, configuración'},
+    {l:'Su marca',s:'Logo, colores, estilo'},
+    {l:'Páginas y contenido',s:'Páginas, imágenes, funciones'},
+    {l:'Integraciones',s:'Redes sociales, terceros'},
+    {l:'Detalles finales',s:'Publicación, notas, T&C'}
+  ]
+};
+
+var T={
+  en:{
+    topbarLabel:'Website questionnaire',
+    eyebrow:'Website services',
+    titleMain:"Let's build your",
+    titleSpan:'website',
+    sub:'Tell us about your business and we\'ll take it from there. Takes about 5 minutes.',
+    sbSteps:'Steps',
+    helpTitle:'Need help?',
+    helpBody:'Have questions about your website? Reach out to our team.',
+    helpEmail:'Email us',
+    helpCall:'Book a call',
+    pgCounter:function(n){return n+' of 6 included pages selected';},
+    pgCounterOver:function(n,e,c){return n+' pages — '+e+' additional page'+(e>1?'s':'')+' at $50 each';},
+    extraPagesMsg:function(e,c){return e+' additional page'+(e>1?'s':'')+' selected ($'+c+' USD total). ';},
+    extraPagesBody:'By continuing, you agree to the additional page fee. We\'ll send you a proposal to review and sign before any work begins.',
+    featCounter:function(n){return n+' of 6 slots used';},
+    featFull:function(n){return n+' of 6 slots used';},
+    imagesDisclaimer:'By selecting your own images, you declare you have copyright licensing for the imagery or authorize its use on your website.\n\nIf we don\'t receive images at time of processing, we\'ll use stock images and replace them later.',
+    inspirationDesc:'You can also upload a flyer, poster, or social media post using the link below.\n<a href="https://spoton-website-contents.tiiny.site/" target="_blank" style="color:var(--blue);font-weight:500">Upload inspiration files \u2197</a>\n\nTo view example websites made by us, <a href="https://websites-catalog.webflow.io/client-catalog" target="_blank" style="color:var(--blue);font-weight:500">click here \u2197</a>',
+    pageSpecificsHint:'Please tell us: which page, what content, and any external links (Yelp, TripAdvisor, reservations, press, etc.)<br><em>Example: Home — Include: About us, Featured dishes, Menu, Catering, Newsletter, Contact</em>',
+    autopublishDesc:'Once your website draft is complete, our team will reach out to you at least 5 times to get your approval. If we\'re unable to reach you, your website will be auto-published to your domain so it can start ranking in Google\'s search engines.<br><br>If you prefer not to auto-publish, your subscription will simply be put on hold until you get back to us.',
+    back:'← Back',
+    cont:'Continue',
+    submit:'Submit questionnaire'
+  },
+  es:{
+    topbarLabel:'Cuestionario de sitio web',
+    eyebrow:'Servicios web',
+    titleMain:'Vamos a construir su',
+    titleSpan:'sitio web',
+    sub:'Cuéntenos sobre su negocio y nos encargamos del resto. Toma unos 5 minutos.',
+    sbSteps:'Pasos',
+    helpTitle:'¿Necesita ayuda?',
+    helpBody:'¿Tiene preguntas sobre su sitio web? Comuníquese con nuestro equipo.',
+    helpEmail:'Enviar correo',
+    helpCall:'Agendar llamada',
+    pgCounter:function(n){return n+' de 6 páginas incluidas seleccionadas';},
+    pgCounterOver:function(n,e,c){return n+' páginas — '+e+' página'+(e>1?'s':'')+' adicional'+(e>1?'es':'')+' a $50 cada una';},
+    extraPagesMsg:function(e,c){return e+' página'+(e>1?'s adicionales':' adicional')+' seleccionada'+(e>1?'s':'')+' ($'+c+' USD total). ';},
+    extraPagesBody:'Al continuar, acepta el costo adicional por página. Le enviaremos una propuesta para revisar y firmar antes de comenzar.',
+    featCounter:function(n){return n+' de 6 espacios usados';},
+    featFull:function(n){return n+' de 6 espacios usados';},
+    imagesDisclaimer:'Al seleccionar sus propias imágenes, declara que tiene licencia de derechos de autor sobre ellas o autoriza su uso en su sitio web.\n\nSi no recibimos imágenes al momento de procesar, usaremos imágenes de banco y las reemplazaremos después.',
+    inspirationDesc:'También puede subir un volante, póster o publicación de redes sociales usando el enlace a continuación.\n<a href="https://spoton-website-contents.tiiny.site/" target="_blank" style="color:var(--blue);font-weight:500">Subir archivos de inspiración \u2197</a>\n\nPara ver ejemplos de sitios web hechos por nosotros, <a href="https://websites-catalog.webflow.io/client-catalog" target="_blank" style="color:var(--blue);font-weight:500">haga clic aquí \u2197</a>',
+    pageSpecificsHint:'Por favor indíquenos: qué página, qué contenido, y cualquier enlace externo (Yelp, TripAdvisor, reservaciones, prensa, etc.)<br><em>Ejemplo: Inicio — Incluir: Sobre nosotros, Platillos destacados, Menú, Catering, Newsletter, Contacto</em>',
+    autopublishDesc:'Una vez que el borrador de su sitio web esté listo, nuestro equipo lo contactará al menos 5 veces para obtener su aprobación. Si no podemos comunicarnos con usted, su sitio web se publicará automáticamente para que comience a posicionarse en Google.<br><br>Si prefiere que no se publique automáticamente, su suscripción simplemente se pausará hasta que se comunique con nosotros.',
+    back:'← Atrás',
+    cont:'Continuar',
+    submit:'Enviar cuestionario'
+  }
+};
+
+function t(key){return T[lang][key]||T['en'][key]||'';}
+
+function applyLang(){
+  document.querySelectorAll('[data-en]').forEach(function(el){
+    el.innerHTML=el.getAttribute('data-'+lang)||el.getAttribute('data-en')||'';
+  });
+  document.querySelectorAll('[data-en-ph]').forEach(function(el){
+    el.placeholder=el.getAttribute('data-'+lang+'-ph')||el.getAttribute('data-en-ph')||'';
+  });
+  $('topbar-label').textContent=t('topbarLabel');
+  $('ph-eyebrow').textContent=t('eyebrow');
+  $('ph-title').innerHTML=t('titleMain')+' <span id="ph-title-span">'+t('titleSpan')+'</span>';
+  $('ph-sub').textContent=t('sub');
+  $('sb-steps-title').textContent=t('sbSteps');
+  $('help-title').textContent=t('helpTitle');
+  $('help-body').textContent=t('helpBody');
+  $('help-email').innerHTML=t('helpEmail')+' <svg viewBox="0 0 12 12"><path d="M2 10L10 2M10 2H5M10 2v5" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" fill="none" stroke-width="2"/></svg>';
+  $('help-call').innerHTML=t('helpCall')+' <svg viewBox="0 0 12 12"><path d="M2 10L10 2M10 2H5M10 2v5" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" fill="none" stroke-width="2"/></svg>';
+  $('inspiration-desc').innerHTML=t('inspirationDesc').replace(/\n/g,'<br>');
+  $('images-disclaimer').innerHTML=t('imagesDisclaimer').replace(/\n/g,'<br>');
+  $('page-specifics-hint').innerHTML=t('pageSpecificsHint');
+  $('autopublish-desc').innerHTML=t('autopublishDesc');
+  $('extra-pages-body').textContent=t('extraPagesBody');
+  updFeatCounter();
+  updPgCounter();
+  updProg();
+}
+
+function setLang(l){
+  lang=l;
+  $('btn-en').classList.toggle('active',l==='en');
+  $('btn-es').classList.toggle('active',l==='es');
+  applyLang();
+  sendHeight();
+}
+
+function updProg(){
+  var dots=$('dots');dots.innerHTML='';
+  for(var i=1;i<=STEPS;i++){
+    var d=document.createElement('div');
+    var isDone=i<cur,isAct=i===cur;
+    d.className='dot'+(isDone?' done':isAct?' active':'');
+    if(isDone){(function(s){d.addEventListener('click',function(){jumpTo(s);});})(i);}
+    dots.appendChild(d);
+  }
+  var steps=SM[lang];
+  $('slabel').textContent=steps[cur-1].l;
+  $('scounter').textContent=cur+' / '+STEPS;
+  var sb=$('sbsteps');sb.innerHTML='';
+  steps.forEach(function(s,i){
+    var n=i+1,isA=n===cur,isD=n<cur;
+    var div=document.createElement('div');
+    div.className='ss'+(isD?' cl':'');
+    if(isD){(function(step){div.addEventListener('click',function(){jumpTo(step);});})(n);}
+    div.innerHTML='<div class="sn'+(isA?' active':isD?' done':'')+'">'+
+      (isD?'&#10003;':n)+'</div><div><div class="stt'+(!isA&&!isD?' m':'')+'">'+
+      s.l+'</div><div class="ssb">'+s.s+'</div></div>';
+    sb.appendChild(div);
+  });
+  $('btnBack').style.visibility=cur===1?'hidden':'visible';
+  $('stickyBack').style.visibility=cur===1?'hidden':'visible';
+  var isLast=cur===STEPS;
+  $('btnNext').style.display=isLast?'none':'block';
+  $('btnSubmit').classList.toggle('on',isLast);
+  $('stickyLabel').textContent=SM[lang][cur-1].l;
+  $('stickyNext').querySelector('span').setAttribute('data-'+lang,isLast?t('submit'):t('cont'));
+  $('stickyNext').querySelector('span').innerHTML=isLast?t('submit'):t('cont');
+  $('stickyNext').onclick=isLast?function(){if(validate())$('wf').dispatchEvent(new Event('submit'));}:goNext;
+  sendHeight();
+}
+
+function jumpTo(n){cur=n;showStep(cur);window.scrollTo(0,0);}
+
+function showStep(n){
+  for(var i=1;i<=STEPS;i++){var el=$('step'+i);if(el)el.classList.toggle('active',i===n);}
+  updProg();
+  sendHeight();
+}
+
+function updPgCounter(){
+  var n=document.querySelectorAll('.pcb:checked').length;
+  var c=$('pgc'),w=$('extra-pages-warn'),m=$('epm');
+  if(n<=6){c.textContent=t('pgCounter')(n);c.className='pgc';hide('extra-pages-warn');}
+  else{var e=n-6,cost=e*50;c.textContent=t('pgCounterOver')(n,e,cost);c.className='pgc ov';m.textContent=t('extraPagesMsg')(e,cost);show('extra-pages-warn');}
+}
+
+function updFeatCounter(){
+  var c=$('feat-counter');
+  if(!c)return;
+  c.textContent=t('featCounter')(featCount);
+  c.className=featCount>=6?'fc full':'fc';
+}
+
+function validate(){
+  var ok=true;
+  function req(fId,iId,fn){
+    var f=$(fId),v=$(iId)?$(iId).value.trim():'';
+    var bad=fn?!fn(v):v==='';
+    if(f)f.classList.toggle('inv',bad);
+    if(bad)ok=false;
+  }
+  if(cur===1){
+    req('f-bn','bizname');req('f-ba','bizaddr');req('f-bh','bizhours');req('f-about','about-biz');
+    var fv=$('eforms')?$('eforms').value.trim():'';
+    if(!fv){if($('eforms'))$('eforms').style.borderColor='#f87171';$('err-eforms').style.display='block';ok=false;}
+    else{if($('eforms'))$('eforms').style.borderColor='';$('err-eforms').style.display='none';}
+    if(!document.querySelector('input[name="optimize-about"]:checked'))ok=false;
+    if(!document.querySelector('input[name="primary-lang"]:checked'))ok=false;
+    if(!document.querySelector('input[name="translate"]:checked'))ok=false;
+  }
+  if(cur===2){
+    if(!document.querySelector('input[name="has-website"]:checked'))ok=false;
+    var hw=document.querySelector('input[name="has-website"]:checked');
+    if(hw&&hw.value==='yes'){if(!document.querySelector('input[name="domain-transfer"]:checked'))ok=false;}
+    else if(hw&&hw.value==='no'){
+      if(!document.querySelector('input[name="has-domain"]:checked'))ok=false;
+      var hd=document.querySelector('input[name="has-domain"]:checked');
+      if(hd&&hd.value==='yes'&&!document.querySelector('input[name="domain-transfer"]:checked'))ok=false;
+    }
+  }
+  if(cur===3){
+    if(!document.querySelector('input[name="has-logo"]:checked'))ok=false;
+    if(!document.querySelector('input[name="vibe"]:checked'))ok=false;
+    if(!document.querySelectorAll('#colors-group input:checked').length)ok=false;
+  }
+  if(cur===4){
+    if(!document.querySelectorAll('#images-group input:checked').length){$('images-err').style.display='block';ok=false;}else $('images-err').style.display='none';
+    if(!document.querySelectorAll('.pcb:checked').length){$('pages-err').style.display='block';ok=false;}else $('pages-err').style.display='none';
+    var mc=document.querySelector('input[name="page-menu"]');
+    if(mc&&mc.checked&&!document.querySelector('input[name="menu-type"]:checked'))ok=false;
+  }
+  if(cur===5){
+    var tpP=[['tp-ordering-cb','tp-ordering-url'],['tp-res-cb','tp-res-url'],['tp-gc-cb','tp-gc-url'],['tp-loyalty-cb','tp-loyalty-url'],['tp-other-cb','tp-other-text']];
+    tpP.forEach(function(p){var cb=$(p[0]),inp=$(p[1]);if(!cb||!inp)return;if(cb.checked&&!inp.value.trim()){inp.classList.add('err-inp');ok=false;}else{inp.classList.remove('err-inp');}});
+  }
+  if(cur===6){
+    if(needNewDomain&&!document.querySelector('input[name="autopublish"]:checked'))ok=false;
+    if(!$('terms-agreed').checked){$('terms-opt').style.borderColor='#f87171';$('terms-err').style.display='block';ok=false;}
+    else{$('terms-opt').style.borderColor='#e0e3e9';$('terms-err').style.display='none';}
+  }
+  return ok;
+}
+
+function goNext(){if(!validate())return;cur++;showStep(cur);window.scrollTo(0,0);sendHeight();}
+function goBack(){if(cur===1)return;cur--;showStep(cur);window.scrollTo(0,0);sendHeight();}
+
+function addFeat(){
+  if(featCount>=6)return;featCount++;
+  var list=$('feat-list'),row=document.createElement('div');
+  row.className='fr';
+  row.innerHTML='<div class="fn">'+featCount+'</div><input type="text" name="featured-'+featCount+'" placeholder="'+(lang==='es'?'ej. Artículo '+featCount:'Item '+featCount)+'">';
+  list.appendChild(row);
+  updFeatCounter();
+  if(featCount>=6)$('add-feat-btn').style.display='none';
+  sendHeight();
+}
+
+var RC=['Afghan','African','American (New)','American (Traditional)','Arabian','Argentine','Armenian','Asian Fusion','Australian','Austrian','Bangladeshi','Barbeque','Belgian','Bistros','Brazilian','Breakfast & Brunch','British','Buffets','Burgers','Burmese','Cafes','Cajun/Creole','Cambodian','Caribbean','Chicken Wings','Chinese','Comfort Food','Creperies','Cuban','Czech','Delis','Dim Sum','Diners','Ethiopian','Fast Food','Filipino','Fish & Chips','French','German','Gluten-Free','Greek','Halal','Hawaiian','Hot Dogs','Hot Pot','Hungarian','Indian','Indonesian','Irish','Italian','Japanese','Korean','Kosher','Latin American','Lebanese','Malaysian','Mediterranean','Mexican','Middle Eastern','Mongolian','Moroccan','Noodles','Pakistani','Pan Asian','Persian/Iranian','Peruvian','Pizza','Polish','Portuguese','Puerto Rican','Ramen','Russian','Salad','Salvadoran','Sandwiches','Seafood','Singaporean','Soup','Southern','Spanish','Sri Lankan','Steakhouses','Sushi Bars','Taiwanese','Tapas/Small Plates','Tex-Mex','Thai','Turkish','Vegan','Vegetarian','Venezuelan','Vietnamese','Wraps'];
+var RRC=["Children's Clothing",'Clothing','Computers','Cosmetics & Beauty Supply','Department Stores','Electronics','Eyewear & Opticians','Fabric Stores','Fashion Accessories','Flowers & Gifts','Food & Beverage Retail','Furniture Stores','Gift Shops','Hardware Stores','Health Markets','Hobby Shops','Home & Garden','Home Decor','Jewelry','Kitchen & Bath','Luggage',"Men's Clothing",'Musical Instruments','Outlet Stores','Party Supplies','Pet Stores','Shoe Stores','Sporting Goods','Thrift Stores','Toy Stores','Vitamins & Supplements','Watches',"Women's Clothing"];
+
+function hl(t2,q){var i=t2.toLowerCase().indexOf(q);if(i===-1)return t2;return t2.slice(0,i)+'<strong>'+t2.slice(i,i+q.length)+'</strong>'+t2.slice(i+q.length);}
+function selDD(iId,dId,v){$(iId).value=v;$(dId).style.display='none';}
+function setupDD(iId,dId,items){
+  var inp=$(iId),dd=$(dId);if(!inp||!dd)return;
+  inp.addEventListener('input',function(){
+    var q=inp.value.trim().toLowerCase();if(!q){dd.style.display='none';return;}
+    var m=items.filter(function(i){return i.toLowerCase().includes(q);}).slice(0,30);
+    if(!m.length){dd.style.display='none';return;}
+    dd.innerHTML=m.map(function(x){return'<div class="ddi" style="padding:9px 13px;font-size:13px;cursor:pointer;border-bottom:1px solid #f0f2f5;color:#333" onmousedown="selDD(\''+iId+'\',\''+dId+'\',\''+x.replace(/'/g,"\\'")+'\')">'+hl(x,q)+'</div>';}).join('');
+    dd.style.display='block';
+  });
+  inp.addEventListener('blur',function(){setTimeout(function(){dd.style.display='none';},150);});
+}
+
+// ── IFRAME AUTO-RESIZE ──────────────────────────────────────────────
+// Sends page height to parent window so the Webflow iframe can resize itself.
+function sendHeight(){
+  var h=document.documentElement.scrollHeight;
+  try{window.parent.postMessage({type:'spoton-resize',height:h},'*');}catch(e){}
+}
+window.addEventListener('load',sendHeight);
+window.addEventListener('resize',sendHeight);
+var _mo=new MutationObserver(function(){sendHeight();});
+_mo.observe(document.body,{childList:true,subtree:true,attributes:true,characterData:true});
+// ────────────────────────────────────────────────────────────────────
+
+function setup(){
+  var tR=$('cb-rest'),tRo=$('opt-rest'),tRe=$('cb-ret'),tReo=$('opt-ret');
+  on(tR,'change',function(){if(tR.checked){tRe.checked=false;tReo.classList.remove('sel');}tRo.classList.toggle('sel',tR.checked);tog('rest-sub-wrap',tR.checked);hide('ret-sub-wrap');sendHeight();});
+  on(tRe,'change',function(){if(tRe.checked){tR.checked=false;tRo.classList.remove('sel');}tReo.classList.toggle('sel',tRe.checked);tog('ret-sub-wrap',tRe.checked);hide('rest-sub-wrap');sendHeight();});
+  setupDD('rss','rsd',RC);setupDD('res','red',RRC);
+
+  document.querySelectorAll('input[name="optimize-about"]').forEach(function(r){on(r,'change',function(){selRG('opt-about-group',r);});});
+  document.querySelectorAll('input[name="primary-lang"]').forEach(function(r){on(r,'change',function(){tog('lang-other-wrap',r.value==='other'&&r.checked);selRG('lang-group',r);sendHeight();});});
+  document.querySelectorAll('input[name="translate"]').forEach(function(r){on(r,'change',function(){tog('translate-wrap',r.value==='yes'&&r.checked);selRG('translate-group',r);sendHeight();});});
+  document.querySelectorAll('input[name="has-website"]').forEach(function(r){
+    on(r,'change',function(){
+      var hw=r.value==='yes'&&r.checked;
+      tog('existing-wrap',hw);tog('domain-q-wrap',!hw);tog('domain-owned-wrap',hw);tog('domain-name-wrap',!hw);
+      hide('transfer-code-wrap');
+      document.querySelectorAll('input[name="domain-transfer"]').forEach(function(i){i.checked=false;});
+      document.querySelectorAll('#dt-group .ro').forEach(function(o){o.classList.remove('sel');});
+      if(!hw){hide('domain-owned-wrap');hide('new-domain-wrap');document.querySelectorAll('input[name="has-domain"]').forEach(function(i){i.checked=false;});document.querySelectorAll('#hd-group .ro').forEach(function(o){o.classList.remove('sel');});}
+      var iwo=$('images-website-opt');if(iwo)iwo.style.display=hw?'flex':'none';
+      selRG('hw-group',r);sendHeight();
+    });
+  });
+  document.querySelectorAll('input[name="use-existing-content"]').forEach(function(r){on(r,'change',function(){tog('upload-content-wrap',r.value==='no'&&r.checked);selRG('usecontent-group',r);sendHeight();});});
+  document.querySelectorAll('input[name="has-domain"]').forEach(function(r){
+    on(r,'change',function(){
+      var owns=r.value==='yes'&&r.checked,needs=r.value==='no'&&r.checked;
+      tog('domain-owned-wrap',owns);tog('domain-name-wrap',owns);tog('new-domain-wrap',needs);
+      if(!owns)hide('transfer-code-wrap');
+      needNewDomain=needs;tog('autopublish-wrap',needs);
+      selRG('hd-group',r);sendHeight();
+    });
+  });
+  document.querySelectorAll('input[name="domain-transfer"]').forEach(function(r){on(r,'change',function(){tog('transfer-code-wrap',r.value==='transfer'&&r.checked);selRG('dt-group',r);sendHeight();});});
+  document.querySelectorAll('input[name="has-logo"]').forEach(function(r){
+    on(r,'change',function(){
+      tog('logo-upload-wrap',r.value==='yes'&&r.checked);
+      tog('standard-logo-wrap',r.value==='need-standard'&&r.checked);
+      tog('custom-logo-wrap',r.value==='need-custom'&&r.checked);
+      tog('logo-notes-wrap',(r.value==='need-standard'||r.value==='need-custom')&&r.checked);
+      tog('no-logo-wrap',r.value==='no'&&r.checked);
+      selRG('logo-group',r);sendHeight();
+    });
+  });
+  on($('colors-other-cb'),'change',function(){tog('colors-other-wrap',this.checked);$('colors-other-opt').classList.toggle('sel',this.checked);sendHeight();});
+  document.querySelectorAll('#colors-group input').forEach(function(inp){if(inp.id==='colors-other-cb')return;on(inp,'change',function(){inp.closest('.co').classList.toggle('sel',inp.checked);});});
+  document.querySelectorAll('input[name="vibe"]').forEach(function(r){on(r,'change',function(){tog('vibe-other-wrap',r.value==='other'&&r.checked);selRG('vibe-group',r);sendHeight();});});
+  on($('images-upload-cb'),'change',function(){tog('images-upload-wrap',this.checked);this.closest('.co').classList.toggle('sel',this.checked);sendHeight();});
+  document.querySelectorAll('#images-group input').forEach(function(inp){if(inp.id==='images-upload-cb')return;on(inp,'change',function(){inp.closest('.co').classList.toggle('sel',inp.checked);});});
+  document.querySelectorAll('.pcb').forEach(function(cb){
+    on(cb,'change',function(){
+      if(cb.id!=='page-other-cb')cb.closest('.co').classList.toggle('sel',cb.checked);
+      updPgCounter();
+      var mc=document.querySelector('input[name="page-menu"]'),showMenu=mc&&mc.checked;
+      tog('menu-page-wrap',showMenu);tog('featured-wrap',showMenu);sendHeight();
+    });
+  });
+  on($('page-other-cb'),'change',function(){tog('page-other-wrap',this.checked);$('page-other-opt').classList.toggle('sel',this.checked);sendHeight();});
+  document.querySelectorAll('input[name="menu-type"]').forEach(function(r){
+    on(r,'change',function(){
+      var ids=['mopt-ordering','mopt-spoton','mopt-image','mopt-other'];
+      ids.forEach(function(id){var el=$(id);if(el){el.className=id==='mopt-ordering'?'mopt feat':'mopt';}});
+      var map={'online-ordering':'mopt-ordering','spoton-sync':'mopt-spoton','image':'mopt-image','other':'mopt-other'};
+      if(map[r.value]){var el=$(map[r.value]);if(el)el.classList.add('act');}
+      tog('menu-upload-wrap',r.value==='image'&&r.checked);
+      tog('menu-other-wrap',r.value==='other'&&r.checked);sendHeight();
+    });
+  });
+  var tpList=[['tp-ordering-cb','tp-ordering-url-wrap','tp-ordering-opt'],['tp-res-cb','tp-res-url-wrap','tp-res-opt'],['tp-gc-cb','tp-gc-url-wrap','tp-gc-opt'],['tp-loyalty-cb','tp-loyalty-url-wrap','tp-loyalty-opt'],['tp-other-cb','tp-other-url-wrap','tp-other-opt']];
+  tpList.forEach(function(arr){
+    var cb=$(arr[0]);
+    on(cb,'change',function(){
+      var wrap=$(arr[1]),opt=$(arr[2]);
+      if(wrap)wrap.classList.toggle('on',cb.checked);
+      if(opt)opt.classList.toggle('act',cb.checked);
+      sendHeight();
+    });
+  });
+  document.querySelectorAll('input[name="autopublish"]').forEach(function(r){on(r,'change',function(){selRG('autopublish-group',r);});});
+  on($('terms-agreed'),'change',function(){
+    $('terms-opt').classList.toggle('sel',this.checked);
+    if(this.checked){$('terms-opt').style.borderColor='var(--blue)';$('terms-err').style.display='none';}
+  });
+}
+
+setup();
+applyLang();
+showStep(1);
+sendHeight();
+</script>
+</body>
+</html>
