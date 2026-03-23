@@ -181,13 +181,13 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
     <div class="hc">
       <h3 id="help-title">Need help?</h3>
       <p id="help-body">Have questions about your website? Reach out to our team.</p>
-      <a class="hl" href="mailto:websiteimp@spoton.com" style="display:flex" id="help-email">Email us <svg viewBox="0 0 12 12"><path d="M2 10L10 2M10 2H5M10 2v5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a class="hl" href="/cdn-cgi/l/email-protection#d0a7b5b2a3b9a4b5b9bda090a3a0bfa4bfbefeb3bfbd" style="display:flex" id="help-email">Email us <svg viewBox="0 0 12 12"><path d="M2 10L10 2M10 2H5M10 2v5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       <a class="hl" href="https://calendar.app.google/1pvzRL4x8KP5dqPZA" target="_blank" style="display:flex" id="help-call">Book a call <svg viewBox="0 0 12 12"><path d="M2 10L10 2M10 2H5M10 2v5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     </div>
   </div>
 
   <div class="card">
-  <form id="wf" name="Website Questionnaire" method="POST">
+  <form id="wf" name="Website Questionnaire" method="POST" action="https://formspree.io/f/xbdzngaq">
 
   <!-- STEP 1 -->
   <div class="sp active" id="step1">
@@ -573,7 +573,7 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
         <strong>5. Domain.</strong> If SpotOn registers a domain on your behalf, it remains your property. Upon cancellation, the domain will be transferred back to you at no cost.<br><br>
         <strong>6. Revisions.</strong> Your subscription includes 2 revision rounds per month (up to 3 line items per revision). Additional revision rounds are available at $75 USD each.<br><br>
         <strong>7. Auto-publishing.</strong> If you select auto-publishing, SpotOn will attempt to reach you at least 5 times before publishing your site.<br><br>
-        <strong>8. Cancellation.</strong> You may cancel at any time by emailing <a href="mailto:websiteimp@spoton.com" style="color:var(--blue)">websiteimp@spoton.com</a>. If you cancel after design work has begun without an active subscription, a $350 design fee may apply.<br><br>
+        <strong>8. Cancellation.</strong> You may cancel at any time by emailing <a href="/cdn-cgi/l/email-protection#6d1a080f1e04190804001d2d1e1d02190203430e0200" style="color:var(--blue)"><span class="__cf_email__" data-cfemail="ee998b8c9d879a8b87839eae9d9e819a8180c08d8183">[email&#160;protected]</span></a>. If you cancel after design work has begun without an active subscription, a $350 design fee may apply.<br><br>
         <strong>9. Support.</strong> Post-launch edits are handled by our support team. SpotOn provides support Monday–Friday, 9am–6pm EST.
       </div>
       <label class="co" id="terms-opt"><input type="checkbox" name="terms-agreed" id="terms-agreed"> <span data-en="I have read and agree to the terms &amp; conditions" data-es="He leído y acepto los términos y condiciones"></span></label>
@@ -605,7 +605,7 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
   </div>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 var STEPS=6,cur=1,needNewDomain=false,featCount=3,lang='en';
 function $(id){return document.getElementById(id);}
 function on(el,evt,fn){if(el)el.addEventListener(evt,fn);}
@@ -954,6 +954,43 @@ function setup(){
     if(this.checked){$('terms-opt').style.borderColor='var(--blue)';$('terms-err').style.display='none';}
   });
 }
+
+// ── FORMSPREE AJAX SUBMIT ────────────────────────────────────────────
+document.getElementById('wf').addEventListener('submit', function(e) {
+  e.preventDefault();
+  if (!validate()) return;
+  var form = this;
+  var data = new FormData(form);
+  var btn = $('btnSubmit'), sticky = $('stickyNext');
+  var origBtn = btn.innerHTML, origSticky = sticky.innerHTML;
+  btn.innerHTML = '<span>' + (lang === 'es' ? 'Enviando…' : 'Sending…') + '</span>';
+  sticky.innerHTML = '<span>' + (lang === 'es' ? 'Enviando…' : 'Sending…') + '</span>';
+  btn.disabled = true; sticky.disabled = true;
+  fetch('https://formspree.io/f/xbdzngaq', {
+    method: 'POST',
+    body: data,
+    headers: { 'Accept': 'application/json' }
+  }).then(function(r) {
+    if (r.ok) {
+      for (var i = 1; i <= STEPS; i++) { var s = $('step' + i); if (s) s.style.display = 'none'; }
+      $('navBar').style.display = 'none';
+      $('stnav').style.display = 'none';
+      $('pw').style.display = 'none';
+      var succ = $('succ'); succ.style.display = 'block';
+      applyLang();
+      sendHeight();
+    } else {
+      btn.innerHTML = origBtn; sticky.innerHTML = origSticky;
+      btn.disabled = false; sticky.disabled = false;
+      alert(lang === 'es' ? 'Hubo un error al enviar. Por favor intente de nuevo.' : 'There was an error submitting. Please try again.');
+    }
+  }).catch(function() {
+    btn.innerHTML = origBtn; sticky.innerHTML = origSticky;
+    btn.disabled = false; sticky.disabled = false;
+    alert(lang === 'es' ? 'Hubo un error al enviar. Por favor intente de nuevo.' : 'There was an error submitting. Please try again.');
+  });
+});
+// ─────────────────────────────────────────────────────────────────────
 
 setup();
 applyLang();
