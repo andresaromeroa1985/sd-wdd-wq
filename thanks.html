@@ -51,26 +51,68 @@ body{font-family:var(--f);background:var(--black);color:var(--white);min-height:
 </div>
 
 <div class="ph">
-  <div class="ey">Website services</div>
-  <div class="pt">You're all set!</div>
-  <div class="ps">We received your questionnaire and will be in touch soon.</div>
+  <div class="ey" id="eyebrow"></div>
+  <div class="pt" id="title"></div>
+  <div class="ps" id="subtitle"></div>
 </div>
 
 <div class="layout">
   <div class="sb">
     <div class="hc">
-      <h3>Need help?</h3>
-      <p>Have questions about your website? Reach out to our team.</p>
-      <a class="hl" href="mailto:websiteimp@spoton.com" style="display:flex">Email us <svg viewBox="0 0 12 12"><path d="M2 10L10 2M10 2H5M10 2v5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-      <a class="hl" href="https://calendar.app.google/1pvzRL4x8KP5dqPZA" target="_blank" style="display:flex">Book a call <svg viewBox="0 0 12 12"><path d="M2 10L10 2M10 2H5M10 2v5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <h3 id="help-title"></h3>
+      <p id="help-body"></p>
+      <a class="hl" href="mailto:websiteimp@spoton.com" style="display:flex" id="help-email"></a>
+      <a class="hl" href="https://calendar.app.google/1pvzRL4x8KP5dqPZA" target="_blank" style="display:flex" id="help-call"></a>
     </div>
   </div>
   <div class="card">
     <div class="succ-ico"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
-    <h2>Questionnaire submitted!</h2>
-    <p>Thanks — we'll confirm receipt within 2 business days and notify you when your site moves into the design queue.</p>
+    <h2 id="card-title"></h2>
+    <p id="card-body"></p>
   </div>
 </div>
 
+<script>
+var T = {
+  en: {
+    eyebrow: 'Website services',
+    title: "You're all set!",
+    subtitle: "We received your questionnaire and will be in touch soon.",
+    helpTitle: 'Need help?',
+    helpBody: 'Have questions about your website? Reach out to our team.',
+    helpEmail: 'Email us',
+    helpCall: 'Book a call',
+    cardTitle: 'Questionnaire submitted!',
+    cardBody: "Thanks — we'll confirm receipt within 2 business days and notify you when your site moves into the design queue."
+  },
+  es: {
+    eyebrow: 'Servicios web',
+    title: '¡Todo listo!',
+    subtitle: 'Recibimos su cuestionario y nos pondremos en contacto pronto.',
+    helpTitle: '¿Necesita ayuda?',
+    helpBody: '¿Tiene preguntas sobre su sitio web? Comuníquese con nuestro equipo.',
+    helpEmail: 'Enviar correo',
+    helpCall: 'Agendar llamada',
+    cardTitle: '¡Cuestionario enviado!',
+    cardBody: 'Gracias — confirmaremos la recepción dentro de 2 días hábiles y le notificaremos cuando su sitio entre en la cola de diseño.'
+  }
+};
+
+var arrowSvg = ' <svg viewBox="0 0 12 12"><path d="M2 10L10 2M10 2H5M10 2v5" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" fill="none" stroke-width="2"/></svg>';
+
+var lang = (new URLSearchParams(window.location.search).get('lang') === 'es') ? 'es' : 'en';
+var t = T[lang];
+
+document.documentElement.lang = lang;
+document.getElementById('eyebrow').textContent   = t.eyebrow;
+document.getElementById('title').textContent     = t.title;
+document.getElementById('subtitle').textContent  = t.subtitle;
+document.getElementById('help-title').textContent = t.helpTitle;
+document.getElementById('help-body').textContent  = t.helpBody;
+document.getElementById('help-email').innerHTML   = t.helpEmail + arrowSvg;
+document.getElementById('help-call').innerHTML    = t.helpCall  + arrowSvg;
+document.getElementById('card-title').textContent = t.cardTitle;
+document.getElementById('card-body').textContent  = t.cardBody;
+</script>
 </body>
 </html>
