@@ -753,7 +753,7 @@ function updProg(){
   $('stickyLabel').textContent=SM[lang][cur-1].l;
   $('stickyNext').querySelector('span').setAttribute('data-'+lang,isLast?t('submit'):t('cont'));
   $('stickyNext').querySelector('span').innerHTML=isLast?t('submit'):t('cont');
-  $('stickyNext').onclick=isLast?function(){if(validate())$('wf').dispatchEvent(new Event('submit'));}:goNext;
+  $('stickyNext').onclick=isLast?function(){if(validate())$('wf').dispatchEvent(new Event('submit',{bubbles:true,cancelable:true}));}:goNext;
   sendHeight();
 }
 
