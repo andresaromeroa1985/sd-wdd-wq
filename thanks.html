@@ -6,20 +6,71 @@
 <title>SpotOn — Thank You</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Poppins',-apple-system,sans-serif;background:#000;color:#fff;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 16px}
-.wrap{text-align:center;max-width:480px}
-.ico{width:64px;height:64px;border-radius:50%;background:#f0f5ff;border:1.5px solid rgba(23,105,255,0.25);display:flex;align-items:center;justify-content:center;margin:0 auto 28px}
-.ico svg{width:28px;height:28px;stroke:#1769ff;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
-h1{font-size:28px;font-weight:600;letter-spacing:-.02em;margin-bottom:12px}
-p{font-size:15px;color:#a6b0bf;line-height:1.7}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:#1769ff;
+  --black:#000;
+  --white:#fff;
+  --tp:#a6b0bf;--tg:#6A7586;
+  --brd:rgba(255,255,255,0.10);
+  --sd:#0d0d0d;
+  --f:'Poppins',-apple-system,sans-serif
+}
+body{font-family:var(--f);background:var(--black);color:var(--white);min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:0 16px 80px}
+.topbar{width:100%;max-width:960px;display:flex;align-items:center;justify-content:space-between;padding:24px 0 44px}
+.logo{display:flex;align-items:center;text-decoration:none}
+.ph{width:100%;max-width:960px;margin-bottom:36px}
+.ey{font-size:12px;font-weight:500;letter-spacing:.10em;text-transform:uppercase;color:var(--blue);margin-bottom:14px}
+.pt{font-size:clamp(26px,3.5vw,40px);font-weight:600;letter-spacing:-.02em;line-height:1.15;color:var(--white);margin-bottom:10px}
+.ps{font-size:14px;color:var(--tp)}
+.layout{width:100%;max-width:960px;display:grid;grid-template-columns:260px 1fr;gap:20px;align-items:start}
+.card{background:var(--white);border-radius:12px;padding:40px 44px 44px;color:#111;text-align:center}
+.succ-ico{width:64px;height:64px;border-radius:50%;background:#f0f5ff;border:1.5px solid rgba(23,105,255,0.25);display:flex;align-items:center;justify-content:center;margin:0 auto 28px}
+.succ-ico svg{width:28px;height:28px;stroke:var(--blue);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.card h2{font-size:22px;font-weight:600;letter-spacing:-.02em;color:#111;margin-bottom:10px}
+.card p{font-size:14px;color:var(--tg);line-height:1.7;max-width:380px;margin:0 auto}
+.sb{display:flex;flex-direction:column;gap:16px}
+.hc{background:var(--sd);border:1px solid var(--brd);border-radius:12px;padding:24px}
+.hc h3{font-size:13px;font-weight:600;color:var(--white);margin-bottom:8px}
+.hc p{font-size:13px;color:var(--tp);line-height:1.65;margin-bottom:14px}
+.hl{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:500;color:var(--blue);text-decoration:none;margin-bottom:10px}
+.hl:last-child{margin-bottom:0}
+.hl:hover{text-decoration:underline}
+.hl svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2}
+@media(max-width:700px){
+  .layout{grid-template-columns:1fr}
+  .sb{order:2}
+  .card{order:1;padding:28px 22px 32px}
+}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="ico"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
-  <h1>Questionnaire submitted!</h1>
-  <p>Thanks — we'll confirm receipt within 2 business days and notify you when your site moves into the design queue.</p>
+
+<div class="topbar">
+  <a class="logo" href="#"><img src="https://www.spoton.com/_next/static/media/spoton-logo-white.f07227e6.svg" alt="SpotOn" style="height:28px;width:auto"></a>
 </div>
+
+<div class="ph">
+  <div class="ey">Website services</div>
+  <div class="pt">You're all set!</div>
+  <div class="ps">We received your questionnaire and will be in touch soon.</div>
+</div>
+
+<div class="layout">
+  <div class="sb">
+    <div class="hc">
+      <h3>Need help?</h3>
+      <p>Have questions about your website? Reach out to our team.</p>
+      <a class="hl" href="mailto:websiteimp@spoton.com" style="display:flex">Email us <svg viewBox="0 0 12 12"><path d="M2 10L10 2M10 2H5M10 2v5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a class="hl" href="https://calendar.app.google/1pvzRL4x8KP5dqPZA" target="_blank" style="display:flex">Book a call <svg viewBox="0 0 12 12"><path d="M2 10L10 2M10 2H5M10 2v5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+  </div>
+  <div class="card">
+    <div class="succ-ico"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <h2>Questionnaire submitted!</h2>
+    <p>Thanks — we'll confirm receipt within 2 business days and notify you when your site moves into the design queue.</p>
+  </div>
+</div>
+
 </body>
 </html>
