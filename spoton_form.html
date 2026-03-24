@@ -963,12 +963,29 @@ function setup(){
 document.getElementById('wf').addEventListener('submit', function(e) {
   e.preventDefault();
   if (!validate()) return;
-  var redir = document.createElement('input');
-  redir.type = 'hidden';
-  redir.name = '_next';
-  redir.value = 'https://andresaromeroa1985.github.io/sd-wdd-wq/thanks.html?lang=' + lang;
-  this.appendChild(redir);
-  this.submit();
+  var form = this;
+  var btn = $('btnSubmit');
+  btn.disabled = true;
+  btn.querySelector('span').textContent = lang === 'es' ? 'Enviando…' : 'Sending…';
+  var data = new FormData(form);
+  fetch(form.action, {
+    method: 'POST',
+    body: data,
+    headers: { 'Accept': 'application/json' }
+  }).then(function(r){ return r.json().then(function(j){ return {ok: r.ok, json: j}; }); })
+  .then(function(res) {
+    if (res.ok) {
+      window.location.href = 'https://andresaromeroa1985.github.io/sd-wdd-wq/thanks.html?lang=' + lang;
+    } else {
+      btn.disabled = false;
+      btn.querySelector('span').textContent = lang === 'es' ? 'Enviar cuestionario' : 'Submit questionnaire';
+      alert(lang === 'es' ? 'Hubo un error al enviar. Por favor intente de nuevo.' : 'There was an error submitting. Please try again.');
+    }
+  }).catch(function() {
+    btn.disabled = false;
+    btn.querySelector('span').textContent = lang === 'es' ? 'Enviar cuestionario' : 'Submit questionnaire';
+    alert(lang === 'es' ? 'Hubo un error al enviar. Por favor intente de nuevo.' : 'There was an error submitting. Please try again.');
+  });
 });
 // ─────────────────────────────────────────────────────────────────────
 
