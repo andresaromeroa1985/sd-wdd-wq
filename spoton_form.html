@@ -211,16 +211,16 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
       <div class="hint" id="email-hint" data-en="You can use one email for all, or specify different ones. Separate multiple with a comma." data-es="Puede usar un correo para todo, o especificar diferentes. Separe múltiples con una coma." style="margin-bottom:14px"></div>
       <div style="display:flex;flex-direction:column;gap:10px">
         <div>
-          <div style="margin-bottom:5px"><span class="epl" data-en="Public contact" data-es="Contacto público"></span><span class="eps" data-en="Shown on your website — leave blank to hide" data-es="Visible en su sitio web — déjelo en blanco para ocultar"></span></div>
+          <div style="margin-bottom:5px"><span class="epl" data-en="Public contact" data-es="Contacto público"></span><span class="eps" data-en="Shown on your website — if none, type No" data-es="Visible en su sitio web — si no tiene, escriba No"></span></div>
           <input type="text" name="email-public" data-en-ph="e.g. hello@yourbusiness.com" data-es-ph="ej. hola@sunegocio.com">
         </div>
         <div>
-          <div style="margin-bottom:5px"><span class="epl" data-en="Form replies <span class='req'>*</span>" data-es="Respuestas del formulario <span class='req'>*</span>"></span><span class="eps" data-en="Where contact form submissions are sent" data-es="A dónde se envían los mensajes del formulario de contacto"></span></div>
+          <div style="margin-bottom:5px"><span class="epl" data-en="Form replies <span class='req'>*</span>" data-es="Respuestas del formulario <span class='req'>*</span>"></span><span class="eps" data-en="Where contact form submissions are sent — if none, type No" data-es="A dónde se envían los mensajes del formulario de contacto — si no tiene, escriba No"></span></div>
           <input type="text" name="email-forms" id="eforms" data-en-ph="e.g. info@yourbusiness.com" data-es-ph="ej. info@sunegocio.com">
           <div class="err" id="err-eforms" style="display:none" data-en="Please enter at least one email for form replies." data-es="Por favor ingrese al menos un correo para las respuestas del formulario."></div>
         </div>
         <div>
-          <div style="margin-bottom:5px"><span class="epl" data-en="Content editors" data-es="Editores de contenido"></span><span class="eps" data-en="Can edit text &amp; images, not the design" data-es="Pueden editar texto e imágenes, no el diseño"></span></div>
+          <div style="margin-bottom:5px"><span class="epl" data-en="Content editors" data-es="Editores de contenido"></span><span class="eps" data-en="Can edit text &amp; images, not the design — if none, type No" data-es="Pueden editar texto e imágenes, no el diseño — si no tiene, escriba No"></span></div>
           <input type="text" name="email-editors" data-en-ph="e.g. jane@yourbusiness.com" data-es-ph="ej. ana@sunegocio.com">
         </div>
       </div>
@@ -387,9 +387,77 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
       <a href="https://drive.google.com/file/d/1LnR0Szeu9Q2zqk_GCThQcjhzwPSc5Kw0/view?usp=drive_link" target="_blank" class="btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span data-en="Custom logo examples" data-es="Ejemplos de logotipo personalizado"></span></a>
       <div class="warn" style="margin-top:10px"><span style="font-size:18px;flex-shrink:0;line-height:1.3">⚠️</span><div class="wt" data-en="By selecting this option, you'll receive a proposal to review and sign before we proceed. Once approved, you'll be charged $299 USD and we'll begin the design process." data-es="Al seleccionar esta opción, recibirá una propuesta para revisar y firmar antes de proceder. Una vez aprobado, se le cobrará $299 USD y comenzaremos el proceso de diseño."></div></div>
     </div>
-    <div class="cond field" id="logo-notes-wrap">
-      <label data-en="Logo design notes <span class='opt'>optional</span>" data-es="Notas de diseño del logotipo <span class='opt'>opcional</span>"></label>
-      <textarea name="logo-design-notes" data-en-ph="Describe the style, symbols, or ideas you'd like…" data-es-ph="Describa el estilo, símbolos o ideas que le gustaría…"></textarea>
+    <div class="cond" id="logo-notes-wrap">
+      <hr class="div">
+      <div style="font-size:13px;font-weight:600;color:#111;margin-bottom:20px" data-en="Logo design questions" data-es="Preguntas de diseño del logotipo"></div>
+
+      <div class="field">
+        <label data-en="1. Does your business have a tagline? <span class='req'>*</span>" data-es="1. ¿Su negocio tiene un eslogan? <span class='req'>*</span>"></label>
+        <div class="rg" id="tagline-group">
+          <label class="ro"><input type="radio" name="has-tagline" value="no"> <span data-en="No" data-es="No"></span></label>
+          <label class="ro"><input type="radio" name="has-tagline" value="yes"> <span data-en="Yes" data-es="Sí"></span></label>
+        </div>
+        <div class="cond" id="tagline-wrap" style="margin-top:10px">
+          <input type="text" name="tagline-text" data-en-ph="Enter your tagline…" data-es-ph="Ingrese su eslogan…">
+          <div style="font-size:13px;color:#333;font-weight:500;margin-top:4px" data-en="Include tagline in logo?" data-es="¿Incluir eslogan en el logotipo?"></div>
+          <div class="rg" id="tagline-include-group">
+            <label class="ro"><input type="radio" name="tagline-in-logo" value="yes"> <span data-en="Yes, include it" data-es="Sí, inclúyanlo"></span></label>
+            <label class="ro"><input type="radio" name="tagline-in-logo" value="no"> <span data-en="No, just the logo" data-es="No, solo el logotipo"></span></label>
+          </div>
+        </div>
+      </div>
+
+      <div class="field" id="f-logo-audience">
+        <label data-en="2. Who is your target audience? <span class='req'>*</span>" data-es="2. ¿Quién es su público objetivo? <span class='req'>*</span>"></label>
+        <div class="hint" style="margin-bottom:8px" data-en="A target audience is the specific group of people most likely to visit your business — their age, preferences, lifestyle, or dining habits. Knowing this helps us create the right logo for your business." data-es="Su público objetivo es el grupo de personas con mayor probabilidad de visitar su negocio — su edad, preferencias, estilo de vida o hábitos. Esto nos ayuda a crear el logotipo adecuado para su negocio."></div>
+        <textarea name="logo-audience" data-en-ph="e.g. Families with young children, working adults aged 25–45 who enjoy casual dining…" data-es-ph="ej. Familias con niños pequeños, adultos de 25–45 años que disfrutan comer en restaurantes casuales…"></textarea>
+      </div>
+
+      <div class="field" id="f-logo-text">
+        <label data-en="3. What text would you like included in your logo? <span class='req'>*</span>" data-es="3. ¿Qué texto le gustaría incluir en su logotipo? <span class='req'>*</span>"></label>
+        <div class="hint" style="margin-bottom:8px" data-en="Let us know what's important to include or exclude. Example: Include &quot;Established in 1992&quot; — Exclude: My location, I'm opening new sites." data-es="Indíquenos qué es importante incluir o excluir. Ejemplo: Incluir &quot;Fundado en 1992&quot; — Excluir: Mi ubicación, estoy abriendo nuevas sucursales."></div>
+        <textarea name="logo-text" data-en-ph="Include: … / Exclude: …" data-es-ph="Incluir: … / Excluir: …"></textarea>
+      </div>
+
+      <div class="field">
+        <label data-en="4. What imagery, if any, would you like in your logo? <span class='opt'>optional</span>" data-es="4. ¿Qué imágenes, si alguna, le gustaría en su logotipo? <span class='opt'>opcional</span>"></label>
+        <div class="hint" style="margin-bottom:8px" data-en="For example: a sailboat, mariachis, leaves, a coastline, etc. If none, we can create a logo with just your name or using some of the letters, like Canon's logo." data-es="Por ejemplo: un velero, mariachis, hojas, una costa, etc. Si no desea ninguna, podemos crear un logotipo solo con su nombre o algunas de las letras, como el logotipo de Canon."></div>
+        <textarea name="logo-imagery" data-en-ph="Describe any imagery you'd like, or write 'None'…" data-es-ph="Describa cualquier imagen que desee, o escriba 'Ninguna'…"></textarea>
+      </div>
+
+      <div class="field">
+        <label data-en="5. What colors would you like in your logo? <span class='opt'>optional</span>" data-es="5. ¿Qué colores le gustaría en su logotipo? <span class='opt'>opcional</span>"></label>
+        <div class="hint" style="margin-bottom:8px" data-en="We recommend up to 3 colors — this ensures your logo works well across multiple mediums, including print." data-es="Recomendamos hasta 3 colores — esto asegura que su logotipo funcione bien en múltiples formatos, incluyendo impresión."></div>
+        <input type="text" name="logo-colors" data-en-ph="e.g. Navy blue, gold, and white…" data-es-ph="ej. Azul marino, dorado y blanco…">
+      </div>
+
+      <div class="field">
+        <label data-en="6. Choose up to 3 words that describe your desired logo style <span class='req'>*</span>" data-es="6. Elija hasta 3 palabras que describan el estilo de logotipo deseado <span class='req'>*</span>"></label>
+        <div class="hint" style="margin-bottom:10px" data-en="Select up to 3." data-es="Seleccione hasta 3."></div>
+        <div class="cg" id="logo-style-group" style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <label class="co"><input type="checkbox" name="logo-style" value="simple" class="lscb"> <span>Simple</span></label>
+          <label class="co"><input type="checkbox" name="logo-style" value="modern" class="lscb"> <span>Modern</span></label>
+          <label class="co"><input type="checkbox" name="logo-style" value="sleek" class="lscb"> <span>Sleek</span></label>
+          <label class="co"><input type="checkbox" name="logo-style" value="formal" class="lscb"> <span>Formal</span></label>
+          <label class="co"><input type="checkbox" name="logo-style" value="serious" class="lscb"> <span>Serious</span></label>
+          <label class="co"><input type="checkbox" name="logo-style" value="detailed" class="lscb"> <span>Detailed</span></label>
+          <label class="co"><input type="checkbox" name="logo-style" value="vintage" class="lscb"> <span>Vintage</span></label>
+          <label class="co"><input type="checkbox" name="logo-style" value="whimsical" class="lscb"> <span>Whimsical</span></label>
+          <label class="co"><input type="checkbox" name="logo-style" value="playful" class="lscb"> <span>Playful</span></label>
+          <label class="co"><input type="checkbox" name="logo-style" value="casual" class="lscb"> <span>Casual</span></label>
+          <label class="co"><input type="checkbox" name="logo-style" value="organic" class="lscb"> <span>Organic</span></label>
+          <label class="co"><input type="checkbox" name="logo-style" value="fun" class="lscb"> <span>Fun</span></label>
+          <label class="co"><input type="checkbox" name="logo-style" value="perky" class="lscb"> <span>Perky</span></label>
+          <label class="co"><input type="checkbox" name="logo-style" value="elegant" class="lscb"> <span>Elegant</span></label>
+          <label class="co"><input type="checkbox" name="logo-style" value="luxurious" class="lscb"> <span>Luxurious</span></label>
+        </div>
+        <div class="err" id="logo-style-err" style="display:none" data-en="Please select at least one style." data-es="Por favor seleccione al menos un estilo."></div>
+      </div>
+
+      <div class="field">
+        <label data-en="7. Anything else about your desired logo? <span class='opt'>optional</span>" data-es="7. ¿Algo más sobre el logotipo que desea? <span class='opt'>opcional</span>"></label>
+        <textarea name="logo-other" data-en-ph="Any additional ideas, references, or preferences…" data-es-ph="Cualquier idea adicional, referencia o preferencia…"></textarea>
+      </div>
     </div>
     <div class="cond" id="no-logo-wrap">
       <div class="warn" style="margin-bottom:20px"><span style="font-size:20px;flex-shrink:0;line-height:1.3">⚠️</span><div class="wt"><strong data-en="We recommend having a logo." data-es="Recomendamos tener un logotipo."></strong><span data-en="A logo is the foundation of your brand identity — it's what customers recognize and remember. Without one, your website may feel less professional. Our standard logo starts at just $99." data-es="Un logotipo es la base de la identidad de su marca — es lo que los clientes reconocen y recuerdan. Sin uno, su sitio puede verse menos profesional. Nuestro logotipo estándar comienza en solo $99."></span></div></div>
@@ -404,6 +472,7 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
         <label class="co" id="colors-other-opt"><input type="checkbox" name="colors-other-cb" id="colors-other-cb" value="other"> <span data-en="Other" data-es="Otro"></span></label>
       </div>
       <div class="cond" id="colors-other-wrap" style="margin-top:10px"><input type="text" name="colors-other-text" data-en-ph="Describe your preferred colors or palette…" data-es-ph="Describa sus colores o paleta preferida…"></div>
+      <div class="err" id="colors-err" style="display:none" data-en="Please select at least one color option." data-es="Por favor seleccione al menos una opción de color."></div>
     </div>
 
     <div class="field">
@@ -419,6 +488,7 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
         <label class="ro"><input type="radio" name="vibe" value="other"> <span data-en="Other" data-es="Otro"></span></label>
       </div>
       <div class="cond" id="vibe-other-wrap" style="margin-top:10px"><input type="text" name="vibe-other-text" data-en-ph="Describe the look and feel you're going for…" data-es-ph="Describa el estilo que busca…"></div>
+      <div class="err" id="vibe-err" style="display:none" data-en="Please select a look and feel for your website." data-es="Por favor seleccione el estilo para su sitio web."></div>
     </div>
 
     <div class="field">
@@ -461,10 +531,11 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
         <label class="co"><input type="checkbox" name="page-gallery" value="gallery" class="pcb"> <span data-en="Gallery / photos" data-es="Galería / fotos"></span></label>
         <label class="co"><input type="checkbox" name="page-contact" value="contact" class="pcb"> <span data-en="Contact" data-es="Contacto"></span></label>
         <label class="co"><input type="checkbox" name="page-blog" value="blog" class="pcb"> <span data-en="Blog / news" data-es="Blog / noticias"></span></label>
-        <label class="co"><input type="checkbox" name="page-careers" value="careers" class="pcb"> <span data-en="Careers" data-es="Empleos"></span></label>
+        <label class="co"><input type="checkbox" name="page-careers" value="careers" class="pcb" id="cb-careers"> <span data-en="Join Us / We're Hiring" data-es="Únete a nosotros / Se busca personal"></span></label>
         <label class="co"><input type="checkbox" name="page-faq" value="faq" class="pcb"> <span data-en="FAQ" data-es="Preguntas frecuentes"></span></label>
         <label class="co" id="page-other-opt"><input type="checkbox" name="page-other-cb" id="page-other-cb" class="pcb" value="other"> <span data-en="Other — specify below" data-es="Otro — especifique abajo"></span></label>
       </div>
+      <div class="cond" id="blog-faq-warn" style="margin-top:10px"><div class="warn"><span style="font-size:20px;flex-shrink:0;line-height:1.3">📝</span><div class="wt"><strong id="blog-faq-warn-title"></strong><span id="blog-faq-warn-body"></span></div></div></div>
       <div class="cond" id="page-other-wrap" style="margin-top:10px">
         <input type="text" name="page-other-text" data-en-ph="e.g. Events, Press, Catering, Locations…" data-es-ph="ej. Eventos, Prensa, Catering, Sucursales…">
         <div class="hint" data-en="Separate multiple page names with a comma." data-es="Separe múltiples nombres de página con una coma."></div>
@@ -504,16 +575,12 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
       <div id="page-specifics-hint" style="font-size:13px;color:var(--tg);line-height:1.65;margin-bottom:8px"></div>
       <textarea name="page-specifics" data-en-ph="Describe any specific content or links per page…" data-es-ph="Describa el contenido específico o enlaces por página…"></textarea>
     </div>
-    <div class="field">
-      <label data-en="Anything else about your website needs? <span class='opt'>optional</span>" data-es="¿Algo más sobre las necesidades de su sitio web? <span class='opt'>opcional</span>"></label>
-      <textarea name="anything-else" data-en-ph="Any other details, requests, or ideas…" data-es-ph="Cualquier otro detalle, solicitud o idea…"></textarea>
-    </div>
   </div>
 
   <!-- STEP 5 -->
   <div class="sp" id="step5">
     <div class="stitle" data-en="Integrations &amp; social" data-es="Integraciones y redes sociales"></div>
-    <div class="sdesc" data-en="Tell us about your social profiles and any third-party platforms you use." data-es="Cuéntenos sobre sus perfiles en redes sociales y las plataformas de terceros que usa."></div>
+    <div class="sdesc" data-en="Any SpotOn integrations you have are already on our radar — this section is exclusively for third-party platforms outside of your SpotOn deal." data-es="Las integraciones de SpotOn que tenga ya las tenemos en cuenta — esta sección es exclusivamente para plataformas de terceros fuera de su acuerdo con SpotOn."></div>
 
     <div class="field">
       <label data-en="Social media profiles <span class='opt'>paste your URLs</span>" data-es="Perfiles en redes sociales <span class='opt'>pegue sus URLs</span>"></label>
@@ -781,16 +848,18 @@ function updFeatCounter(){
 
 function validate(){
   var ok=true;
+  var firstBad=null;
   function req(fId,iId,fn){
     var f=$(fId),v=$(iId)?$(iId).value.trim():'';
     var bad=fn?!fn(v):v==='';
     if(f)f.classList.toggle('inv',bad);
-    if(bad)ok=false;
+    if(bad){ok=false;if(!firstBad&&f)firstBad=f;}
   }
   if(cur===1){
     req('f-bn','bizname');req('f-ba','bizaddr');req('f-bh','bizhours');req('f-about','about-biz');
     var fv=$('eforms')?$('eforms').value.trim():'';
-    if(!fv){if($('eforms'))$('eforms').style.borderColor='#f87171';$('err-eforms').style.display='block';ok=false;}
+    var efOk=!!fv;
+    if(!efOk){if($('eforms'))$('eforms').style.borderColor='#f87171';$('err-eforms').style.display='block';ok=false;if(!firstBad&&$('eforms'))firstBad=$('eforms').closest('.field')||$('eforms');}
     else{if($('eforms'))$('eforms').style.borderColor='';$('err-eforms').style.display='none';}
     if(!document.querySelector('input[name="optimize-about"]:checked'))ok=false;
     if(!document.querySelector('input[name="primary-lang"]:checked'))ok=false;
@@ -808,8 +877,28 @@ function validate(){
   }
   if(cur===3){
     if(!document.querySelector('input[name="has-logo"]:checked'))ok=false;
-    if(!document.querySelector('input[name="vibe"]:checked'))ok=false;
-    if(!document.querySelectorAll('#colors-group input:checked').length)ok=false;
+    var logoVal=document.querySelector('input[name="has-logo"]:checked');
+    var needsLogoQ=logoVal&&(logoVal.value==='need-standard'||logoVal.value==='need-custom');
+    if(needsLogoQ){
+      if(!document.querySelector('input[name="has-tagline"]:checked'))ok=false;
+      // Audience
+      var audF=$('f-logo-audience'),audV=$('logo-audience')&&$('logo-audience').value.trim();
+      if(!audV){if(audF)audF.classList.add('inv');ok=false;if(!firstBad&&audF)firstBad=audF;}else{if(audF)audF.classList.remove('inv');}
+      // Logo text
+      var ltF=$('f-logo-text'),ltV=$('logo-text')&&$('logo-text').value.trim();
+      if(!ltV){if(ltF)ltF.classList.add('inv');ok=false;if(!firstBad&&ltF)firstBad=ltF;}else{if(ltF)ltF.classList.remove('inv');}
+      // Style words
+      var lsChecked=document.querySelectorAll('.lscb:checked').length;
+      if(!lsChecked){$('logo-style-err').style.display='block';ok=false;if(!firstBad&&$('logo-style-err'))firstBad=$('logo-style-err');}else{$('logo-style-err').style.display='none';}
+    }
+    // Colors
+    var colorsOk=!!document.querySelectorAll('#colors-group input:checked').length;
+    var colErr=$('colors-err');
+    if(!colorsOk){if(colErr)colErr.style.display='block';ok=false;if(!firstBad&&colErr)firstBad=colErr;}else{if(colErr)colErr.style.display='none';}
+    // Vibe
+    var vibeOk=!!document.querySelector('input[name="vibe"]:checked');
+    var vibeErr=$('vibe-err');
+    if(!vibeOk){if(vibeErr)vibeErr.style.display='block';ok=false;if(!firstBad&&vibeErr)firstBad=vibeErr;}else{if(vibeErr)vibeErr.style.display='none';}
   }
   if(cur===4){
     if(!document.querySelectorAll('#images-group input:checked').length){$('images-err').style.display='block';ok=false;}else $('images-err').style.display='none';
@@ -826,6 +915,7 @@ function validate(){
     if(!$('terms-agreed').checked){$('terms-opt').style.borderColor='#f87171';$('terms-err').style.display='block';ok=false;}
     else{$('terms-opt').style.borderColor='#e0e3e9';$('terms-err').style.display='none';}
   }
+  if(!ok&&firstBad){setTimeout(function(){firstBad.scrollIntoView({behavior:'smooth',block:'center'});},80);}
   return ok;
 }
 
@@ -918,9 +1008,24 @@ function setup(){
       selRG('logo-group',r);sendHeight();
     });
   });
+  // Tagline toggle
+  document.querySelectorAll('input[name="has-tagline"]').forEach(function(r){
+    on(r,'change',function(){tog('tagline-wrap',r.value==='yes'&&r.checked);selRG('tagline-group',r);sendHeight();});
+  });
+  document.querySelectorAll('input[name="tagline-in-logo"]').forEach(function(r){
+    on(r,'change',function(){selRG('tagline-include-group',r);});
+  });
+  // Logo style word limit (max 3)
+  document.querySelectorAll('.lscb').forEach(function(cb){
+    on(cb,'change',function(){
+      var checked=document.querySelectorAll('.lscb:checked');
+      if(checked.length>3){cb.checked=false;return;}
+      cb.closest('.co').classList.toggle('sel',cb.checked);
+    });
+  });
   on($('colors-other-cb'),'change',function(){tog('colors-other-wrap',this.checked);$('colors-other-opt').classList.toggle('sel',this.checked);sendHeight();});
-  document.querySelectorAll('#colors-group input').forEach(function(inp){if(inp.id==='colors-other-cb')return;on(inp,'change',function(){inp.closest('.co').classList.toggle('sel',inp.checked);});});
-  document.querySelectorAll('input[name="vibe"]').forEach(function(r){on(r,'change',function(){tog('vibe-other-wrap',r.value==='other'&&r.checked);selRG('vibe-group',r);sendHeight();});});
+  document.querySelectorAll('#colors-group input').forEach(function(inp){if(inp.id==='colors-other-cb')return;on(inp,'change',function(){inp.closest('.co').classList.toggle('sel',inp.checked);if($('colors-err'))$('colors-err').style.display='none';});});
+  document.querySelectorAll('input[name="vibe"]').forEach(function(r){on(r,'change',function(){tog('vibe-other-wrap',r.value==='other'&&r.checked);selRG('vibe-group',r);if($('vibe-err'))$('vibe-err').style.display='none';sendHeight();});});
   on($('images-upload-cb'),'change',function(){tog('images-upload-wrap',this.checked);this.closest('.co').classList.toggle('sel',this.checked);sendHeight();});
   document.querySelectorAll('#images-group input').forEach(function(inp){if(inp.id==='images-upload-cb')return;on(inp,'change',function(){inp.closest('.co').classList.toggle('sel',inp.checked);});});
   document.querySelectorAll('.pcb').forEach(function(cb){
@@ -928,7 +1033,24 @@ function setup(){
       if(cb.id!=='page-other-cb')cb.closest('.co').classList.toggle('sel',cb.checked);
       updPgCounter();
       var mc=document.querySelector('input[name="page-menu"]'),showMenu=mc&&mc.checked;
-      tog('menu-page-wrap',showMenu);tog('featured-wrap',showMenu);sendHeight();
+      tog('menu-page-wrap',showMenu);tog('featured-wrap',showMenu);
+      // Blog/FAQ warning
+      var hasBlog=document.querySelector('input[name="page-blog"]:checked');
+      var hasFaq=document.querySelector('input[name="page-faq"]:checked');
+      var bfw=$('blog-faq-warn');
+      if(bfw){
+        bfw.classList.toggle('on',!!(hasBlog||hasFaq));
+        var both=hasBlog&&hasFaq,blogOnly=hasBlog&&!hasFaq,faqOnly=!hasBlog&&hasFaq;
+        var wt=$('blog-faq-warn-title'),wb=$('blog-faq-warn-body');
+        if(wt){
+          if(both){wt.textContent=lang==='es'?'Blog/Noticias y Preguntas frecuentes':'Blog/News & FAQ';}
+          else if(blogOnly){wt.textContent=lang==='es'?'Blog/Noticias':'Blog/News';}
+          else if(faqOnly){wt.textContent=lang==='es'?'Preguntas frecuentes':'FAQ';}
+        }
+        if(wb){wb.textContent=lang==='es'?' — Necesitaremos que usted nos proporcione el contenido para esta(s) página(s).'
+          :' — You will need to provide the content for this page.'+(both?'s':'');}
+      }
+      sendHeight();
     });
   });
   on($('page-other-cb'),'change',function(){tog('page-other-wrap',this.checked);$('page-other-opt').classList.toggle('sel',this.checked);sendHeight();});
