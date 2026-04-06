@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="robots" content="noindex">
+<!-- email-protection-disable -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SpotOn — Website Questionnaire</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
@@ -465,7 +467,7 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
 
     <div class="field">
       <label data-en="What colors would you like on your website? <span class='req'>*</span>" data-es="¿Qué colores le gustaría en su sitio web? <span class='req'>*</span>"></label>
-      <div class="hint" id="colors-hint" style="margin-bottom:10px" data-en="If you have a specific palette, email it to websiteimp@spoton.com" data-es="Si tiene una paleta específica, envíela a websiteimp@spoton.com"></div>
+      <div class="hint" id="colors-hint" style="margin-bottom:10px" data-en="If you have a specific palette, email it to websiteimp&#64;spoton.com" data-es="Si tiene una paleta específica, envíela a websiteimp&#64;spoton.com"></div>
       <div class="cg" id="colors-group">
         <label class="co"><input type="checkbox" name="colors-logo" value="logo"> <span data-en="The same colors as my logo" data-es="Los mismos colores que mi logotipo"></span></label>
         <label class="co"><input type="checkbox" name="colors-website" value="website"> <span data-en="The same colors as my current website" data-es="Los mismos colores que mi sitio web actual"></span></label>
@@ -982,7 +984,7 @@ function setup(){
       document.querySelectorAll('input[name="domain-transfer"]').forEach(function(i){i.checked=false;});
       document.querySelectorAll('#dt-group .ro').forEach(function(o){o.classList.remove('sel');});
       if(!hw){hide('domain-owned-wrap');hide('new-domain-wrap');document.querySelectorAll('input[name="has-domain"]').forEach(function(i){i.checked=false;});document.querySelectorAll('#hd-group .ro').forEach(function(o){o.classList.remove('sel');});}
-      var iwo=$('images-website-opt');if(iwo)iwo.style.display=(hw==='Yes, I have an existing website'||r.value==='Yes, I have an existing website'&&r.checked)?'flex':'none';
+      var iwo=$('images-website-opt');if(iwo)iwo.style.display=hw?'flex':'none';
       selRG('hw-group',r);sendHeight();
     });
   });
