@@ -381,6 +381,8 @@ function setup(){
     .then(function(r){return r.json().then(function(j){return{ok:r.ok,json:j};});})
     .then(function(res){
       if(res.ok){
+        // Set submission lock
+        localStorage.setItem('spoton-wq-submitted','true');
         // Show success screen
         for(var i=1;i<=STEPS;i++){var el=$('step'+i);if(el)el.classList.remove('active');}
         $('navBar').style.display='none';
@@ -402,5 +404,22 @@ function setup(){
 
 setup();
 applyLang();
-showStep(1);
-notifyResize();
+
+// Submission lock check
+if(localStorage.getItem('spoton-wq-submitted')==='true'){
+  var locked=$('locked-screen');
+  var topbar=$('topbar');
+  var hero=$('hero');
+  var prog=$('pw');
+  var nav=$('navBar');
+  if(locked)locked.style.display='block';
+  if(topbar)topbar.style.display='none';
+  if(hero)hero.style.display='none';
+  if(prog)prog.style.display='none';
+  if(nav)nav.style.display='none';
+  for(var i=1;i<=STEPS;i++){var el=$('step'+i);if(el)el.style.display='none';}
+  notifyResize();
+} else {
+  showStep(1);
+  notifyResize();
+}
