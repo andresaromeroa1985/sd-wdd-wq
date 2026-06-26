@@ -16,12 +16,12 @@ var SM={
     {l:'Final details',s:'Publishing, notes, T&C'}
   ],
   es:[
-    {l:'Informaci\u00f3n del negocio',s:'Nombre, direcci\u00f3n, sobre nosotros'},
-    {l:'Su dominio',s:'Sitio existente, configuraci\u00f3n'},
+    {l:'Información del negocio',s:'Nombre, dirección, sobre nosotros'},
+    {l:'Su dominio',s:'Sitio existente, configuración'},
     {l:'Su marca',s:'Logo, colores, estilo'},
-    {l:'P\u00e1ginas y contenido',s:'P\u00e1ginas, im\u00e1genes, funciones'},
+    {l:'Páginas y contenido',s:'Páginas, imágenes, funciones'},
     {l:'Integraciones',s:'Redes sociales, terceros'},
-    {l:'Detalles finales',s:'Publicaci\u00f3n, notas, T&C'}
+    {l:'Detalles finales',s:'Publicación, notas, T&C'}
   ]
 };
 
@@ -38,53 +38,45 @@ var T={
     helpEmail:'Email us',
     helpCall:'Book a call',
     pgCounter:function(n){return n+' of 6 included pages selected';},
-    pgCounterOver:function(n,e,c){return n+' pages \u2014 '+e+' additional page'+(e>1?'s':'')+' at $50 each';},
+    pgCounterOver:function(n,e,c){return n+' pages — '+e+' additional page'+(e>1?'s':'')+' at $50 each';},
     extraPagesMsg:function(e,c){return e+' additional page'+(e>1?'s':'')+' selected ($'+c+' USD total). ';},
     extraPagesBody:"By continuing, you agree to the additional page fee. We'll send you a proposal to review and sign before any work begins.",
     featCounter:function(n){return n+' of 6 slots used';},
     imagesDisclaimer:"By selecting your own images, you declare you have copyright licensing for the imagery or authorize its use on your website.\n\nIf we don't receive images at time of processing, we'll use stock images and replace them later.",
-    inspirationDesc:'You can also upload a flyer, poster, or social media post using the link below.\n<a href="https://spoton-website-contents.tiiny.site/" target="_blank" style="color:var(--blue);font-weight:500">Upload inspiration files \u2197</a>\n\nTo view example websites made by us, <a href="https://websites-catalog.webflow.io/client-catalog" target="_blank" style="color:var(--blue);font-weight:500">click here \u2197</a>',
-    pageSpecificsHint:'Please tell us: which page, what content, and any external links (Yelp, TripAdvisor, reservations, press, etc.)<br><em>Example: Home \u2014 Include: About us, Featured dishes, Menu, Catering, Newsletter, Contact</em>',
+    inspirationDesc:'You can also upload a flyer, poster, or social media post using the link below.\n<a href="https://spoton-website-contents.tiiny.site/" target="_blank" style="color:var(--blue);font-weight:500">Upload inspiration files ↗</a>\n\nTo view example websites made by us, <a href="https://websites-catalog.webflow.io/client-catalog" target="_blank" style="color:var(--blue);font-weight:500">click here ↗</a>',
+    pageSpecificsHint:'Please tell us: which page, what content, and any external links (Yelp, TripAdvisor, reservations, press, etc.)<br><em>Example: Home — Include: About us, Featured dishes, Menu, Catering, Newsletter, Contact</em>',
     autopublishDesc:"Once your website draft is complete, our team will reach out to you at least 5 times to get your approval. If we're unable to reach you, your website will be auto-published to your domain so it can start ranking in Google's search engines.<br><br>If you prefer not to auto-publish, your subscription will simply be put on hold until you get back to us.",
-    back:'\u2190 Back',
-    cont:'Continue',
-    submit:'Submit questionnaire'
+    back:'← Back',cont:'Continue',submit:'Submit questionnaire'
   },
   es:{
     topbarLabel:'Cuestionario de sitio web',
     eyebrow:'Servicios web',
     titleMain:'Vamos a construir su',
     titleSpan:'sitio web',
-    sub:'Cu\u00e9ntenos sobre su negocio y nos encargamos del resto. Toma unos 5 minutos.',
+    sub:'Cuéntenos sobre su negocio y nos encargamos del resto. Toma unos 5 minutos.',
     sbSteps:'Pasos',
-    helpTitle:'\u00bfNecesita ayuda?',
-    helpBody:'\u00bfTiene preguntas sobre su sitio web? Comun\u00edquese con nuestro equipo.',
+    helpTitle:'¿Necesita ayuda?',
+    helpBody:'¿Tiene preguntas sobre su sitio web? Comuníquese con nuestro equipo.',
     helpEmail:'Enviar correo',
     helpCall:'Agendar llamada',
-    pgCounter:function(n){return n+' de 6 p\u00e1ginas incluidas seleccionadas';},
-    pgCounterOver:function(n,e,c){return n+' p\u00e1ginas \u2014 '+e+' p\u00e1gina'+(e>1?'s':'')+' adicional'+(e>1?'es':'')+' a $50 cada una';},
-    extraPagesMsg:function(e,c){return e+' p\u00e1gina'+(e>1?'s adicionales':' adicional')+' seleccionada'+(e>1?'s':'')+' ($'+c+' USD total). ';},
-    extraPagesBody:'Al continuar, acepta el costo adicional por p\u00e1gina. Le enviaremos una propuesta para revisar y firmar antes de comenzar.',
+    pgCounter:function(n){return n+' de 6 páginas incluidas seleccionadas';},
+    pgCounterOver:function(n,e,c){return n+' páginas — '+e+' página'+(e>1?'s':'')+' adicional'+(e>1?'es':'')+' a $50 cada una';},
+    extraPagesMsg:function(e,c){return e+' página'+(e>1?'s adicionales':' adicional')+' seleccionada'+(e>1?'s':'')+' ($'+c+' USD total). ';},
+    extraPagesBody:'Al continuar, acepta el costo adicional por página. Le enviaremos una propuesta para revisar y firmar antes de comenzar.',
     featCounter:function(n){return n+' de 6 espacios usados';},
-    imagesDisclaimer:'Al seleccionar sus propias im\u00e1genes, declara que tiene licencia de derechos de autor sobre ellas o autoriza su uso en su sitio web.\n\nSi no recibimos im\u00e1genes al momento de procesar, usaremos im\u00e1genes de banco y las reemplazaremos despu\u00e9s.',
-    inspirationDesc:'Tambi\u00e9n puede subir un volante, p\u00f3ster o publicaci\u00f3n de redes sociales usando el enlace a continuaci\u00f3n.\n<a href="https://spoton-website-contents.tiiny.site/" target="_blank" style="color:var(--blue);font-weight:500">Subir archivos de inspiraci\u00f3n \u2197</a>\n\nPara ver ejemplos de sitios web hechos por nosotros, <a href="https://websites-catalog.webflow.io/client-catalog" target="_blank" style="color:var(--blue);font-weight:500">haga clic aqu\u00ed \u2197</a>',
-    pageSpecificsHint:'Por favor ind\u00edquenos: qu\u00e9 p\u00e1gina, qu\u00e9 contenido, y cualquier enlace externo (Yelp, TripAdvisor, reservaciones, prensa, etc.)<br><em>Ejemplo: Inicio \u2014 Incluir: Sobre nosotros, Platillos destacados, Men\u00fa, Catering, Newsletter, Contacto</em>',
-    autopublishDesc:'Una vez que el borrador de su sitio web est\u00e9 listo, nuestro equipo lo contactar\u00e1 al menos 5 veces para obtener su aprobaci\u00f3n. Si no podemos comunicarnos con usted, su sitio web se publicar\u00e1 autom\u00e1ticamente para que comience a posicionarse en Google.<br><br>Si prefiere que no se publique autom\u00e1ticamente, su suscripci\u00f3n simplemente se pausar\u00e1 hasta que se comunique con nosotros.',
-    back:'\u2190 Atr\u00e1s',
-    cont:'Continuar',
-    submit:'Enviar cuestionario'
+    imagesDisclaimer:'Al seleccionar sus propias imágenes, declara que tiene licencia de derechos de autor sobre ellas o autoriza su uso en su sitio web.\n\nSi no recibimos imágenes al momento de procesar, usaremos imágenes de banco y las reemplazaremos después.',
+    inspirationDesc:'También puede subir un volante, póster o publicación de redes sociales usando el enlace a continuación.\n<a href="https://spoton-website-contents.tiiny.site/" target="_blank" style="color:var(--blue);font-weight:500">Subir archivos de inspiración ↗</a>\n\nPara ver ejemplos de sitios web hechos por nosotros, <a href="https://websites-catalog.webflow.io/client-catalog" target="_blank" style="color:var(--blue);font-weight:500">haga clic aquí ↗</a>',
+    pageSpecificsHint:'Por favor indíquenos: qué página, qué contenido, y cualquier enlace externo (Yelp, TripAdvisor, reservaciones, prensa, etc.)<br><em>Ejemplo: Inicio — Incluir: Sobre nosotros, Platillos destacados, Menú, Catering, Newsletter, Contacto</em>',
+    autopublishDesc:'Una vez que el borrador de su sitio web esté listo, nuestro equipo lo contactará al menos 5 veces para obtener su aprobación. Si no podemos comunicarnos con usted, su sitio web se publicará automáticamente para que comience a posicionarse en Google.<br><br>Si prefiere que no se publique automáticamente, su suscripción simplemente se pausará hasta que se comunique con nosotros.',
+    back:'← Atrás',cont:'Continuar',submit:'Enviar cuestionario'
   }
 };
 
 function t(key){return T[lang][key]||T['en'][key]||'';}
 
 function applyLang(){
-  document.querySelectorAll('[data-en]').forEach(function(el){
-    el.innerHTML=el.getAttribute('data-'+lang)||el.getAttribute('data-en')||'';
-  });
-  document.querySelectorAll('[data-en-ph]').forEach(function(el){
-    el.placeholder=el.getAttribute('data-'+lang+'-ph')||el.getAttribute('data-en-ph')||'';
-  });
+  document.querySelectorAll('[data-en]').forEach(function(el){el.innerHTML=el.getAttribute('data-'+lang)||el.getAttribute('data-en')||'';});
+  document.querySelectorAll('[data-en-ph]').forEach(function(el){el.placeholder=el.getAttribute('data-'+lang+'-ph')||el.getAttribute('data-en-ph')||'';});
   $('topbar-label').textContent=t('topbarLabel');
   $('ph-eyebrow').textContent=t('eyebrow');
   $('ph-title').innerHTML=t('titleMain')+' <span id="ph-title-span">'+t('titleSpan')+'</span>';
@@ -99,9 +91,7 @@ function applyLang(){
   $('page-specifics-hint').innerHTML=t('pageSpecificsHint');
   $('autopublish-desc').innerHTML=t('autopublishDesc');
   $('extra-pages-body').textContent=t('extraPagesBody');
-  updFeatCounter();
-  updPgCounter();
-  updProg();
+  updFeatCounter();updPgCounter();updProg();
 }
 
 function setLang(l){
@@ -109,7 +99,6 @@ function setLang(l){
   $('btn-en').classList.toggle('active',l==='en');
   $('btn-es').classList.toggle('active',l==='es');
   applyLang();
-  sendHeight();
 }
 
 function updProg(){
@@ -140,19 +129,14 @@ function updProg(){
   $('btnNext').style.display=isLast?'none':'block';
   $('btnSubmit').classList.toggle('on',isLast);
   var sn=$('stickyNext');
-  if(sn){
-    sn.querySelector('span').innerHTML=isLast?t('submit'):t('cont');
-    sn.onclick=isLast?function(){if(validate())$('wf').dispatchEvent(new Event('submit',{bubbles:true,cancelable:true}));}:goNext;
-  }
-  sendHeight();
+  if(sn){sn.querySelector('span').innerHTML=isLast?t('submit'):t('cont');sn.onclick=isLast?function(){if(validate())$('wf').dispatchEvent(new Event('submit',{bubbles:true,cancelable:true}));}:goNext;}
 }
 
-function jumpTo(n){cur=n;showStep(cur);scrollToTop();}
+function jumpTo(n){cur=n;showStep(cur);window.scrollTo(0,0);}
 
 function showStep(n){
   for(var i=1;i<=STEPS;i++){var el=$('step'+i);if(el)el.classList.toggle('active',i===n);}
   updProg();
-  sendHeight();
 }
 
 function updPgCounter(){
@@ -163,15 +147,13 @@ function updPgCounter(){
 }
 
 function updFeatCounter(){
-  var c=$('feat-counter');
-  if(!c)return;
+  var c=$('feat-counter');if(!c)return;
   c.textContent=t('featCounter')(featCount);
   c.className=featCount>=6?'fc full':'fc';
 }
 
 function validate(){
-  var ok=true;
-  var firstBad=null;
+  var ok=true,firstBad=null;
   function req(fId,iId,fn){
     var f=$(fId),v=$(iId)?$(iId).value.trim():'';
     var bad=fn?!fn(v):v==='';
@@ -186,6 +168,14 @@ function validate(){
     if(!document.querySelector('input[name="optimize-about"]:checked'))ok=false;
     if(!document.querySelector('input[name="primary-lang"]:checked'))ok=false;
     if(!document.querySelector('input[name="translate"]:checked'))ok=false;
+    // Business type required
+    var isRest=$('cb-rest')&&$('cb-rest').checked,isRet=$('cb-ret')&&$('cb-ret').checked;
+    var btErr=$('btype-err');
+    if(!isRest&&!isRet){if(btErr)btErr.style.display='block';ok=false;if(!firstBad)firstBad=$('f-btype');}
+    else{if(btErr)btErr.style.display='none';}
+    // Subcategory required if type selected
+    if(isRest){var rssV=$('rss')?$('rss').value.trim():'';var rssErr=$('rss-err');if(!rssV){if(rssErr)rssErr.style.display='block';if($('rss'))$('rss').style.borderColor='#f87171';ok=false;if(!firstBad)firstBad=$('rest-sub-wrap');}else{if(rssErr)rssErr.style.display='none';if($('rss'))$('rss').style.borderColor='';}}
+    if(isRet){var resV=$('res')?$('res').value.trim():'';var resErr=$('res-err');if(!resV){if(resErr)resErr.style.display='block';if($('res'))$('res').style.borderColor='#f87171';ok=false;if(!firstBad)firstBad=$('ret-sub-wrap');}else{if(resErr)resErr.style.display='none';if($('res'))$('res').style.borderColor='';}}
   }
   if(cur===2){
     if(!document.querySelector('input[name="has-website"]:checked'))ok=false;
@@ -194,7 +184,7 @@ function validate(){
     else if(hw){
       if(!document.querySelector('input[name="has-domain"]:checked'))ok=false;
       var hd=document.querySelector('input[name="has-domain"]:checked');
-      if(hd&&hd.value==='Yes, I already have a domain'&&!document.querySelector('input[name="domain-transfer"]:checked'))ok=false;
+      if(hd&&hd.value.indexOf('already')>-1&&!document.querySelector('input[name="domain-transfer"]:checked'))ok=false;
     }
   }
   if(cur===3){
@@ -203,19 +193,17 @@ function validate(){
     var needsLogoQ=logoVal&&(logoVal.value.indexOf('standard')>-1||logoVal.value.indexOf('custom')>-1);
     if(needsLogoQ){
       if(!document.querySelector('input[name="has-tagline"]:checked'))ok=false;
-      var audF=$('f-logo-audience'),audV=$('logo-audience')&&$('logo-audience').value.trim();
-      if(!audV){if(audF)audF.classList.add('inv');ok=false;if(!firstBad&&audF)firstBad=audF;}else{if(audF)audF.classList.remove('inv');}
-      var ltF=$('f-logo-text'),ltV=$('logo-text')&&$('logo-text').value.trim();
-      if(!ltV){if(ltF)ltF.classList.add('inv');ok=false;if(!firstBad&&ltF)firstBad=ltF;}else{if(ltF)ltF.classList.remove('inv');}
+      var audF=$('f-logo-audience'),audEl=$('logo-audience'),audV=audEl?audEl.value.trim():'';
+      if(!audV){if(audF)audF.classList.add('inv');if(audEl){audEl.style.borderColor='#f87171';}ok=false;if(!firstBad&&audF)firstBad=audF;}else{if(audF)audF.classList.remove('inv');if(audEl)audEl.style.borderColor='';}
+      var ltF=$('f-logo-text'),ltEl=$('logo-text'),ltV=ltEl?ltEl.value.trim():'';
+      if(!ltV){if(ltF)ltF.classList.add('inv');if(ltEl){ltEl.style.borderColor='#f87171';}ok=false;if(!firstBad&&ltF)firstBad=ltF;}else{if(ltF)ltF.classList.remove('inv');if(ltEl)ltEl.style.borderColor='';}
       var lsChecked=document.querySelectorAll('.lscb:checked').length;
-      if(!lsChecked){$('logo-style-err').style.display='block';ok=false;if(!firstBad)firstBad=$('logo-style-err');}else{$('logo-style-err').style.display='none';}
+      if(!lsChecked){$('logo-style-err').style.display='block';ok=false;}else{$('logo-style-err').style.display='none';}
     }
     var colorsOk=!!document.querySelectorAll('#colors-group input:checked').length;
-    var colErr=$('colors-err');
-    if(!colorsOk){if(colErr)colErr.style.display='block';ok=false;if(!firstBad&&colErr)firstBad=colErr;}else{if(colErr)colErr.style.display='none';}
+    if(!colorsOk){if($('colors-err'))$('colors-err').style.display='block';ok=false;}else{if($('colors-err'))$('colors-err').style.display='none';}
     var vibeOk=!!document.querySelector('input[name="vibe"]:checked');
-    var vibeErr=$('vibe-err');
-    if(!vibeOk){if(vibeErr)vibeErr.style.display='block';ok=false;if(!firstBad&&vibeErr)firstBad=vibeErr;}else{if(vibeErr)vibeErr.style.display='none';}
+    if(!vibeOk){if($('vibe-err'))$('vibe-err').style.display='block';ok=false;}else{if($('vibe-err'))$('vibe-err').style.display='none';}
   }
   if(cur===4){
     if(!document.querySelectorAll('#images-group input:checked').length){$('images-err').style.display='block';ok=false;}else $('images-err').style.display='none';
@@ -228,7 +216,13 @@ function validate(){
     tpP.forEach(function(p){var cb=$(p[0]),inp=$(p[1]);if(!cb||!inp)return;if(cb.checked&&!inp.value.trim()){inp.classList.add('err-inp');ok=false;}else{inp.classList.remove('err-inp');}});
   }
   if(cur===6){
-    if(needNewDomain&&!document.querySelector('input[name="autopublish"]:checked'))ok=false;
+    if(needNewDomain&&!document.querySelector('input[name="autopublish"]:checked')){
+      var apErr=$('autopublish-err');if(apErr)apErr.style.display='block';
+      if(!firstBad)firstBad=$('autopublish-wrap');
+      ok=false;
+    } else {
+      var apErr=$('autopublish-err');if(apErr)apErr.style.display='none';
+    }
     if(!$('terms-agreed').checked){$('terms-opt').style.borderColor='#f87171';$('terms-err').style.display='block';ok=false;}
     else{$('terms-opt').style.borderColor='#e0e3e9';$('terms-err').style.display='none';}
   }
@@ -236,18 +230,17 @@ function validate(){
   return ok;
 }
 
-function goNext(){if(!validate())return;cur++;showStep(cur);scrollToTop();sendHeight();}
-function goBack(){if(cur===1)return;cur--;showStep(cur);scrollToTop();sendHeight();}
+function goNext(){if(!validate())return;cur++;showStep(cur);window.scrollTo(0,0);}
+function goBack(){if(cur===1)return;cur--;showStep(cur);window.scrollTo(0,0);}
 
 function addFeat(){
   if(featCount>=6)return;featCount++;
   var list=$('feat-list'),row=document.createElement('div');
   row.className='fr';
-  row.innerHTML='<div class="fn">'+featCount+'</div><input type="text" name="featured-'+featCount+'" placeholder="'+(lang==='es'?'ej. Art\u00edculo '+featCount:'Item '+featCount)+'">';
+  row.innerHTML='<div class="fn">'+featCount+'</div><input type="text" name="featured-'+featCount+'" placeholder="'+(lang==='es'?'ej. Artículo '+featCount:'Item '+featCount)+'">';
   list.appendChild(row);
   updFeatCounter();
   if(featCount>=6)$('add-feat-btn').style.display='none';
-  sendHeight();
 }
 
 var RC=['Afghan','African','American (New)','American (Traditional)','Arabian','Argentine','Armenian','Asian Fusion','Australian','Austrian','Bangladeshi','Barbeque','Belgian','Bistros','Brazilian','Breakfast & Brunch','British','Buffets','Burgers','Burmese','Cafes','Cajun/Creole','Cambodian','Caribbean','Chicken Wings','Chinese','Comfort Food','Creperies','Cuban','Czech','Delis','Dim Sum','Diners','Ethiopian','Fast Food','Filipino','Fish & Chips','French','German','Gluten-Free','Greek','Halal','Hawaiian','Hot Dogs','Hot Pot','Hungarian','Indian','Indonesian','Irish','Italian','Japanese','Korean','Kosher','Latin American','Lebanese','Malaysian','Mediterranean','Mexican','Middle Eastern','Mongolian','Moroccan','Noodles','Pakistani','Pan Asian','Persian/Iranian','Peruvian','Pizza','Polish','Portuguese','Puerto Rican','Ramen','Russian','Salad','Salvadoran','Sandwiches','Seafood','Singaporean','Soup','Southern','Spanish','Sri Lankan','Steakhouses','Sushi Bars','Taiwanese','Tapas/Small Plates','Tex-Mex','Thai','Turkish','Vegan','Vegetarian','Venezuelan','Vietnamese','Wraps'];
@@ -267,27 +260,14 @@ function setupDD(iId,dId,items){
   inp.addEventListener('blur',function(){setTimeout(function(){dd.style.display='none';},150);});
 }
 
-function sendHeight(){
-  var h=document.documentElement.scrollHeight;
-  try{window.parent.postMessage({type:'spoton-resize',height:h},'*');}catch(e){}
-}
-function scrollToTop(){
-  window.scrollTo(0,0);
-  try{window.parent.postMessage({type:'spoton-scroll-top'},'*');}catch(e){}
-}
-window.addEventListener('load',sendHeight);
-window.addEventListener('resize',sendHeight);
-var _mo=new MutationObserver(function(){sendHeight();});
-_mo.observe(document.body,{childList:true,subtree:true,attributes:true,characterData:true});
-
 function setup(){
   var tR=$('cb-rest'),tRo=$('opt-rest'),tRe=$('cb-ret'),tReo=$('opt-ret');
-  on(tR,'change',function(){if(tR.checked){tRe.checked=false;tReo.classList.remove('sel');}tRo.classList.toggle('sel',tR.checked);tog('rest-sub-wrap',tR.checked);hide('ret-sub-wrap');sendHeight();});
-  on(tRe,'change',function(){if(tRe.checked){tR.checked=false;tRo.classList.remove('sel');}tReo.classList.toggle('sel',tRe.checked);tog('ret-sub-wrap',tRe.checked);hide('rest-sub-wrap');sendHeight();});
+  on(tR,'change',function(){if(tR.checked){tRe.checked=false;tReo.classList.remove('sel');}tRo.classList.toggle('sel',tR.checked);tog('rest-sub-wrap',tR.checked);hide('ret-sub-wrap');});
+  on(tRe,'change',function(){if(tRe.checked){tR.checked=false;tRo.classList.remove('sel');}tReo.classList.toggle('sel',tRe.checked);tog('ret-sub-wrap',tRe.checked);hide('rest-sub-wrap');});
   setupDD('rss','rsd',RC);setupDD('res','red',RRC);
   document.querySelectorAll('input[name="optimize-about"]').forEach(function(r){on(r,'change',function(){selRG('opt-about-group',r);});});
-  document.querySelectorAll('input[name="primary-lang"]').forEach(function(r){on(r,'change',function(){tog('lang-other-wrap',r.value==='Other'&&r.checked);selRG('lang-group',r);sendHeight();});});
-  document.querySelectorAll('input[name="translate"]').forEach(function(r){on(r,'change',function(){tog('translate-wrap',r.value.indexOf('specify')>-1&&r.checked);selRG('translate-group',r);sendHeight();});});
+  document.querySelectorAll('input[name="primary-lang"]').forEach(function(r){on(r,'change',function(){tog('lang-other-wrap',r.value==='Other'&&r.checked);selRG('lang-group',r);});});
+  document.querySelectorAll('input[name="translate"]').forEach(function(r){on(r,'change',function(){tog('translate-wrap',r.value.indexOf('specify')>-1&&r.checked);selRG('translate-group',r);});});
   document.querySelectorAll('input[name="has-website"]').forEach(function(r){
     on(r,'change',function(){
       var hw=r.value==='Yes, I have an existing website'&&r.checked;
@@ -297,20 +277,20 @@ function setup(){
       document.querySelectorAll('#dt-group .ro').forEach(function(o){o.classList.remove('sel');});
       if(!hw){hide('domain-owned-wrap');hide('new-domain-wrap');document.querySelectorAll('input[name="has-domain"]').forEach(function(i){i.checked=false;});document.querySelectorAll('#hd-group .ro').forEach(function(o){o.classList.remove('sel');});}
       var iwo=$('images-website-opt');if(iwo)iwo.style.display=hw?'flex':'none';
-      selRG('hw-group',r);sendHeight();
+      selRG('hw-group',r);
     });
   });
-  document.querySelectorAll('input[name="use-existing-content"]').forEach(function(r){on(r,'change',function(){tog('upload-content-wrap',r.value.indexOf('provide')>-1&&r.checked);selRG('usecontent-group',r);sendHeight();});});
+  document.querySelectorAll('input[name="use-existing-content"]').forEach(function(r){on(r,'change',function(){tog('upload-content-wrap',r.value.indexOf('provide')>-1&&r.checked);selRG('usecontent-group',r);});});
   document.querySelectorAll('input[name="has-domain"]').forEach(function(r){
     on(r,'change',function(){
       var owns=r.value.indexOf('already')>-1&&r.checked,needs=r.value.indexOf('need one')>-1&&r.checked;
       tog('domain-owned-wrap',owns);tog('domain-name-wrap',owns);tog('new-domain-wrap',needs);
       if(!owns)hide('transfer-code-wrap');
       needNewDomain=needs;tog('autopublish-wrap',needs);
-      selRG('hd-group',r);sendHeight();
+      selRG('hd-group',r);
     });
   });
-  document.querySelectorAll('input[name="domain-transfer"]').forEach(function(r){on(r,'change',function(){tog('transfer-code-wrap',r.value.indexOf('Transfer')>-1&&r.checked);selRG('dt-group',r);sendHeight();});});
+  document.querySelectorAll('input[name="domain-transfer"]').forEach(function(r){on(r,'change',function(){tog('transfer-code-wrap',r.value.indexOf('Transfer')>-1&&r.checked);selRG('dt-group',r);});});
   document.querySelectorAll('input[name="has-logo"]').forEach(function(r){
     on(r,'change',function(){
       tog('logo-upload-wrap',r.value.indexOf('have a logo')>-1&&r.checked);
@@ -318,15 +298,11 @@ function setup(){
       tog('custom-logo-wrap',r.value.indexOf('custom')>-1&&r.checked);
       tog('logo-notes-wrap',(r.value.indexOf('standard')>-1||r.value.indexOf('custom')>-1)&&r.checked);
       tog('no-logo-wrap',r.value==='No logo needed'&&r.checked);
-      selRG('logo-group',r);sendHeight();
+      selRG('logo-group',r);
     });
   });
-  document.querySelectorAll('input[name="has-tagline"]').forEach(function(r){
-    on(r,'change',function(){tog('tagline-wrap',r.value==='Yes'&&r.checked);selRG('tagline-group',r);sendHeight();});
-  });
-  document.querySelectorAll('input[name="tagline-in-logo"]').forEach(function(r){
-    on(r,'change',function(){selRG('tagline-include-group',r);});
-  });
+  document.querySelectorAll('input[name="has-tagline"]').forEach(function(r){on(r,'change',function(){tog('tagline-wrap',r.value==='Yes'&&r.checked);selRG('tagline-group',r);});});
+  document.querySelectorAll('input[name="tagline-in-logo"]').forEach(function(r){on(r,'change',function(){selRG('tagline-include-group',r);});});
   document.querySelectorAll('.lscb').forEach(function(cb){
     on(cb,'change',function(){
       var checked=document.querySelectorAll('.lscb:checked');
@@ -334,10 +310,10 @@ function setup(){
       cb.closest('.co').classList.toggle('sel',cb.checked);
     });
   });
-  on($('colors-other-cb'),'change',function(){tog('colors-other-wrap',this.checked);$('colors-other-opt').classList.toggle('sel',this.checked);if($('colors-err'))$('colors-err').style.display='none';sendHeight();});
+  on($('colors-other-cb'),'change',function(){tog('colors-other-wrap',this.checked);$('colors-other-opt').classList.toggle('sel',this.checked);if($('colors-err'))$('colors-err').style.display='none';});
   document.querySelectorAll('#colors-group input').forEach(function(inp){if(inp.id==='colors-other-cb')return;on(inp,'change',function(){inp.closest('.co').classList.toggle('sel',inp.checked);if($('colors-err'))$('colors-err').style.display='none';});});
-  document.querySelectorAll('input[name="vibe"]').forEach(function(r){on(r,'change',function(){tog('vibe-other-wrap',r.value==='Other'&&r.checked);selRG('vibe-group',r);if($('vibe-err'))$('vibe-err').style.display='none';sendHeight();});});
-  on($('images-upload-cb'),'change',function(){tog('images-upload-wrap',this.checked);this.closest('.co').classList.toggle('sel',this.checked);sendHeight();});
+  document.querySelectorAll('input[name="vibe"]').forEach(function(r){on(r,'change',function(){tog('vibe-other-wrap',r.value==='Other'&&r.checked);selRG('vibe-group',r);if($('vibe-err'))$('vibe-err').style.display='none';});});
+  on($('images-upload-cb'),'change',function(){tog('images-upload-wrap',this.checked);this.closest('.co').classList.toggle('sel',this.checked);});
   document.querySelectorAll('#images-group input').forEach(function(inp){if(inp.id==='images-upload-cb')return;on(inp,'change',function(){inp.closest('.co').classList.toggle('sel',inp.checked);});});
   document.querySelectorAll('.pcb').forEach(function(cb){
     on(cb,'change',function(){
@@ -353,12 +329,11 @@ function setup(){
         var both=hasBlog&&hasFaq,blogOnly=hasBlog&&!hasFaq;
         var wt=$('blog-faq-warn-title'),wb=$('blog-faq-warn-body');
         if(wt){if(both){wt.textContent=lang==='es'?'Blog/Noticias y Preguntas frecuentes':'Blog/News & FAQ';}else if(blogOnly){wt.textContent=lang==='es'?'Blog/Noticias':'Blog/News';}else{wt.textContent=lang==='es'?'Preguntas frecuentes':'FAQ';}}
-        if(wb){wb.textContent=lang==='es'?' \u2014 Necesitaremos que usted nos proporcione el contenido para esta(s) p\u00e1gina(s).':' \u2014 You will need to provide the content for this page'+(both?'s':'')+'.';}
+        if(wb){wb.textContent=lang==='es'?' — Necesitaremos que usted nos proporcione el contenido para esta(s) página(s).':(both?' — You will need to provide the content for these pages.':', — You will need to provide the content for this page.');}
       }
-      sendHeight();
     });
   });
-  on($('page-other-cb'),'change',function(){tog('page-other-wrap',this.checked);$('page-other-opt').classList.toggle('sel',this.checked);sendHeight();});
+  on($('page-other-cb'),'change',function(){tog('page-other-wrap',this.checked);$('page-other-opt').classList.toggle('sel',this.checked);});
   document.querySelectorAll('input[name="menu-type"]').forEach(function(r){
     on(r,'change',function(){
       var ids=['mopt-ordering','mopt-spoton','mopt-image','mopt-other'];
@@ -366,7 +341,7 @@ function setup(){
       var map={'Link directly to my online ordering':'mopt-ordering','Sync with my SpotOn online ordering':'mopt-spoton','Display my menu as an image or PDF':'mopt-image','other':'mopt-other'};
       if(map[r.value]){var el=$(map[r.value]);if(el)el.classList.add('act');}
       tog('menu-upload-wrap',r.value.indexOf('image')>-1&&r.checked);
-      tog('menu-other-wrap',r.value==='other'&&r.checked);sendHeight();
+      tog('menu-other-wrap',r.value==='other'&&r.checked);
     });
   });
   var tpList=[['tp-ordering-cb','tp-ordering-url-wrap','tp-ordering-opt'],['tp-res-cb','tp-res-url-wrap','tp-res-opt'],['tp-gc-cb','tp-gc-url-wrap','tp-gc-opt'],['tp-loyalty-cb','tp-loyalty-url-wrap','tp-loyalty-opt'],['tp-other-cb','tp-other-url-wrap','tp-other-opt']];
@@ -376,7 +351,6 @@ function setup(){
       var wrap=$(arr[1]),opt=$(arr[2]);
       if(wrap)wrap.classList.toggle('on',cb.checked);
       if(opt)opt.classList.toggle('act',cb.checked);
-      sendHeight();
     });
   });
   document.querySelectorAll('input[name="autopublish"]').forEach(function(r){on(r,'change',function(){selRG('autopublish-group',r);});});
@@ -384,37 +358,38 @@ function setup(){
     $('terms-opt').classList.toggle('sel',this.checked);
     if(this.checked){$('terms-opt').style.borderColor='var(--blue)';$('terms-err').style.display='none';}
   });
-}
 
-document.getElementById('wf').addEventListener('submit', function(e) {
-  e.preventDefault();
-  if (!validate()) return;
-  var form = this;
-  var btn = $('btnSubmit');
-  btn.disabled = true;
-  btn.querySelector('span').textContent = lang === 'es' ? 'Enviando\u2026' : 'Sending\u2026';
-  var data = new FormData(form);
-  fetch(form.action, {
-    method: 'POST',
-    body: data,
-    headers: { 'Accept': 'application/json' }
-  }).then(function(r){ return r.json().then(function(j){ return {ok: r.ok, json: j}; }); })
-  .then(function(res) {
-    if (res.ok) {
-      window.location.href = 'https://andresaromeroa1985.github.io/sd-wdd-wq/thanks.html?lang=' + lang;
-    } else {
-      btn.disabled = false;
-      btn.querySelector('span').textContent = lang === 'es' ? 'Enviar cuestionario' : 'Submit questionnaire';
-      alert(lang === 'es' ? 'Hubo un error al enviar. Por favor intente de nuevo.' : 'There was an error submitting. Please try again.');
-    }
-  }).catch(function() {
-    btn.disabled = false;
-    btn.querySelector('span').textContent = lang === 'es' ? 'Enviar cuestionario' : 'Submit questionnaire';
-    alert(lang === 'es' ? 'Hubo un error al enviar. Por favor intente de nuevo.' : 'There was an error submitting. Please try again.');
+  // Form submission with Formspree
+  $('wf').addEventListener('submit',function(e){
+    e.preventDefault();
+    if(!validate())return;
+    var btn=$('btnSubmit');
+    btn.disabled=true;
+    btn.querySelector('span').textContent=lang==='es'?'Enviando…':'Sending…';
+    var data=new FormData(this);
+    fetch(this.action,{method:'POST',body:data,headers:{'Accept':'application/json'}})
+    .then(function(r){return r.json().then(function(j){return{ok:r.ok,json:j};});})
+    .then(function(res){
+      if(res.ok){
+        // Show success screen
+        for(var i=1;i<=STEPS;i++){var el=$('step'+i);if(el)el.classList.remove('active');}
+        $('navBar').style.display='none';
+        $('succ').style.display='block';
+        window.scrollTo(0,0);
+      } else {
+        btn.disabled=false;
+        btn.querySelector('span').textContent=lang==='es'?'Enviar cuestionario':'Submit questionnaire';
+        alert(lang==='es'?'Hubo un error al enviar. Por favor intente de nuevo.':'There was an error submitting. Please try again.');
+      }
+    })
+    .catch(function(){
+      btn.disabled=false;
+      btn.querySelector('span').textContent=lang==='es'?'Enviar cuestionario':'Submit questionnaire';
+      alert(lang==='es'?'Hubo un error al enviar. Por favor intente de nuevo.':'There was an error submitting. Please try again.');
+    });
   });
-});
+}
 
 setup();
 applyLang();
 showStep(1);
-sendHeight();
