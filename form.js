@@ -128,8 +128,6 @@ function updProg(){
   var isLast=cur===STEPS;
   $('btnNext').style.display=isLast?'none':'block';
   $('btnSubmit').classList.toggle('on',isLast);
-  var sn=$('stickyNext');
-  if(sn){sn.querySelector('span').innerHTML=isLast?t('submit'):t('cont');sn.onclick=isLast?function(){if(validate())$('wf').dispatchEvent(new Event('submit',{bubbles:true,cancelable:true}));}:goNext;}
 }
 
 function jumpTo(n){cur=n;showStep(cur);window.scrollTo(0,0);}
