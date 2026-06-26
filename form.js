@@ -134,9 +134,18 @@ function updProg(){
 
 function jumpTo(n){cur=n;showStep(cur);window.scrollTo(0,0);}
 
+function notifyResize(){
+  setTimeout(function(){
+    window.parent.postMessage({type:'spoton-resize',height:document.body.scrollHeight},'*');
+  },80);
+}
+function notifyScrollTop(){
+  window.parent.postMessage({type:'spoton-scroll-top'},'*');
+}
 function showStep(n){
   for(var i=1;i<=STEPS;i++){var el=$('step'+i);if(el)el.classList.toggle('active',i===n);}
   updProg();
+  notifyResize();
 }
 
 function updPgCounter(){
@@ -230,8 +239,8 @@ function validate(){
   return ok;
 }
 
-function goNext(){if(!validate())return;cur++;showStep(cur);window.scrollTo(0,0);}
-function goBack(){if(cur===1)return;cur--;showStep(cur);window.scrollTo(0,0);}
+function goNext(){if(!validate())return;cur++;showStep(cur);notifyScrollTop();}
+function goBack(){if(cur===1)return;cur--;showStep(cur);notifyScrollTop();}
 
 function addFeat(){
   if(featCount>=6)return;featCount++;
@@ -393,3 +402,4 @@ function setup(){
 setup();
 applyLang();
 showStep(1);
+notifyResize();
