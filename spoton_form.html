@@ -2,8 +2,6 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="robots" content="noindex">
-<!-- email-protection-disable -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SpotOn — Website Questionnaire</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
@@ -137,7 +135,7 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
 .hl:last-child{margin-bottom:0}
 .hl:hover{text-decoration:underline}
 .hl svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2}
-.stnav{display:none!important}
+.stnav{position:fixed;bottom:0;left:0;right:0;background:rgba(13,13,13,0.96);backdrop-filter:blur(8px);border-top:1px solid var(--brd);padding:12px 24px;display:flex;justify-content:center;z-index:200}
 .stni{width:100%;max-width:960px;display:flex;align-items:center;justify-content:space-between;gap:16px}
 .stl{font-size:12px;color:var(--tg);white-space:nowrap}
 .sb2{padding:8px 22px;border-radius:var(--r);font-size:13px;font-weight:600;font-family:var(--f);cursor:pointer;border:none;transition:background .15s}
@@ -183,7 +181,7 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
     <div class="hc">
       <h3 id="help-title">Need help?</h3>
       <p id="help-body">Have questions about your website? Reach out to our team.</p>
-      <a class="hl" href="/cdn-cgi/l/email-protection#d0a7b5b2a3b9a4b5b9bda090a3a0bfa4bfbefeb3bfbd" style="display:flex" id="help-email">Email us <svg viewBox="0 0 12 12"><path d="M2 10L10 2M10 2H5M10 2v5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a class="hl" href="mailto:websiteimp@spoton.com" style="display:flex" id="help-email">Email us <svg viewBox="0 0 12 12"><path d="M2 10L10 2M10 2H5M10 2v5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       <a class="hl" href="https://calendar.app.google/1pvzRL4x8KP5dqPZA" target="_blank" style="display:flex" id="help-call">Book a call <svg viewBox="0 0 12 12"><path d="M2 10L10 2M10 2H5M10 2v5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     </div>
   </div>
@@ -202,6 +200,12 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
       <div class="err" data-en="Please enter your business name." data-es="Por favor ingrese el nombre de su negocio."></div>
     </div>
 
+    <div class="field" id="f-dba">
+      <label data-en="DBA (Doing Business As) <span class='opt'>only if different from business name</span>" data-es="DBA (Nombre comercial) <span class='opt'>solo si es diferente al nombre del negocio</span>"></label>
+      <input type="text" name="dba-name" id="dbaname" data-en-ph="e.g. The Corner Spot (if different from legal name)" data-es-ph="ej. El Rinconcito (si es diferente al nombre legal)">
+      <div class="hint" data-en="If your website should display a different name than your registered business name, enter it here." data-es="Si su sitio web debe mostrar un nombre diferente al nombre registrado de su negocio, ingréselo aquí."></div>
+    </div>
+
     <div class="field" id="f-ba">
       <label data-en="Business address <span class='req'>*</span>" data-es="Dirección del negocio <span class='req'>*</span>"></label>
       <input type="text" name="business-address" id="bizaddr" data-en-ph="123 Main St, City, State, ZIP" data-es-ph="Calle 123, Ciudad, Estado, CP">
@@ -217,7 +221,7 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
           <input type="text" name="email-public" data-en-ph="e.g. hello@yourbusiness.com" data-es-ph="ej. hola@sunegocio.com">
         </div>
         <div>
-          <div style="margin-bottom:5px"><span class="epl" data-en="Form replies <span class='req'>*</span>" data-es="Respuestas del formulario <span class='req'>*</span>"></span><span class="eps" data-en="Where contact form submissions are sent — if none, type No" data-es="A dónde se envían los mensajes del formulario de contacto — si no tiene, escriba No"></span></div>
+          <div style="margin-bottom:5px"><span class="epl" data-en="Form replies <span class='req'>*</span>" data-es="Respuestas del formulario <span class='req'>*</span>"></span><span class="eps" data-en="Where contact form submissions are sent — if none, type No" data-es="A dónde se envían los mensajes del formulario — si no tiene, escriba No"></span></div>
           <input type="text" name="email-forms" id="eforms" data-en-ph="e.g. info@yourbusiness.com" data-es-ph="ej. info@sunegocio.com">
           <div class="err" id="err-eforms" style="display:none" data-en="Please enter at least one email for form replies." data-es="Por favor ingrese al menos un correo para las respuestas del formulario."></div>
         </div>
@@ -239,20 +243,23 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
       <div class="err" data-en="Please enter your business hours." data-es="Por favor ingrese el horario de su negocio."></div>
     </div>
 
-    <div class="field">
+    <div class="field" id="f-btype">
       <label data-en="Business type <span class='req'>*</span>" data-es="Tipo de negocio <span class='req'>*</span>"></label>
       <div style="display:flex;gap:10px" id="btype-group">
         <label class="co" style="flex:1" id="opt-rest"><input type="checkbox" name="biz-type-restaurant" id="cb-rest" value="restaurant"> <span data-en="Restaurant" data-es="Restaurante"></span></label>
         <label class="co" style="flex:1" id="opt-ret"><input type="checkbox" name="biz-type-retail" id="cb-ret" value="retail"> <span data-en="Retail" data-es="Tienda minorista"></span></label>
       </div>
+      <div class="err" id="btype-err" style="display:none" data-en="Please select a business type." data-es="Por favor seleccione el tipo de negocio."></div>
     </div>
     <div class="cond field" id="rest-sub-wrap">
-      <label data-en="Restaurant category" data-es="Categoría de restaurante"></label>
+      <label data-en="Restaurant category <span class='req'>*</span>" data-es="Categoría de restaurante <span class='req'>*</span>"></label>
       <div style="position:relative"><input type="text" id="rss" name="restaurant-subcategory" data-en-ph="Type to search (e.g. Italian, Sushi…)" data-es-ph="Escriba para buscar (ej. Italiana, Sushi…)"><div id="rsd" style="display:none;position:absolute;top:100%;left:0;right:0;background:#fff;border:1.5px solid var(--blue);border-top:none;border-radius:0 0 6px 6px;max-height:220px;overflow-y:auto;z-index:100;box-shadow:0 4px 12px rgba(0,0,0,0.08)"></div></div>
+      <div class="err" id="rss-err" style="display:none" data-en="Please select your restaurant category." data-es="Por favor seleccione la categoría de su restaurante."></div>
     </div>
     <div class="cond field" id="ret-sub-wrap">
-      <label data-en="Retail category" data-es="Categoría de tienda"></label>
+      <label data-en="Retail category <span class='req'>*</span>" data-es="Categoría de tienda <span class='req'>*</span>"></label>
       <div style="position:relative"><input type="text" id="res" name="retail-subcategory" data-en-ph="Type to search (e.g. Clothing, Electronics…)" data-es-ph="Escriba para buscar (ej. Ropa, Electrónica…)"><div id="red" style="display:none;position:absolute;top:100%;left:0;right:0;background:#fff;border:1.5px solid var(--blue);border-top:none;border-radius:0 0 6px 6px;max-height:220px;overflow-y:auto;z-index:100;box-shadow:0 4px 12px rgba(0,0,0,0.08)"></div></div>
+      <div class="err" id="res-err" style="display:none" data-en="Please select your retail category." data-es="Por favor seleccione la categoría de su tienda."></div>
     </div>
 
     <div class="field" id="f-about">
@@ -381,14 +388,18 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
       <a href="https://spoton-website-contents.tiiny.site/" target="_blank" class="btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg><span data-en="Upload logo" data-es="Subir logotipo"></span></a>
       <div class="hint" style="margin-top:8px" data-en="You'll be taken to our secure upload page — come back here once done." data-es="Será llevado a nuestra página segura de carga — regrese aquí cuando termine."></div>
     </div>
+
     <div class="cond field" id="standard-logo-wrap">
       <a href="https://drive.google.com/file/d/1dP1l0zxl4Q4JksHNiYxD2pWIwQBOTzeP/view?usp=sharing" target="_blank" class="btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span data-en="Standard logo examples" data-es="Ejemplos de logotipo estándar"></span></a>
       <div class="warn" style="margin-top:10px"><span style="font-size:18px;flex-shrink:0;line-height:1.3">⚠️</span><div class="wt" data-en="By selecting this option, you'll receive a proposal to review and sign before we proceed. Once approved, you'll be charged $99 USD and we'll begin the design process." data-es="Al seleccionar esta opción, recibirá una propuesta para revisar y firmar antes de proceder. Una vez aprobado, se le cobrará $99 USD y comenzaremos el proceso de diseño."></div></div>
     </div>
+
     <div class="cond field" id="custom-logo-wrap">
       <a href="https://drive.google.com/file/d/1LnR0Szeu9Q2zqk_GCThQcjhzwPSc5Kw0/view?usp=drive_link" target="_blank" class="btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span data-en="Custom logo examples" data-es="Ejemplos de logotipo personalizado"></span></a>
       <div class="warn" style="margin-top:10px"><span style="font-size:18px;flex-shrink:0;line-height:1.3">⚠️</span><div class="wt" data-en="By selecting this option, you'll receive a proposal to review and sign before we proceed. Once approved, you'll be charged $299 USD and we'll begin the design process." data-es="Al seleccionar esta opción, recibirá una propuesta para revisar y firmar antes de proceder. Una vez aprobado, se le cobrará $299 USD y comenzaremos el proceso de diseño."></div></div>
     </div>
+
+    <!-- Logo design questions — shown for standard or custom -->
     <div class="cond" id="logo-notes-wrap">
       <hr class="div">
       <div style="font-size:13px;font-weight:600;color:#111;margin-bottom:20px" data-en="Logo design questions" data-es="Preguntas de diseño del logotipo"></div>
@@ -400,8 +411,8 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
           <label class="ro"><input type="radio" name="has-tagline" value="Yes"> <span data-en="Yes" data-es="Sí"></span></label>
         </div>
         <div class="cond" id="tagline-wrap" style="margin-top:10px">
-          <input type="text" name="tagline-text" data-en-ph="Enter your tagline…" data-es-ph="Ingrese su eslogan…">
-          <div style="font-size:13px;color:#333;font-weight:500;margin-top:4px" data-en="Include tagline in logo?" data-es="¿Incluir eslogan en el logotipo?"></div>
+          <input type="text" name="tagline-text" data-en-ph="Enter your tagline…" data-es-ph="Ingrese su eslogan…" style="margin-bottom:10px">
+          <div style="font-size:13px;color:#333;font-weight:500;margin-bottom:6px" data-en="Include tagline in logo?" data-es="¿Incluir eslogan en el logotipo?"></div>
           <div class="rg" id="tagline-include-group">
             <label class="ro"><input type="radio" name="tagline-in-logo" value="Yes, include it"> <span data-en="Yes, include it" data-es="Sí, inclúyanlo"></span></label>
             <label class="ro"><input type="radio" name="tagline-in-logo" value="No, just the logo"> <span data-en="No, just the logo" data-es="No, solo el logotipo"></span></label>
@@ -412,13 +423,15 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
       <div class="field" id="f-logo-audience">
         <label data-en="2. Who is your target audience? <span class='req'>*</span>" data-es="2. ¿Quién es su público objetivo? <span class='req'>*</span>"></label>
         <div class="hint" style="margin-bottom:8px" data-en="A target audience is the specific group of people most likely to visit your business — their age, preferences, lifestyle, or dining habits. Knowing this helps us create the right logo for your business." data-es="Su público objetivo es el grupo de personas con mayor probabilidad de visitar su negocio — su edad, preferencias, estilo de vida o hábitos. Esto nos ayuda a crear el logotipo adecuado para su negocio."></div>
-        <textarea name="logo-audience" data-en-ph="e.g. Families with young children, working adults aged 25–45 who enjoy casual dining…" data-es-ph="ej. Familias con niños pequeños, adultos de 25–45 años que disfrutan comer en restaurantes casuales…"></textarea>
+        <textarea name="logo-audience" id="logo-audience" data-en-ph="e.g. Families with young children, working adults aged 25–45 who enjoy casual dining…" data-es-ph="ej. Familias con niños pequeños, adultos de 25–45 años que disfrutan comer en restaurantes casuales…"></textarea>
+        <div class="err" data-en="Please describe your target audience." data-es="Por favor describa su público objetivo."></div>
       </div>
 
       <div class="field" id="f-logo-text">
         <label data-en="3. What text would you like included in your logo? <span class='req'>*</span>" data-es="3. ¿Qué texto le gustaría incluir en su logotipo? <span class='req'>*</span>"></label>
-        <div class="hint" style="margin-bottom:8px" data-en="Let us know what's important to include or exclude. Example: Include &quot;Established in 1992&quot; — Exclude: My location, I'm opening new sites." data-es="Indíquenos qué es importante incluir o excluir. Ejemplo: Incluir &quot;Fundado en 1992&quot; — Excluir: Mi ubicación, estoy abriendo nuevas sucursales."></div>
-        <textarea name="logo-text" data-en-ph="Include: … / Exclude: …" data-es-ph="Incluir: … / Excluir: …"></textarea>
+        <div class="hint" style="margin-bottom:8px" data-en='Let us know what&apos;s important to include or exclude. Example: Include "Established in 1992" — Exclude: My location, I&apos;m opening new sites.' data-es='Indíquenos qué es importante incluir o excluir. Ejemplo: Incluir "Fundado en 1992" — Excluir: Mi ubicación, estoy abriendo nuevas sucursales.'></div>
+        <textarea name="logo-text" id="logo-text" data-en-ph="Include: … / Exclude: …" data-es-ph="Incluir: … / Excluir: …"></textarea>
+        <div class="err" data-en="Please tell us what text to include in your logo." data-es="Por favor indíquenos qué texto incluir en su logotipo."></div>
       </div>
 
       <div class="field">
@@ -437,21 +450,21 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
         <label data-en="6. Choose up to 3 words that describe your desired logo style <span class='req'>*</span>" data-es="6. Elija hasta 3 palabras que describan el estilo de logotipo deseado <span class='req'>*</span>"></label>
         <div class="hint" style="margin-bottom:10px" data-en="Select up to 3." data-es="Seleccione hasta 3."></div>
         <div class="cg" id="logo-style-group" style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-          <label class="co"><input type="checkbox" name="logo-style" value="simple" class="lscb"> <span>Simple</span></label>
-          <label class="co"><input type="checkbox" name="logo-style" value="modern" class="lscb"> <span>Modern</span></label>
-          <label class="co"><input type="checkbox" name="logo-style" value="sleek" class="lscb"> <span>Sleek</span></label>
-          <label class="co"><input type="checkbox" name="logo-style" value="formal" class="lscb"> <span>Formal</span></label>
-          <label class="co"><input type="checkbox" name="logo-style" value="serious" class="lscb"> <span>Serious</span></label>
-          <label class="co"><input type="checkbox" name="logo-style" value="detailed" class="lscb"> <span>Detailed</span></label>
-          <label class="co"><input type="checkbox" name="logo-style" value="vintage" class="lscb"> <span>Vintage</span></label>
-          <label class="co"><input type="checkbox" name="logo-style" value="whimsical" class="lscb"> <span>Whimsical</span></label>
-          <label class="co"><input type="checkbox" name="logo-style" value="playful" class="lscb"> <span>Playful</span></label>
-          <label class="co"><input type="checkbox" name="logo-style" value="casual" class="lscb"> <span>Casual</span></label>
-          <label class="co"><input type="checkbox" name="logo-style" value="organic" class="lscb"> <span>Organic</span></label>
-          <label class="co"><input type="checkbox" name="logo-style" value="fun" class="lscb"> <span>Fun</span></label>
-          <label class="co"><input type="checkbox" name="logo-style" value="perky" class="lscb"> <span>Perky</span></label>
-          <label class="co"><input type="checkbox" name="logo-style" value="elegant" class="lscb"> <span>Elegant</span></label>
-          <label class="co"><input type="checkbox" name="logo-style" value="luxurious" class="lscb"> <span>Luxurious</span></label>
+          <label class="co"><input type="checkbox" name="logo-style" value="Simple" class="lscb"> <span>Simple</span></label>
+          <label class="co"><input type="checkbox" name="logo-style" value="Modern" class="lscb"> <span>Modern</span></label>
+          <label class="co"><input type="checkbox" name="logo-style" value="Sleek" class="lscb"> <span>Sleek</span></label>
+          <label class="co"><input type="checkbox" name="logo-style" value="Formal" class="lscb"> <span>Formal</span></label>
+          <label class="co"><input type="checkbox" name="logo-style" value="Serious" class="lscb"> <span>Serious</span></label>
+          <label class="co"><input type="checkbox" name="logo-style" value="Detailed" class="lscb"> <span>Detailed</span></label>
+          <label class="co"><input type="checkbox" name="logo-style" value="Vintage" class="lscb"> <span>Vintage</span></label>
+          <label class="co"><input type="checkbox" name="logo-style" value="Whimsical" class="lscb"> <span>Whimsical</span></label>
+          <label class="co"><input type="checkbox" name="logo-style" value="Playful" class="lscb"> <span>Playful</span></label>
+          <label class="co"><input type="checkbox" name="logo-style" value="Casual" class="lscb"> <span>Casual</span></label>
+          <label class="co"><input type="checkbox" name="logo-style" value="Organic" class="lscb"> <span>Organic</span></label>
+          <label class="co"><input type="checkbox" name="logo-style" value="Fun" class="lscb"> <span>Fun</span></label>
+          <label class="co"><input type="checkbox" name="logo-style" value="Perky" class="lscb"> <span>Perky</span></label>
+          <label class="co"><input type="checkbox" name="logo-style" value="Elegant" class="lscb"> <span>Elegant</span></label>
+          <label class="co"><input type="checkbox" name="logo-style" value="Luxurious" class="lscb"> <span>Luxurious</span></label>
         </div>
         <div class="err" id="logo-style-err" style="display:none" data-en="Please select at least one style." data-es="Por favor seleccione al menos un estilo."></div>
       </div>
@@ -461,17 +474,18 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
         <textarea name="logo-other" data-en-ph="Any additional ideas, references, or preferences…" data-es-ph="Cualquier idea adicional, referencia o preferencia…"></textarea>
       </div>
     </div>
+
     <div class="cond" id="no-logo-wrap">
-      <div class="warn" style="margin-bottom:20px"><span style="font-size:20px;flex-shrink:0;line-height:1.3">⚠️</span><div class="wt"><strong data-en="We recommend having a logo." data-es="Recomendamos tener un logotipo."></strong><span data-en="A logo is the foundation of your brand identity — it's what customers recognize and remember. Without one, your website may feel less professional. Our standard logo starts at just $99." data-es="Un logotipo es la base de la identidad de su marca — es lo que los clientes reconocen y recuerdan. Sin uno, su sitio puede verse menos profesional. Nuestro logotipo estándar comienza en solo $99."></span></div></div>
+      <div class="warn" style="margin-bottom:20px"><span style="font-size:20px;flex-shrink:0;line-height:1.3">⚠️</span><div class="wt"><strong data-en="We recommend having a logo." data-es="Recomendamos tener un logotipo."></strong><span data-en=" A logo is the foundation of your brand identity — it's what customers recognize and remember. Without one, your website may feel less professional. Our standard logo starts at just $99." data-es=" Un logotipo es la base de la identidad de su marca — es lo que los clientes reconocen y recuerdan. Sin uno, su sitio puede verse menos profesional. Nuestro logotipo estándar comienza en solo $99."></span></div></div>
     </div>
 
     <div class="field">
       <label data-en="What colors would you like on your website? <span class='req'>*</span>" data-es="¿Qué colores le gustaría en su sitio web? <span class='req'>*</span>"></label>
-      <div class="hint" id="colors-hint" style="margin-bottom:10px" data-en="If you have a specific palette, email it to websiteimp&#64;spoton.com" data-es="Si tiene una paleta específica, envíela a websiteimp&#64;spoton.com"></div>
+      <div class="hint" id="colors-hint" style="margin-bottom:10px" data-en="If you have a specific palette, email it to websiteimp@spoton.com" data-es="Si tiene una paleta específica, envíela a websiteimp@spoton.com"></div>
       <div class="cg" id="colors-group">
-        <label class="co"><input type="checkbox" name="colors-logo" value="logo"> <span data-en="The same colors as my logo" data-es="Los mismos colores que mi logotipo"></span></label>
-        <label class="co"><input type="checkbox" name="colors-website" value="website"> <span data-en="The same colors as my current website" data-es="Los mismos colores que mi sitio web actual"></span></label>
-        <label class="co" id="colors-other-opt"><input type="checkbox" name="colors-other-cb" id="colors-other-cb" value="other"> <span data-en="Other" data-es="Otro"></span></label>
+        <label class="co"><input type="checkbox" name="colors-logo" value="The same colors as my logo"> <span data-en="The same colors as my logo" data-es="Los mismos colores que mi logotipo"></span></label>
+        <label class="co"><input type="checkbox" name="colors-website" value="The same colors as my current website"> <span data-en="The same colors as my current website" data-es="Los mismos colores que mi sitio web actual"></span></label>
+        <label class="co" id="colors-other-opt"><input type="checkbox" name="colors-other-cb" id="colors-other-cb" value="Other"> <span data-en="Other" data-es="Otro"></span></label>
       </div>
       <div class="cond" id="colors-other-wrap" style="margin-top:10px"><input type="text" name="colors-other-text" data-en-ph="Describe your preferred colors or palette…" data-es-ph="Describa sus colores o paleta preferida…"></div>
       <div class="err" id="colors-err" style="display:none" data-en="Please select at least one color option." data-es="Por favor seleccione al menos una opción de color."></div>
@@ -487,7 +501,7 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
         <label class="ro"><input type="radio" name="vibe" value="Elegant & luxurious"> <span data-en="✨ Elegant &amp; luxurious" data-es="✨ Elegante y lujoso"></span></label>
         <label class="ro"><input type="radio" name="vibe" value="Laid-back & casual"> <span data-en="😎 Laid-back &amp; casual" data-es="😎 Relajado y casual"></span></label>
         <label class="ro"><input type="radio" name="vibe" value="Let SpotOn take creative liberties"> <span data-en="🎭 Let SpotOn take creative liberties" data-es="🎭 Dejar que SpotOn tome libertades creativas"></span></label>
-        <label class="ro"><input type="radio" name="vibe" value="other"> <span data-en="Other" data-es="Otro"></span></label>
+        <label class="ro"><input type="radio" name="vibe" value="Other"> <span data-en="Other" data-es="Otro"></span></label>
       </div>
       <div class="cond" id="vibe-other-wrap" style="margin-top:10px"><input type="text" name="vibe-other-text" data-en-ph="Describe the look and feel you're going for…" data-es-ph="Describa el estilo que busca…"></div>
       <div class="err" id="vibe-err" style="display:none" data-en="Please select a look and feel for your website." data-es="Por favor seleccione el estilo para su sitio web."></div>
@@ -497,6 +511,16 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
       <label data-en="Do you have example websites or visual styles for inspiration? <span class='opt'>optional</span>" data-es="¿Tiene sitios web de ejemplo o estilos visuales para inspiración? <span class='opt'>opcional</span>"></label>
       <div id="inspiration-desc" style="font-size:13px;color:var(--tg);line-height:1.65;margin-bottom:10px"></div>
       <textarea name="inspiration-urls" data-en-ph="Paste links or describe the styles you like…" data-es-ph="Pegue enlaces o describa los estilos que le gustan…"></textarea>
+    </div>
+
+    <div class="field">
+      <label data-en="Working with a designer or have a mockup? <span class='opt'>optional</span>" data-es="¿Trabaja con un diseñador o tiene una maqueta? <span class='opt'>opcional</span>"></label>
+      <div style="background:#f0f5ff;border:1.5px solid rgba(23,105,255,0.25);border-radius:var(--r);padding:14px 16px;margin-bottom:10px">
+        <div style="font-size:13px;color:#1a3a6e;line-height:1.65" data-en="💡 If you have a mockup, wireframe, or are working with your own web designer, please share it with us — it helps us build your site exactly the way you envision it. You can also upload files using the upload page linked above." data-es="💡 Si tiene una maqueta, wireframe o está trabajando con su propio diseñador web, por favor compártalo con nosotros — nos ayuda a construir su sitio exactamente como lo imagina. También puede subir archivos usando la página de carga enlazada arriba."></div>
+      </div>
+      <input type="text" name="mockup-link" data-en-ph="Paste a link (Figma, Google Drive, Dropbox, etc.)…" data-es-ph="Pegue un enlace (Figma, Google Drive, Dropbox, etc.)…">
+      <a href="https://spoton-website-contents.tiiny.site/" target="_blank" class="btn" style="margin-top:10px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg><span data-en="Upload files" data-es="Subir archivos"></span></a>
+      <div class="hint" data-en="Or email files directly to websiteimp@spoton.com" data-es="O envíe archivos directamente a websiteimp@spoton.com"></div>
     </div>
   </div>
 
@@ -509,10 +533,10 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
       <label data-en="Where would you like us to source images? <span class='req'>*</span>" data-es="¿De dónde le gustaría que obtengamos las imágenes? <span class='req'>*</span>"></label>
       <div style="font-size:13px;color:var(--tg);margin-bottom:12px" data-en="Select all that apply." data-es="Seleccione todas las que apliquen."></div>
       <div class="cg" id="images-group">
-        <label class="co"><input type="checkbox" name="images-social" value="social"> <span data-en="From my social media" data-es="De mis redes sociales"></span></label>
-        <label class="co" id="images-website-opt" style="display:none"><input type="checkbox" name="images-website" value="current-website"> <span data-en="From my current website" data-es="De mi sitio web actual"></span></label>
-        <label class="co"><input type="checkbox" name="images-stock" value="stock"> <span data-en="From stock images" data-es="De imágenes de banco de imágenes"></span></label>
-        <label class="co"><input type="checkbox" name="images-upload" id="images-upload-cb" value="upload"> <span data-en="I'll upload my own images" data-es="Subiré mis propias imágenes"></span></label>
+        <label class="co"><input type="checkbox" name="images-social" value="From my social media"> <span data-en="From my social media" data-es="De mis redes sociales"></span></label>
+        <label class="co" id="images-website-opt" style="display:none"><input type="checkbox" name="images-website" value="From my current website"> <span data-en="From my current website" data-es="De mi sitio web actual"></span></label>
+        <label class="co"><input type="checkbox" name="images-stock" value="From stock images"> <span data-en="From stock images" data-es="De imágenes de banco de imágenes"></span></label>
+        <label class="co"><input type="checkbox" name="images-upload" id="images-upload-cb" value="I will upload my own images"> <span data-en="I'll upload my own images" data-es="Subiré mis propias imágenes"></span></label>
       </div>
       <div class="cond" id="images-upload-wrap" style="margin-top:12px">
         <a href="https://spoton-website-contents.tiiny.site/" target="_blank" class="btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg><span data-en="Upload your images here" data-es="Suba sus imágenes aquí"></span></a>
@@ -527,17 +551,19 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
     <div class="field">
       <label data-en="Which pages would you like on your site? <span class='req'>*</span>" data-es="¿Qué páginas le gustaría en su sitio? <span class='req'>*</span>"></label>
       <div class="cg" id="pages-group">
-        <label class="co"><input type="checkbox" name="page-home" value="home" class="pcb"> <span data-en="Home" data-es="Inicio"></span></label>
-        <label class="co"><input type="checkbox" name="page-about" value="about" class="pcb"> <span data-en="About us" data-es="Sobre nosotros"></span></label>
-        <label class="co"><input type="checkbox" name="page-menu" value="menu" class="pcb"> <span data-en="Menu / services" data-es="Menú / servicios"></span></label>
-        <label class="co"><input type="checkbox" name="page-gallery" value="gallery" class="pcb"> <span data-en="Gallery / photos" data-es="Galería / fotos"></span></label>
-        <label class="co"><input type="checkbox" name="page-contact" value="contact" class="pcb"> <span data-en="Contact" data-es="Contacto"></span></label>
-        <label class="co"><input type="checkbox" name="page-blog" value="blog" class="pcb"> <span data-en="Blog / news" data-es="Blog / noticias"></span></label>
-        <label class="co"><input type="checkbox" name="page-careers" value="careers" class="pcb" id="cb-careers"> <span data-en="Join Us / We're Hiring" data-es="Únete a nosotros / Se busca personal"></span></label>
-        <label class="co"><input type="checkbox" name="page-faq" value="faq" class="pcb"> <span data-en="FAQ" data-es="Preguntas frecuentes"></span></label>
-        <label class="co" id="page-other-opt"><input type="checkbox" name="page-other-cb" id="page-other-cb" class="pcb" value="other"> <span data-en="Other — specify below" data-es="Otro — especifique abajo"></span></label>
+        <label class="co"><input type="checkbox" name="page-home" value="Home" class="pcb"> <span data-en="Home" data-es="Inicio"></span></label>
+        <label class="co"><input type="checkbox" name="page-about" value="About us" class="pcb"> <span data-en="About us" data-es="Sobre nosotros"></span></label>
+        <label class="co"><input type="checkbox" name="page-menu" value="Menu / services" class="pcb"> <span data-en="Menu / services" data-es="Menú / servicios"></span></label>
+        <label class="co"><input type="checkbox" name="page-gallery" value="Gallery / photos" class="pcb"> <span data-en="Gallery / photos" data-es="Galería / fotos"></span></label>
+        <label class="co"><input type="checkbox" name="page-contact" value="Contact" class="pcb"> <span data-en="Contact" data-es="Contacto"></span></label>
+        <label class="co"><input type="checkbox" name="page-blog" value="Blog / news" class="pcb"> <span data-en="Blog / news" data-es="Blog / noticias"></span></label>
+        <label class="co"><input type="checkbox" name="page-careers" value="Join Us / We're Hiring" class="pcb" id="cb-careers"> <span data-en="Join Us / We're Hiring" data-es="Únete a nosotros / Se busca personal"></span></label>
+        <label class="co"><input type="checkbox" name="page-faq" value="FAQ" class="pcb"> <span data-en="FAQ" data-es="Preguntas frecuentes"></span></label>
+        <label class="co" id="page-other-opt"><input type="checkbox" name="page-other-cb" id="page-other-cb" class="pcb" value="Other"> <span data-en="Other — specify below" data-es="Otro — especifique abajo"></span></label>
       </div>
-      <div class="cond" id="blog-faq-warn" style="margin-top:10px"><div class="warn"><span style="font-size:20px;flex-shrink:0;line-height:1.3">📝</span><div class="wt"><strong id="blog-faq-warn-title"></strong><span id="blog-faq-warn-body"></span></div></div></div>
+      <div class="cond" id="blog-faq-warn" style="margin-top:10px">
+        <div class="warn"><span style="font-size:20px;flex-shrink:0;line-height:1.3">📝</span><div class="wt"><strong id="blog-faq-warn-title"></strong><span id="blog-faq-warn-body"></span></div></div>
+      </div>
       <div class="cond" id="page-other-wrap" style="margin-top:10px">
         <input type="text" name="page-other-text" data-en-ph="e.g. Events, Press, Catering, Locations…" data-es-ph="ej. Eventos, Prensa, Catering, Sucursales…">
         <div class="hint" data-en="Separate multiple page names with a comma." data-es="Separe múltiples nombres de página con una coma."></div>
@@ -622,6 +648,7 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
         <label class="ro"><input type="radio" name="autopublish" value="Yes, auto-publish if I do not respond"> <span data-en="Yes, auto-publish if I don't respond" data-es="Sí, publicar automáticamente si no respondo"></span></label>
         <label class="ro"><input type="radio" name="autopublish" value="No, put my subscription on hold"> <span data-en="No, put my subscription on hold until I respond" data-es="No, pausar mi suscripción hasta que responda"></span></label>
       </div>
+      <div class="err" id="autopublish-err" style="display:none" data-en="Please choose an auto-publish preference." data-es="Por favor elija una preferencia de publicación automática."></div>
     </div>
 
     <div class="field">
@@ -641,8 +668,8 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
         <strong>Domain Transfer.</strong> By agreeing to transfer your domain, you are handing over ownership of the domain to SpotOn. You may request the return of the domain at any time. Once the request has been made and the transfer code provided, you will have a period of 15 calendar days to complete the transfer. If you do not do it within this period, you will lose the opportunity to recover it free of cost. Please note that if a domain has recently been purchased or transferred, we must wait 60 days, per ICANN norms, before being able to transfer again.<br><br>
         <strong>Fees.</strong> Fees may change over time.<br><br>
         <strong>Third-Party Integrations.</strong> We do not provide support for issues related to third-party integrations, nor can we guarantee they will always work correctly.<br><br>
-        <strong>Ongoing Support.</strong> Before your website is published, you can contact us anytime at <a href="/cdn-cgi/l/email-protection#c0b7a5a2b3a9b4a5a9adb080b3b0afb4afaeeea3afad" style="color:var(--blue)"><span class="__cf_email__" data-cfemail="afd8cacddcc6dbcac6c2dfefdcdfc0dbc0c181ccc0c2">[email&#160;protected]</span></a> or call <a href="tel:+14159804613" style="color:var(--blue)">(415) 980-4613</a> with any questions or comments.<br><br>
-        Once your website is live, please contact our support team at <a href="/cdn-cgi/l/email-protection#4d3e383d3d223f390d3e3d22392223632e2220" style="color:var(--blue)"><span class="__cf_email__" data-cfemail="95e6e0e5e5fae7e1d5e6e5fae1fafbbbf6faf8">[email&#160;protected]</span></a> or call <a href="tel:+18778144102" style="color:var(--blue)">(877) 814-4102</a> for further assistance.
+        <strong>Ongoing Support.</strong> Before your website is published, you can contact us anytime at <a href="mailto:websiteimp@spoton.com" style="color:var(--blue)">websiteimp@spoton.com</a> or <a href="https://calendar.app.google/1pvzRL4x8KP5dqPZA" target="_blank" style="color:var(--blue)">book a call</a> to speak with a website implementation specialist.<br><br>
+        Once your website is live, please contact our support team at <a href="mailto:support@spoton.com" style="color:var(--blue)">support@spoton.com</a> or call <a href="tel:+18778144102" style="color:var(--blue)">(877) 814-4102</a> for further assistance.
       </div>
       <label class="co" id="terms-opt"><input type="checkbox" name="terms-agreed" id="terms-agreed"> <span data-en="I have read and agree to the terms &amp; conditions" data-es="He leído y acepto los términos y condiciones"></span></label>
       <div class="err" id="terms-err" style="display:none" data-en="You must agree to the terms &amp; conditions to continue." data-es="Debe aceptar los términos y condiciones para continuar."></div>
@@ -673,7 +700,6 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
   </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-<script data-cfasync="false" src="form.js"></script>
+<script src="form.js"></script>
 </body>
 </html>
