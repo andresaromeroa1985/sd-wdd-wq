@@ -1,7 +1,7 @@
 var STEPS=6,cur=1,needNewDomain=false,featCount=3,lang='en';
 function $(id){return document.getElementById(id);}
 function on(el,evt,fn){if(el)el.addEventListener(evt,fn);}
-function tog(id,v){var el=$(id);if(el)el.classList.toggle('on',!!v);}
+function tog(id,v){var el=$(id);if(el){el.classList.toggle('on',!!v);notifyResize();}}
 function show(id){tog(id,true);}
 function hide(id){tog(id,false);}
 function selRG(gId,inp){var g=$(gId);if(!g)return;g.querySelectorAll('.ro').forEach(function(o){o.classList.remove('sel');});if(inp)inp.closest('.ro').classList.add('sel');}
