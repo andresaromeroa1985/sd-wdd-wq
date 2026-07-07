@@ -1,7 +1,7 @@
 var STEPS=6,cur=1,needNewDomain=false,featCount=3,lang='en';
 function $(id){return document.getElementById(id);}
 function on(el,evt,fn){if(el)el.addEventListener(evt,fn);}
-function tog(id,v){var el=$(id);if(el){el.classList.toggle('on',!!v);notifyResize();}}
+function tog(id,v){var el=$(id);if(el)el.classList.toggle('on',!!v);}
 function show(id){tog(id,true);}
 function hide(id){tog(id,false);}
 function selRG(gId,inp){var g=$(gId);if(!g)return;g.querySelectorAll('.ro').forEach(function(o){o.classList.remove('sel');});if(inp)inp.closest('.ro').classList.add('sel');}
@@ -16,12 +16,12 @@ var SM={
     {l:'Final details',s:'Publishing, notes, T&C'}
   ],
   es:[
-    {l:'Información del negocio',s:'Nombre, dirección, sobre nosotros'},
-    {l:'Su dominio',s:'Sitio existente, configuración'},
+    {l:'Informaci\u00f3n del negocio',s:'Nombre, direcci\u00f3n, sobre nosotros'},
+    {l:'Su dominio',s:'Sitio existente, configuraci\u00f3n'},
     {l:'Su marca',s:'Logo, colores, estilo'},
-    {l:'Páginas y contenido',s:'Páginas, imágenes, funciones'},
+    {l:'P\u00e1ginas y contenido',s:'P\u00e1ginas, im\u00e1genes, funciones'},
     {l:'Integraciones',s:'Redes sociales, terceros'},
-    {l:'Detalles finales',s:'Publicación, notas, T&C'}
+    {l:'Detalles finales',s:'Publicaci\u00f3n, notas, T&C'}
   ]
 };
 
@@ -38,47 +38,66 @@ var T={
     helpEmail:'Email us',
     helpCall:'Book a call',
     pgCounter:function(n){return n+' of 6 included pages selected';},
-    pgCounterOver:function(n,e,c){return n+' pages — '+e+' additional page'+(e>1?'s':'')+' at $50 each';},
+    pgCounterOver:function(n,e,c){return n+' pages \u2014 '+e+' additional page'+(e>1?'s':'')+' at $50 each';},
     extraPagesMsg:function(e,c){return e+' additional page'+(e>1?'s':'')+' selected ($'+c+' USD total). ';},
     extraPagesBody:"By continuing, you agree to the additional page fee. We'll send you a proposal to review and sign before any work begins.",
     featCounter:function(n){return n+' of 6 slots used';},
     imagesDisclaimer:"By selecting your own images, you declare you have copyright licensing for the imagery or authorize its use on your website.\n\nIf we don't receive images at time of processing, we'll use stock images and replace them later.",
-    inspirationDesc:'You can also upload a flyer, poster, or social media post using the link below.\n<a href="https://spoton-website-contents.tiiny.site/" target="_blank" style="color:var(--blue);font-weight:500">Upload inspiration files ↗</a>\n\nTo view example websites made by us, <a href="https://websites-catalog.webflow.io/client-catalog" target="_blank" style="color:var(--blue);font-weight:500">click here ↗</a>',
-    pageSpecificsHint:'Please tell us: which page, what content, and any external links (Yelp, TripAdvisor, reservations, press, etc.)<br><em>Example: Home — Include: About us, Featured dishes, Menu, Catering, Newsletter, Contact</em>',
+    inspirationDesc:'You can also upload a flyer, poster, or social media post using the link below.\n<a href="https://spoton-website-contents.tiiny.site/" target="_blank" style="color:var(--blue);font-weight:500">Upload inspiration files \u2197</a>\n\nTo view example websites made by us, <a href="https://websites-catalog.webflow.io/client-catalog" target="_blank" style="color:var(--blue);font-weight:500">click here \u2197</a>',
+    pageSpecificsHint:'Please tell us: which page, what content, and any external links (Yelp, TripAdvisor, reservations, press, etc.)<br><em>Example: Home \u2014 Include: About us, Featured dishes, Menu, Catering, Newsletter, Contact</em>',
     autopublishDesc:"Once your website draft is complete, our team will reach out to you at least 5 times to get your approval. If we're unable to reach you, your website will be auto-published to your domain so it can start ranking in Google's search engines.<br><br>If you prefer not to auto-publish, your subscription will simply be put on hold until you get back to us.",
-    back:'← Back',cont:'Continue',submit:'Submit questionnaire',
-    tcBody:'<strong>SpotOn Website Services — Terms &amp; Conditions</strong><br><br>By accepting these terms and conditions, you confirm that all the information you provide is true and accurate, and that you have read and agreed to the following:<br><br><strong>Copy Optimization.</strong> By agreeing to have your website content optimized, you are accepting the use of generative artificial intelligence in the process.<br><br><strong>Copyright License.</strong> By accepting these terms, you confirm that you have the proper copyright licenses for all the content you send us or approve for use on your website. This includes (but is not limited to) images, videos, fonts, logos, and text.<br><br><strong>Domain Transfer.</strong> By agreeing to transfer your domain, you are handing over ownership of the domain to SpotOn. You may request the return of the domain at any time. Once the request has been made and the transfer code provided, you will have a period of 15 calendar days to complete the transfer. If you do not do it within this period, you will lose the opportunity to recover it free of cost. Please note that if a domain has recently been purchased or transferred, we must wait 60 days, per ICANN norms, before being able to transfer again.<br><br><strong>Fees.</strong> Fees may change over time.<br><br><strong>Third-Party Integrations.</strong> We do not provide support for issues related to third-party integrations, nor can we guarantee they will always work correctly.<br><br><strong>Ongoing Support.</strong> Before your website is published, you can contact us anytime at <a href="mailto:websiteimp@spoton.com" style="color:var(--blue)">websiteimp@spoton.com</a> or <a href="https://calendar.app.google/1pvzRL4x8KP5dqPZA" target="_blank" style="color:var(--blue)">book a call</a> to speak with a website implementation specialist.<br><br>Once your website is live, please contact our support team at <a href="mailto:support@spoton.com" style="color:var(--blue)">support@spoton.com</a> or call <a href="tel:+18778144102" style="color:var(--blue)">(877) 814-4102</a> for further assistance.'
+    back:'\u2190 Back',
+    cont:'Continue',
+    submit:'Submit questionnaire',
+    inspirationNudgeTitle:"No inspiration site?",
+    inspirationNudgeBody:"That's totally fine — but we'd love for you to browse our website examples so our team has a better sense of your style.",
+    inspirationNudgeCta:"View our website examples \u2197",
+    inspirationNudgeContinue:"Continue without one",
+    inspirationErr:"Please share an inspiration site or URL — or visit our examples and describe a style you like."
   },
   es:{
     topbarLabel:'Cuestionario de sitio web',
     eyebrow:'Servicios web',
     titleMain:'Vamos a construir su',
     titleSpan:'sitio web',
-    sub:'Cuéntenos sobre su negocio y nos encargamos del resto. Toma unos 5 minutos.',
+    sub:'Cu\u00e9ntenos sobre su negocio y nos encargamos del resto. Toma unos 5 minutos.',
     sbSteps:'Pasos',
-    helpTitle:'¿Necesita ayuda?',
-    helpBody:'¿Tiene preguntas sobre su sitio web? Comuníquese con nuestro equipo.',
+    helpTitle:'\u00bfNecesita ayuda?',
+    helpBody:'\u00bfTiene preguntas sobre su sitio web? Comun\u00edquese con nuestro equipo.',
     helpEmail:'Enviar correo',
     helpCall:'Agendar llamada',
-    pgCounter:function(n){return n+' de 6 páginas incluidas seleccionadas';},
-    pgCounterOver:function(n,e,c){return n+' páginas — '+e+' página'+(e>1?'s':'')+' adicional'+(e>1?'es':'')+' a $50 cada una';},
-    extraPagesMsg:function(e,c){return e+' página'+(e>1?'s adicionales':' adicional')+' seleccionada'+(e>1?'s':'')+' ($'+c+' USD total). ';},
-    extraPagesBody:'Al continuar, acepta el costo adicional por página. Le enviaremos una propuesta para revisar y firmar antes de comenzar.',
+    pgCounter:function(n){return n+' de 6 p\u00e1ginas incluidas seleccionadas';},
+    pgCounterOver:function(n,e,c){return n+' p\u00e1ginas \u2014 '+e+' p\u00e1gina'+(e>1?'s':'')+' adicional'+(e>1?'es':'')+' a $50 cada una';},
+    extraPagesMsg:function(e,c){return e+' p\u00e1gina'+(e>1?'s adicionales':' adicional')+' seleccionada'+(e>1?'s':'')+' ($'+c+' USD total). ';},
+    extraPagesBody:'Al continuar, acepta el costo adicional por p\u00e1gina. Le enviaremos una propuesta para revisar y firmar antes de comenzar.',
     featCounter:function(n){return n+' de 6 espacios usados';},
-    imagesDisclaimer:'Al seleccionar sus propias imágenes, declara que tiene licencia de derechos de autor sobre ellas o autoriza su uso en su sitio web.\n\nSi no recibimos imágenes al momento de procesar, usaremos imágenes de banco y las reemplazaremos después.',
-    inspirationDesc:'También puede subir un volante, póster o publicación de redes sociales usando el enlace a continuación.\n<a href="https://spoton-website-contents.tiiny.site/" target="_blank" style="color:var(--blue);font-weight:500">Subir archivos de inspiración ↗</a>\n\nPara ver ejemplos de sitios web hechos por nosotros, <a href="https://websites-catalog.webflow.io/client-catalog" target="_blank" style="color:var(--blue);font-weight:500">haga clic aquí ↗</a>',
-    pageSpecificsHint:'Por favor indíquenos: qué página, qué contenido, y cualquier enlace externo (Yelp, TripAdvisor, reservaciones, prensa, etc.)<br><em>Ejemplo: Inicio — Incluir: Sobre nosotros, Platillos destacados, Menú, Catering, Newsletter, Contacto</em>',
-    autopublishDesc:'Una vez que el borrador de su sitio web esté listo, nuestro equipo lo contactará al menos 5 veces para obtener su aprobación. Si no podemos comunicarnos con usted, su sitio web se publicará automáticamente para que comience a posicionarse en Google.<br><br>Si prefiere que no se publique automáticamente, su suscripción simplemente se pausará hasta que se comunique con nosotros.',
-    back:'← Atrás',cont:'Continuar',submit:'Enviar cuestionario',
-    tcBody:'<strong>SpotOn Servicios Web — Términos y Condiciones</strong><br><br>Al aceptar estos términos y condiciones, usted confirma que toda la información que proporciona es verdadera y precisa, y que ha leído y aceptado lo siguiente:<br><br><strong>Optimización de contenido.</strong> Al aceptar que el contenido de su sitio web sea optimizado, usted acepta el uso de inteligencia artificial generativa en el proceso.<br><br><strong>Licencia de derechos de autor.</strong> Al aceptar estos términos, usted confirma que posee las licencias de derechos de autor adecuadas para todo el contenido que nos envíe o apruebe para su uso en su sitio web. Esto incluye (pero no se limita a) imágenes, videos, fuentes, logotipos y texto.<br><br><strong>Transferencia de dominio.</strong> Al aceptar transferir su dominio, usted cede la propiedad del dominio a SpotOn. Puede solicitar la devolución del dominio en cualquier momento. Una vez realizada la solicitud y proporcionado el código de transferencia, tendrá un período de 15 días calendario para completar la transferencia. Si no lo hace dentro de este período, perderá la oportunidad de recuperarlo sin costo. Tenga en cuenta que si un dominio ha sido comprado o transferido recientemente, debemos esperar 60 días, según las normas de ICANN, antes de poder transferirlo nuevamente.<br><br><strong>Tarifas.</strong> Las tarifas pueden cambiar con el tiempo.<br><br><strong>Integraciones de terceros.</strong> No brindamos soporte para problemas relacionados con integraciones de terceros, ni podemos garantizar que siempre funcionen correctamente.<br><br><strong>Soporte continuo.</strong> Antes de que su sitio web sea publicado, puede contactarnos en cualquier momento en <a href="mailto:websiteimp@spoton.com" style="color:var(--blue)">websiteimp@spoton.com</a> o <a href="https://calendar.app.google/1pvzRL4x8KP5dqPZA" target="_blank" style="color:var(--blue)">agendar una llamada</a> para hablar con un especialista en implementación de sitios web.<br><br>Una vez que su sitio web esté activo, comuníquese con nuestro equipo de soporte en <a href="mailto:support@spoton.com" style="color:var(--blue)">support@spoton.com</a> o llame al <a href="tel:+18778144102" style="color:var(--blue)">(877) 814-4102</a> para obtener más asistencia.'
+    imagesDisclaimer:'Al seleccionar sus propias im\u00e1genes, declara que tiene licencia de derechos de autor sobre ellas o autoriza su uso en su sitio web.\n\nSi no recibimos im\u00e1genes al momento de procesar, usaremos im\u00e1genes de banco y las reemplazaremos despu\u00e9s.',
+    inspirationDesc:'Tambi\u00e9n puede subir un volante, p\u00f3ster o publicaci\u00f3n de redes sociales usando el enlace a continuaci\u00f3n.\n<a href="https://spoton-website-contents.tiiny.site/" target="_blank" style="color:var(--blue);font-weight:500">Subir archivos de inspiraci\u00f3n \u2197</a>\n\nPara ver ejemplos de sitios web hechos por nosotros, <a href="https://websites-catalog.webflow.io/client-catalog" target="_blank" style="color:var(--blue);font-weight:500">haga clic aqu\u00ed \u2197</a>',
+    pageSpecificsHint:'Por favor ind\u00edquenos: qu\u00e9 p\u00e1gina, qu\u00e9 contenido, y cualquier enlace externo (Yelp, TripAdvisor, reservaciones, prensa, etc.)<br><em>Ejemplo: Inicio \u2014 Incluir: Sobre nosotros, Platillos destacados, Men\u00fa, Catering, Newsletter, Contacto</em>',
+    autopublishDesc:'Una vez que el borrador de su sitio web est\u00e9 listo, nuestro equipo lo contactar\u00e1 al menos 5 veces para obtener su aprobaci\u00f3n. Si no podemos comunicarnos con usted, su sitio web se publicar\u00e1 autom\u00e1ticamente para que comience a posicionarse en Google.<br><br>Si prefiere que no se publique autom\u00e1ticamente, su suscripci\u00f3n simplemente se pausar\u00e1 hasta que se comunique con nosotros.',
+    back:'\u2190 Atr\u00e1s',
+    cont:'Continuar',
+    submit:'Enviar cuestionario',
+    inspirationNudgeTitle:"¿No tiene sitio de inspiración?",
+    inspirationNudgeBody:"No hay problema — pero le recomendamos explorar nuestros ejemplos de sitios web para que nuestro equipo tenga una mejor idea de su estilo.",
+    inspirationNudgeCta:"Ver nuestros ejemplos de sitios web \u2197",
+    inspirationNudgeContinue:"Continuar sin uno",
+    inspirationErr:"Por favor comparta un sitio de inspiración o URL — o visite nuestros ejemplos y describa un estilo que le guste."
   }
 };
 
 function t(key){return T[lang][key]||T['en'][key]||'';}
 
+// Tracks whether the user dismissed the inspiration nudge dialog
+var inspirationNudgeDismissed = false;
+
 function applyLang(){
-  document.querySelectorAll('[data-en]').forEach(function(el){el.innerHTML=el.getAttribute('data-'+lang)||el.getAttribute('data-en')||'';});
-  document.querySelectorAll('[data-en-ph]').forEach(function(el){el.placeholder=el.getAttribute('data-'+lang+'-ph')||el.getAttribute('data-en-ph')||'';});
+  document.querySelectorAll('[data-en]').forEach(function(el){
+    el.innerHTML=el.getAttribute('data-'+lang)||el.getAttribute('data-en')||'';
+  });
+  document.querySelectorAll('[data-en-ph]').forEach(function(el){
+    el.placeholder=el.getAttribute('data-'+lang+'-ph')||el.getAttribute('data-en-ph')||'';
+  });
   $('topbar-label').textContent=t('topbarLabel');
   $('ph-eyebrow').textContent=t('eyebrow');
   $('ph-title').innerHTML=t('titleMain')+' <span id="ph-title-span">'+t('titleSpan')+'</span>';
@@ -93,8 +112,9 @@ function applyLang(){
   $('page-specifics-hint').innerHTML=t('pageSpecificsHint');
   $('autopublish-desc').innerHTML=t('autopublishDesc');
   $('extra-pages-body').textContent=t('extraPagesBody');
-  if($('tc-body'))$('tc-body').innerHTML=t('tcBody');
-  updFeatCounter();updPgCounter();updProg();
+  updFeatCounter();
+  updPgCounter();
+  updProg();
 }
 
 function setLang(l){
@@ -102,6 +122,7 @@ function setLang(l){
   $('btn-en').classList.toggle('active',l==='en');
   $('btn-es').classList.toggle('active',l==='es');
   applyLang();
+  sendHeight();
 }
 
 function updProg(){
@@ -131,22 +152,20 @@ function updProg(){
   var isLast=cur===STEPS;
   $('btnNext').style.display=isLast?'none':'block';
   $('btnSubmit').classList.toggle('on',isLast);
+  var sn=$('stickyNext');
+  if(sn){
+    sn.querySelector('span').innerHTML=isLast?t('submit'):t('cont');
+    sn.onclick=isLast?function(){if(validate())$('wf').dispatchEvent(new Event('submit',{bubbles:true,cancelable:true}));}:goNext;
+  }
+  sendHeight();
 }
 
-function jumpTo(n){cur=n;showStep(cur);window.scrollTo(0,0);}
+function jumpTo(n){cur=n;showStep(cur);scrollToTop();}
 
-function notifyResize(){
-  setTimeout(function(){
-    window.parent.postMessage({type:'spoton-resize',height:document.body.scrollHeight},'*');
-  },80);
-}
-function notifyScrollTop(){
-  window.parent.postMessage({type:'spoton-scroll-top'},'*');
-}
 function showStep(n){
   for(var i=1;i<=STEPS;i++){var el=$('step'+i);if(el)el.classList.toggle('active',i===n);}
   updProg();
-  notifyResize();
+  sendHeight();
 }
 
 function updPgCounter(){
@@ -157,13 +176,65 @@ function updPgCounter(){
 }
 
 function updFeatCounter(){
-  var c=$('feat-counter');if(!c)return;
+  var c=$('feat-counter');
+  if(!c)return;
   c.textContent=t('featCounter')(featCount);
   c.className=featCount>=6?'fc full':'fc';
 }
 
+// --- Inspiration nudge dialog ---
+function showInspirationNudge(onContinue) {
+  var existing = $('inspiration-nudge');
+  if (existing) existing.remove();
+
+  var overlay = document.createElement('div');
+  overlay.id = 'inspiration-nudge';
+  overlay.style.cssText = [
+    'position:fixed','inset:0','z-index:1000',
+    'display:flex','align-items:center','justify-content:center',
+    'background:rgba(0,0,0,0.55)','padding:16px'
+  ].join(';');
+
+  overlay.innerHTML =
+    '<div style="background:#fff;border-radius:12px;padding:32px 28px;max-width:400px;width:100%;box-shadow:0 8px 40px rgba(0,0,0,0.18)">' +
+      '<div style="font-size:17px;font-weight:600;color:#111;margin-bottom:10px" id="nudge-title"></div>' +
+      '<div style="font-size:14px;color:#6A7586;line-height:1.65;margin-bottom:20px" id="nudge-body"></div>' +
+      '<a href="https://websites-catalog.webflow.io/client-catalog" target="_blank" ' +
+        'style="display:inline-flex;align-items:center;gap:6px;padding:9px 18px;background:#1769ff;color:#fff;border-radius:6px;font-size:13px;font-weight:500;text-decoration:none;margin-bottom:12px" ' +
+        'id="nudge-cta"></a>' +
+      '<div>' +
+        '<button type="button" id="nudge-dismiss" ' +
+          'style="background:none;border:none;font-family:inherit;font-size:13px;color:#6A7586;cursor:pointer;padding:4px 0;text-decoration:underline">' +
+        '</button>' +
+      '</div>' +
+    '</div>';
+
+  document.body.appendChild(overlay);
+
+  $('nudge-title').textContent = t('inspirationNudgeTitle');
+  $('nudge-body').textContent  = t('inspirationNudgeBody');
+  $('nudge-cta').textContent   = t('inspirationNudgeCta');
+  $('nudge-dismiss').textContent = t('inspirationNudgeContinue');
+
+  $('nudge-dismiss').addEventListener('click', function() {
+    overlay.remove();
+    inspirationNudgeDismissed = true;
+    onContinue();
+  });
+
+  // Clicking the backdrop also dismisses
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay) {
+      overlay.remove();
+      inspirationNudgeDismissed = true;
+      onContinue();
+    }
+  });
+}
+
 function validate(){
-  var ok=true,firstBad=null;
+  var ok=true;
+  var firstBad=null;
   function req(fId,iId,fn){
     var f=$(fId),v=$(iId)?$(iId).value.trim():'';
     var bad=fn?!fn(v):v==='';
@@ -178,14 +249,6 @@ function validate(){
     if(!document.querySelector('input[name="optimize-about"]:checked'))ok=false;
     if(!document.querySelector('input[name="primary-lang"]:checked'))ok=false;
     if(!document.querySelector('input[name="translate"]:checked'))ok=false;
-    // Business type required
-    var isRest=$('cb-rest')&&$('cb-rest').checked,isRet=$('cb-ret')&&$('cb-ret').checked;
-    var btErr=$('btype-err');
-    if(!isRest&&!isRet){if(btErr)btErr.style.display='block';ok=false;if(!firstBad)firstBad=$('f-btype');}
-    else{if(btErr)btErr.style.display='none';}
-    // Subcategory required if type selected
-    if(isRest){var rssV=$('rss')?$('rss').value.trim():'';var rssErr=$('rss-err');if(!rssV){if(rssErr)rssErr.style.display='block';if($('rss'))$('rss').style.borderColor='#f87171';ok=false;if(!firstBad)firstBad=$('rest-sub-wrap');}else{if(rssErr)rssErr.style.display='none';if($('rss'))$('rss').style.borderColor='';}}
-    if(isRet){var resV=$('res')?$('res').value.trim():'';var resErr=$('res-err');if(!resV){if(resErr)resErr.style.display='block';if($('res'))$('res').style.borderColor='#f87171';ok=false;if(!firstBad)firstBad=$('ret-sub-wrap');}else{if(resErr)resErr.style.display='none';if($('res'))$('res').style.borderColor='';}}
   }
   if(cur===2){
     if(!document.querySelector('input[name="has-website"]:checked'))ok=false;
@@ -194,7 +257,20 @@ function validate(){
     else if(hw){
       if(!document.querySelector('input[name="has-domain"]:checked'))ok=false;
       var hd=document.querySelector('input[name="has-domain"]:checked');
-      if(hd&&hd.value.indexOf('already')>-1&&!document.querySelector('input[name="domain-transfer"]:checked'))ok=false;
+      if(hd&&hd.value==='Yes, I already have a domain'&&!document.querySelector('input[name="domain-transfer"]:checked'))ok=false;
+      // CHANGE 2: Preferred domain name is required when user wants SpotOn to register one
+      if(hd&&hd.value==='No, I need one (included in subscription)'){
+        var prefDom=$('domain-preferred-field');
+        var prefVal=document.querySelector('input[name="domain-preferred"]');
+        var prefV=prefVal?prefVal.value.trim():'';
+        if(!prefV){
+          if(prefDom)prefDom.classList.add('inv');
+          ok=false;
+          if(!firstBad&&prefDom)firstBad=prefDom;
+        } else {
+          if(prefDom)prefDom.classList.remove('inv');
+        }
+      }
     }
   }
   if(cur===3){
@@ -203,17 +279,37 @@ function validate(){
     var needsLogoQ=logoVal&&(logoVal.value.indexOf('standard')>-1||logoVal.value.indexOf('custom')>-1);
     if(needsLogoQ){
       if(!document.querySelector('input[name="has-tagline"]:checked'))ok=false;
-      var audF=$('f-logo-audience'),audEl=$('logo-audience'),audV=audEl?audEl.value.trim():'';
-      if(!audV){if(audF)audF.classList.add('inv');if(audEl){audEl.style.borderColor='#f87171';}ok=false;if(!firstBad&&audF)firstBad=audF;}else{if(audF)audF.classList.remove('inv');if(audEl)audEl.style.borderColor='';}
-      var ltF=$('f-logo-text'),ltEl=$('logo-text'),ltV=ltEl?ltEl.value.trim():'';
-      if(!ltV){if(ltF)ltF.classList.add('inv');if(ltEl){ltEl.style.borderColor='#f87171';}ok=false;if(!firstBad&&ltF)firstBad=ltF;}else{if(ltF)ltF.classList.remove('inv');if(ltEl)ltEl.style.borderColor='';}
+      var audF=$('f-logo-audience'),audV=$('logo-audience')&&$('logo-audience').value.trim();
+      if(!audV){if(audF)audF.classList.add('inv');ok=false;if(!firstBad&&audF)firstBad=audF;}else{if(audF)audF.classList.remove('inv');}
+      var ltF=$('f-logo-text'),ltV=$('logo-text')&&$('logo-text').value.trim();
+      if(!ltV){if(ltF)ltF.classList.add('inv');ok=false;if(!firstBad&&ltF)firstBad=ltF;}else{if(ltF)ltF.classList.remove('inv');}
       var lsChecked=document.querySelectorAll('.lscb:checked').length;
-      if(!lsChecked){$('logo-style-err').style.display='block';ok=false;}else{$('logo-style-err').style.display='none';}
+      if(!lsChecked){$('logo-style-err').style.display='block';ok=false;if(!firstBad)firstBad=$('logo-style-err');}else{$('logo-style-err').style.display='none';}
     }
+    // CHANGE 1: Color palette is required
     var colorsOk=!!document.querySelectorAll('#colors-group input:checked').length;
-    if(!colorsOk){if($('colors-err'))$('colors-err').style.display='block';ok=false;}else{if($('colors-err'))$('colors-err').style.display='none';}
+    var colErr=$('colors-err');
+    if(!colorsOk){if(colErr)colErr.style.display='block';ok=false;if(!firstBad&&colErr)firstBad=colErr;}else{if(colErr)colErr.style.display='none';}
     var vibeOk=!!document.querySelector('input[name="vibe"]:checked');
-    if(!vibeOk){if($('vibe-err'))$('vibe-err').style.display='block';ok=false;}else{if($('vibe-err'))$('vibe-err').style.display='none';}
+    var vibeErr=$('vibe-err');
+    if(!vibeOk){if(vibeErr)vibeErr.style.display='block';ok=false;if(!firstBad&&vibeErr)firstBad=vibeErr;}else{if(vibeErr)vibeErr.style.display='none';}
+    // CHANGE 3: Inspiration field is required — show nudge dialog if empty and not yet dismissed
+    var inspVal=document.querySelector('textarea[name="inspiration-urls"]');
+    var inspErr=$('inspiration-err');
+    if(inspVal&&!inspVal.value.trim()&&!inspirationNudgeDismissed){
+      ok=false;
+      if(inspErr)inspErr.style.display='block';
+      // Only show the nudge if all other step 3 errors are already resolved
+      // (avoids dialog appearing before the user has even filled the step)
+      if(colorsOk&&vibeOk&&document.querySelector('input[name="has-logo"]:checked')){
+        showInspirationNudge(function(){goNext();});
+      } else {
+        if(!firstBad&&inspErr)firstBad=inspErr;
+      }
+      return false;
+    } else {
+      if(inspErr)inspErr.style.display='none';
+    }
   }
   if(cur===4){
     if(!document.querySelectorAll('#images-group input:checked').length){$('images-err').style.display='block';ok=false;}else $('images-err').style.display='none';
@@ -226,13 +322,7 @@ function validate(){
     tpP.forEach(function(p){var cb=$(p[0]),inp=$(p[1]);if(!cb||!inp)return;if(cb.checked&&!inp.value.trim()){inp.classList.add('err-inp');ok=false;}else{inp.classList.remove('err-inp');}});
   }
   if(cur===6){
-    if(needNewDomain&&!document.querySelector('input[name="autopublish"]:checked')){
-      var apErr=$('autopublish-err');if(apErr)apErr.style.display='block';
-      if(!firstBad)firstBad=$('autopublish-wrap');
-      ok=false;
-    } else {
-      var apErr=$('autopublish-err');if(apErr)apErr.style.display='none';
-    }
+    if(needNewDomain&&!document.querySelector('input[name="autopublish"]:checked'))ok=false;
     if(!$('terms-agreed').checked){$('terms-opt').style.borderColor='#f87171';$('terms-err').style.display='block';ok=false;}
     else{$('terms-opt').style.borderColor='#e0e3e9';$('terms-err').style.display='none';}
   }
@@ -240,17 +330,18 @@ function validate(){
   return ok;
 }
 
-function goNext(){if(!validate())return;cur++;showStep(cur);notifyScrollTop();}
-function goBack(){if(cur===1)return;cur--;showStep(cur);notifyScrollTop();}
+function goNext(){if(!validate())return;cur++;showStep(cur);scrollToTop();sendHeight();}
+function goBack(){if(cur===1)return;cur--;showStep(cur);scrollToTop();sendHeight();}
 
 function addFeat(){
   if(featCount>=6)return;featCount++;
   var list=$('feat-list'),row=document.createElement('div');
   row.className='fr';
-  row.innerHTML='<div class="fn">'+featCount+'</div><input type="text" name="featured-'+featCount+'" placeholder="'+(lang==='es'?'ej. Artículo '+featCount:'Item '+featCount)+'">';
+  row.innerHTML='<div class="fn">'+featCount+'</div><input type="text" name="featured-'+featCount+'" placeholder="'+(lang==='es'?'ej. Art\u00edculo '+featCount:'Item '+featCount)+'">';
   list.appendChild(row);
   updFeatCounter();
   if(featCount>=6)$('add-feat-btn').style.display='none';
+  sendHeight();
 }
 
 var RC=['Afghan','African','American (New)','American (Traditional)','Arabian','Argentine','Armenian','Asian Fusion','Australian','Austrian','Bangladeshi','Barbeque','Belgian','Bistros','Brazilian','Breakfast & Brunch','British','Buffets','Burgers','Burmese','Cafes','Cajun/Creole','Cambodian','Caribbean','Chicken Wings','Chinese','Comfort Food','Creperies','Cuban','Czech','Delis','Dim Sum','Diners','Ethiopian','Fast Food','Filipino','Fish & Chips','French','German','Gluten-Free','Greek','Halal','Hawaiian','Hot Dogs','Hot Pot','Hungarian','Indian','Indonesian','Irish','Italian','Japanese','Korean','Kosher','Latin American','Lebanese','Malaysian','Mediterranean','Mexican','Middle Eastern','Mongolian','Moroccan','Noodles','Pakistani','Pan Asian','Persian/Iranian','Peruvian','Pizza','Polish','Portuguese','Puerto Rican','Ramen','Russian','Salad','Salvadoran','Sandwiches','Seafood','Singaporean','Soup','Southern','Spanish','Sri Lankan','Steakhouses','Sushi Bars','Taiwanese','Tapas/Small Plates','Tex-Mex','Thai','Turkish','Vegan','Vegetarian','Venezuelan','Vietnamese','Wraps'];
@@ -270,14 +361,27 @@ function setupDD(iId,dId,items){
   inp.addEventListener('blur',function(){setTimeout(function(){dd.style.display='none';},150);});
 }
 
+function sendHeight(){
+  var h=document.documentElement.scrollHeight;
+  try{window.parent.postMessage({type:'spoton-resize',height:h},'*');}catch(e){}
+}
+function scrollToTop(){
+  window.scrollTo(0,0);
+  try{window.parent.postMessage({type:'spoton-scroll-top'},'*');}catch(e){}
+}
+window.addEventListener('load',sendHeight);
+window.addEventListener('resize',sendHeight);
+var _mo=new MutationObserver(function(){sendHeight();});
+_mo.observe(document.body,{childList:true,subtree:true,attributes:true,characterData:true});
+
 function setup(){
   var tR=$('cb-rest'),tRo=$('opt-rest'),tRe=$('cb-ret'),tReo=$('opt-ret');
-  on(tR,'change',function(){if(tR.checked){tRe.checked=false;tReo.classList.remove('sel');}tRo.classList.toggle('sel',tR.checked);tog('rest-sub-wrap',tR.checked);hide('ret-sub-wrap');});
-  on(tRe,'change',function(){if(tRe.checked){tR.checked=false;tRo.classList.remove('sel');}tReo.classList.toggle('sel',tRe.checked);tog('ret-sub-wrap',tRe.checked);hide('rest-sub-wrap');});
+  on(tR,'change',function(){if(tR.checked){tRe.checked=false;tReo.classList.remove('sel');}tRo.classList.toggle('sel',tR.checked);tog('rest-sub-wrap',tR.checked);hide('ret-sub-wrap');sendHeight();});
+  on(tRe,'change',function(){if(tRe.checked){tR.checked=false;tRo.classList.remove('sel');}tReo.classList.toggle('sel',tRe.checked);tog('ret-sub-wrap',tRe.checked);hide('rest-sub-wrap');sendHeight();});
   setupDD('rss','rsd',RC);setupDD('res','red',RRC);
   document.querySelectorAll('input[name="optimize-about"]').forEach(function(r){on(r,'change',function(){selRG('opt-about-group',r);});});
-  document.querySelectorAll('input[name="primary-lang"]').forEach(function(r){on(r,'change',function(){tog('lang-other-wrap',r.value==='Other'&&r.checked);selRG('lang-group',r);});});
-  document.querySelectorAll('input[name="translate"]').forEach(function(r){on(r,'change',function(){tog('translate-wrap',r.value.indexOf('specify')>-1&&r.checked);selRG('translate-group',r);});});
+  document.querySelectorAll('input[name="primary-lang"]').forEach(function(r){on(r,'change',function(){tog('lang-other-wrap',r.value==='Other'&&r.checked);selRG('lang-group',r);sendHeight();});});
+  document.querySelectorAll('input[name="translate"]').forEach(function(r){on(r,'change',function(){tog('translate-wrap',r.value.indexOf('specify')>-1&&r.checked);selRG('translate-group',r);sendHeight();});});
   document.querySelectorAll('input[name="has-website"]').forEach(function(r){
     on(r,'change',function(){
       var hw=r.value==='Yes, I have an existing website'&&r.checked;
@@ -287,20 +391,20 @@ function setup(){
       document.querySelectorAll('#dt-group .ro').forEach(function(o){o.classList.remove('sel');});
       if(!hw){hide('domain-owned-wrap');hide('new-domain-wrap');document.querySelectorAll('input[name="has-domain"]').forEach(function(i){i.checked=false;});document.querySelectorAll('#hd-group .ro').forEach(function(o){o.classList.remove('sel');});}
       var iwo=$('images-website-opt');if(iwo)iwo.style.display=hw?'flex':'none';
-      selRG('hw-group',r);
+      selRG('hw-group',r);sendHeight();
     });
   });
-  document.querySelectorAll('input[name="use-existing-content"]').forEach(function(r){on(r,'change',function(){tog('upload-content-wrap',r.value.indexOf('provide')>-1&&r.checked);selRG('usecontent-group',r);});});
+  document.querySelectorAll('input[name="use-existing-content"]').forEach(function(r){on(r,'change',function(){tog('upload-content-wrap',r.value.indexOf('provide')>-1&&r.checked);selRG('usecontent-group',r);sendHeight();});});
   document.querySelectorAll('input[name="has-domain"]').forEach(function(r){
     on(r,'change',function(){
       var owns=r.value.indexOf('already')>-1&&r.checked,needs=r.value.indexOf('need one')>-1&&r.checked;
       tog('domain-owned-wrap',owns);tog('domain-name-wrap',owns);tog('new-domain-wrap',needs);
       if(!owns)hide('transfer-code-wrap');
       needNewDomain=needs;tog('autopublish-wrap',needs);
-      selRG('hd-group',r);
+      selRG('hd-group',r);sendHeight();
     });
   });
-  document.querySelectorAll('input[name="domain-transfer"]').forEach(function(r){on(r,'change',function(){tog('transfer-code-wrap',r.value.indexOf('Transfer')>-1&&r.checked);selRG('dt-group',r);});});
+  document.querySelectorAll('input[name="domain-transfer"]').forEach(function(r){on(r,'change',function(){tog('transfer-code-wrap',r.value.indexOf('Transfer')>-1&&r.checked);selRG('dt-group',r);sendHeight();});});
   document.querySelectorAll('input[name="has-logo"]').forEach(function(r){
     on(r,'change',function(){
       tog('logo-upload-wrap',r.value.indexOf('have a logo')>-1&&r.checked);
@@ -308,11 +412,15 @@ function setup(){
       tog('custom-logo-wrap',r.value.indexOf('custom')>-1&&r.checked);
       tog('logo-notes-wrap',(r.value.indexOf('standard')>-1||r.value.indexOf('custom')>-1)&&r.checked);
       tog('no-logo-wrap',r.value==='No logo needed'&&r.checked);
-      selRG('logo-group',r);
+      selRG('logo-group',r);sendHeight();
     });
   });
-  document.querySelectorAll('input[name="has-tagline"]').forEach(function(r){on(r,'change',function(){tog('tagline-wrap',r.value==='Yes'&&r.checked);selRG('tagline-group',r);});});
-  document.querySelectorAll('input[name="tagline-in-logo"]').forEach(function(r){on(r,'change',function(){selRG('tagline-include-group',r);});});
+  document.querySelectorAll('input[name="has-tagline"]').forEach(function(r){
+    on(r,'change',function(){tog('tagline-wrap',r.value==='Yes'&&r.checked);selRG('tagline-group',r);sendHeight();});
+  });
+  document.querySelectorAll('input[name="tagline-in-logo"]').forEach(function(r){
+    on(r,'change',function(){selRG('tagline-include-group',r);});
+  });
   document.querySelectorAll('.lscb').forEach(function(cb){
     on(cb,'change',function(){
       var checked=document.querySelectorAll('.lscb:checked');
@@ -320,10 +428,10 @@ function setup(){
       cb.closest('.co').classList.toggle('sel',cb.checked);
     });
   });
-  on($('colors-other-cb'),'change',function(){tog('colors-other-wrap',this.checked);$('colors-other-opt').classList.toggle('sel',this.checked);if($('colors-err'))$('colors-err').style.display='none';});
+  on($('colors-other-cb'),'change',function(){tog('colors-other-wrap',this.checked);$('colors-other-opt').classList.toggle('sel',this.checked);if($('colors-err'))$('colors-err').style.display='none';sendHeight();});
   document.querySelectorAll('#colors-group input').forEach(function(inp){if(inp.id==='colors-other-cb')return;on(inp,'change',function(){inp.closest('.co').classList.toggle('sel',inp.checked);if($('colors-err'))$('colors-err').style.display='none';});});
-  document.querySelectorAll('input[name="vibe"]').forEach(function(r){on(r,'change',function(){tog('vibe-other-wrap',r.value==='Other'&&r.checked);selRG('vibe-group',r);if($('vibe-err'))$('vibe-err').style.display='none';});});
-  on($('images-upload-cb'),'change',function(){tog('images-upload-wrap',this.checked);this.closest('.co').classList.toggle('sel',this.checked);});
+  document.querySelectorAll('input[name="vibe"]').forEach(function(r){on(r,'change',function(){tog('vibe-other-wrap',r.value==='Other'&&r.checked);selRG('vibe-group',r);if($('vibe-err'))$('vibe-err').style.display='none';sendHeight();});});
+  on($('images-upload-cb'),'change',function(){tog('images-upload-wrap',this.checked);this.closest('.co').classList.toggle('sel',this.checked);sendHeight();});
   document.querySelectorAll('#images-group input').forEach(function(inp){if(inp.id==='images-upload-cb')return;on(inp,'change',function(){inp.closest('.co').classList.toggle('sel',inp.checked);});});
   document.querySelectorAll('.pcb').forEach(function(cb){
     on(cb,'change',function(){
@@ -339,11 +447,12 @@ function setup(){
         var both=hasBlog&&hasFaq,blogOnly=hasBlog&&!hasFaq;
         var wt=$('blog-faq-warn-title'),wb=$('blog-faq-warn-body');
         if(wt){if(both){wt.textContent=lang==='es'?'Blog/Noticias y Preguntas frecuentes':'Blog/News & FAQ';}else if(blogOnly){wt.textContent=lang==='es'?'Blog/Noticias':'Blog/News';}else{wt.textContent=lang==='es'?'Preguntas frecuentes':'FAQ';}}
-        if(wb){wb.textContent=lang==='es'?' — Necesitaremos que usted nos proporcione el contenido para esta(s) página(s).':(both?' — You will need to provide the content for these pages.':', — You will need to provide the content for this page.');}
+        if(wb){wb.textContent=lang==='es'?' \u2014 Necesitaremos que usted nos proporcione el contenido para esta(s) p\u00e1gina(s).':' \u2014 You will need to provide the content for these pages.';}
       }
+      sendHeight();
     });
   });
-  on($('page-other-cb'),'change',function(){tog('page-other-wrap',this.checked);$('page-other-opt').classList.toggle('sel',this.checked);});
+  on($('page-other-cb'),'change',function(){tog('page-other-wrap',this.checked);$('page-other-opt').classList.toggle('sel',this.checked);sendHeight();});
   document.querySelectorAll('input[name="menu-type"]').forEach(function(r){
     on(r,'change',function(){
       var ids=['mopt-ordering','mopt-spoton','mopt-image','mopt-other'];
@@ -351,7 +460,7 @@ function setup(){
       var map={'Link directly to my online ordering':'mopt-ordering','Sync with my SpotOn online ordering':'mopt-spoton','Display my menu as an image or PDF':'mopt-image','other':'mopt-other'};
       if(map[r.value]){var el=$(map[r.value]);if(el)el.classList.add('act');}
       tog('menu-upload-wrap',r.value.indexOf('image')>-1&&r.checked);
-      tog('menu-other-wrap',r.value==='other'&&r.checked);
+      tog('menu-other-wrap',r.value==='other'&&r.checked);sendHeight();
     });
   });
   var tpList=[['tp-ordering-cb','tp-ordering-url-wrap','tp-ordering-opt'],['tp-res-cb','tp-res-url-wrap','tp-res-opt'],['tp-gc-cb','tp-gc-url-wrap','tp-gc-opt'],['tp-loyalty-cb','tp-loyalty-url-wrap','tp-loyalty-opt'],['tp-other-cb','tp-other-url-wrap','tp-other-opt']];
@@ -361,6 +470,7 @@ function setup(){
       var wrap=$(arr[1]),opt=$(arr[2]);
       if(wrap)wrap.classList.toggle('on',cb.checked);
       if(opt)opt.classList.toggle('act',cb.checked);
+      sendHeight();
     });
   });
   document.querySelectorAll('input[name="autopublish"]').forEach(function(r){on(r,'change',function(){selRG('autopublish-group',r);});});
@@ -369,57 +479,48 @@ function setup(){
     if(this.checked){$('terms-opt').style.borderColor='var(--blue)';$('terms-err').style.display='none';}
   });
 
-  // Form submission with Formspree
-  $('wf').addEventListener('submit',function(e){
-    e.preventDefault();
-    if(!validate())return;
-    var btn=$('btnSubmit');
-    btn.disabled=true;
-    btn.querySelector('span').textContent=lang==='es'?'Enviando…':'Sending…';
-    var data=new FormData(this);
-    fetch(this.action,{method:'POST',body:data,headers:{'Accept':'application/json'}})
-    .then(function(r){return r.json().then(function(j){return{ok:r.ok,json:j};});})
-    .then(function(res){
-      if(res.ok){
-        // Set submission lock
-        localStorage.setItem('spoton-wq-submitted','true');
-        // Show success screen
-        for(var i=1;i<=STEPS;i++){var el=$('step'+i);if(el)el.classList.remove('active');}
-        $('navBar').style.display='none';
-        $('succ').style.display='block';
-        window.scrollTo(0,0);
-      } else {
-        btn.disabled=false;
-        btn.querySelector('span').textContent=lang==='es'?'Enviar cuestionario':'Submit questionnaire';
-        alert(lang==='es'?'Hubo un error al enviar. Por favor intente de nuevo.':'There was an error submitting. Please try again.');
+  // Reset inspirationNudgeDismissed if user edits the inspiration field after dismissing
+  var inspInp=document.querySelector('textarea[name="inspiration-urls"]');
+  if(inspInp){
+    inspInp.addEventListener('input',function(){
+      if(inspInp.value.trim()){
+        inspirationNudgeDismissed=false;
+        var inspErr=$('inspiration-err');
+        if(inspErr)inspErr.style.display='none';
       }
-    })
-    .catch(function(){
-      btn.disabled=false;
-      btn.querySelector('span').textContent=lang==='es'?'Enviar cuestionario':'Submit questionnaire';
-      alert(lang==='es'?'Hubo un error al enviar. Por favor intente de nuevo.':'There was an error submitting. Please try again.');
     });
-  });
+  }
 }
+
+document.getElementById('wf').addEventListener('submit', function(e) {
+  e.preventDefault();
+  if (!validate()) return;
+  var form = this;
+  var btn = $('btnSubmit');
+  btn.disabled = true;
+  btn.querySelector('span').textContent = lang === 'es' ? 'Enviando\u2026' : 'Sending\u2026';
+  var data = new FormData(form);
+  fetch(form.action, {
+    method: 'POST',
+    body: data,
+    headers: { 'Accept': 'application/json' }
+  }).then(function(r){ return r.json().then(function(j){ return {ok: r.ok, json: j}; }); })
+  .then(function(res) {
+    if (res.ok) {
+      window.location.href = 'https://andresaromeroa1985.github.io/sd-wdd-wq/thanks.html?lang=' + lang;
+    } else {
+      btn.disabled = false;
+      btn.querySelector('span').textContent = lang === 'es' ? 'Enviar cuestionario' : 'Submit questionnaire';
+      alert(lang === 'es' ? 'Hubo un error al enviar. Por favor intente de nuevo.' : 'There was an error submitting. Please try again.');
+    }
+  }).catch(function() {
+    btn.disabled = false;
+    btn.querySelector('span').textContent = lang === 'es' ? 'Enviar cuestionario' : 'Submit questionnaire';
+    alert(lang === 'es' ? 'Hubo un error al enviar. Por favor intente de nuevo.' : 'There was an error submitting. Please try again.');
+  });
+});
 
 setup();
 applyLang();
-
-// Submission lock check
-if(localStorage.getItem('spoton-wq-submitted')==='true'){
-  var locked=$('locked-screen');
-  var topbar=$('topbar');
-  var hero=$('hero');
-  var prog=$('pw');
-  var nav=$('navBar');
-  if(locked)locked.style.display='block';
-  if(topbar)topbar.style.display='none';
-  if(hero)hero.style.display='none';
-  if(prog)prog.style.display='none';
-  if(nav)nav.style.display='none';
-  for(var i=1;i<=STEPS;i++){var el=$('step'+i);if(el)el.style.display='none';}
-  notifyResize();
-} else {
-  showStep(1);
-  notifyResize();
-}
+showStep(1);
+sendHeight();
