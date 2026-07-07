@@ -260,15 +260,17 @@ function validate(){
       if(hd&&hd.value==='Yes, I already have a domain'&&!document.querySelector('input[name="domain-transfer"]:checked'))ok=false;
       // CHANGE 2: Preferred domain name is required when user wants SpotOn to register one
       if(hd&&hd.value==='No, I need one (included in subscription)'){
-        var prefDom=$('domain-preferred-field');
-        var prefVal=document.querySelector('input[name="domain-preferred"]');
-        var prefV=prefVal?prefVal.value.trim():'';
+        var prefInp=document.querySelector('input[name="domain-preferred"]');
+        var prefErr=$('domain-preferred-err');
+        var prefV=prefInp?prefInp.value.trim():'';
         if(!prefV){
-          if(prefDom)prefDom.classList.add('inv');
+          if(prefInp){prefInp.style.borderColor='#f87171';}
+          if(prefErr){prefErr.style.display='block';}
           ok=false;
-          if(!firstBad&&prefDom)firstBad=prefDom;
+          if(!firstBad&&prefInp)firstBad=prefInp;
         } else {
-          if(prefDom)prefDom.classList.remove('inv');
+          if(prefInp){prefInp.style.borderColor='';}
+          if(prefErr){prefErr.style.display='none';}
         }
       }
     }
