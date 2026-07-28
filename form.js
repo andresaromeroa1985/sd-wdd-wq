@@ -261,6 +261,21 @@ function validate(){
       if(!document.querySelector('input[name="has-domain"]:checked'))ok=false;
       var hd=document.querySelector('input[name="has-domain"]:checked');
       if(hd&&hd.value==='Yes, I already have a domain'&&!document.querySelector('input[name="domain-transfer"]:checked'))ok=false;
+      // Existing domain name is required when client already owns a domain
+      if(hd&&hd.value==='Yes, I already have a domain'){
+        var domNameInp=document.querySelector('input[name="domain-name"]');
+        var domNameErr=$('domain-name-err');
+        var domNameV=domNameInp?domNameInp.value.trim():'';
+        if(!domNameV){
+          if(domNameInp){domNameInp.style.borderColor='#f87171';}
+          if(domNameErr){domNameErr.style.display='block';}
+          ok=false;
+          if(!firstBad&&domNameInp)firstBad=domNameInp;
+        } else {
+          if(domNameInp){domNameInp.style.borderColor='';}
+          if(domNameErr){domNameErr.style.display='none';}
+        }
+      }
       // CHANGE 2: Preferred domain name is required when user wants SpotOn to register one
       if(hd&&hd.value==='No, I need one (included in subscription)'){
         var prefInp=document.querySelector('input[name="domain-preferred"]');
@@ -436,6 +451,7 @@ function setup(){
       var owns=r.value.indexOf('already')>-1&&r.checked,needs=r.value.indexOf('need one')>-1&&r.checked;
       tog('domain-owned-wrap',owns);tog('domain-name-wrap',owns);tog('new-domain-wrap',needs);
       if(!owns)hide('transfer-code-wrap');
+      if(!owns){var domNameInp2=document.querySelector('input[name="domain-name"]');if(domNameInp2)domNameInp2.style.borderColor='';if($('domain-name-err'))$('domain-name-err').style.display='none';}
       if(!needs){var domPrefInp2=document.querySelector('input[name="domain-preferred"]');if(domPrefInp2)domPrefInp2.style.borderColor='';if($('domain-preferred-err'))$('domain-preferred-err').style.display='none';}
       needNewDomain=needs;tog('autopublish-wrap',needs);
       selRG('hd-group',r);sendHeight();
@@ -548,6 +564,17 @@ function setup(){
         domPrefInp.style.borderColor='';
         var domPrefErr=$('domain-preferred-err');
         if(domPrefErr)domPrefErr.style.display='none';
+      }
+    });
+  }
+
+  var domNameInp3=document.querySelector('input[name="domain-name"]');
+  if(domNameInp3){
+    domNameInp3.addEventListener('input',function(){
+      if(domNameInp3.value.trim()){
+        domNameInp3.style.borderColor='';
+        var domNameErr3=$('domain-name-err');
+        if(domNameErr3)domNameErr3.style.display='none';
       }
     });
   }
