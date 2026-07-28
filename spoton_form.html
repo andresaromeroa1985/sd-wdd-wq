@@ -336,9 +336,10 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
         </div>
       </div>
       <div class="cond field" id="new-domain-wrap">
-        <label data-en="Preferred domain name <span class='opt'>optional</span>" data-es="Nombre de dominio preferido <span class='opt'>opcional</span>"></label>
+        <label data-en="Preferred domain name <span class='req'>*</span>" data-es="Nombre de dominio preferido <span class='req'>*</span>"></label>
         <input type="text" name="domain-preferred" data-en-ph="e.g. yourbusiness.com" data-es-ph="ej. sunegocio.com">
         <div class="hint" data-en="Let us know your preferred domain and we'll register it for you." data-es="Díganos su dominio preferido y lo registraremos por usted."></div>
+        <div class="err" id="domain-preferred-err" style="display:none" data-en="Please tell us your preferred domain name." data-es="Por favor indíquenos su nombre de dominio preferido."></div>
       </div>
     </div>
 
