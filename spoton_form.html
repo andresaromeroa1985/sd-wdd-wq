@@ -373,7 +373,7 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
         <label class="ro"><input type="radio" name="has-logo" value="Yes, I have a logo"> <span data-en="Yes, I have a logo" data-es="Sí, tengo un logotipo"></span></label>
         <label class="ro"><input type="radio" name="has-logo" value="No — I would like a standard logo ($99 USD)"> <span data-en="No — I'd like a standard logo <span style='color:var(--tg);font-size:13px'>($99 USD)</span>" data-es="No — me gustaría un logotipo estándar <span style='color:var(--tg);font-size:13px'>($99 USD)</span>"></span></label>
         <label class="ro"><input type="radio" name="has-logo" value="No — I would like a custom logo ($299 USD)"> <span data-en="No — I'd like a custom logo <span style='color:var(--tg);font-size:13px'>($299 USD)</span>" data-es="No — me gustaría un logotipo personalizado <span style='color:var(--tg);font-size:13px'>($299 USD)</span>"></span></label>
-        <label class="ro"><input type="radio" name="has-logo" value="No logo needed"> <span data-en="No logo needed" data-es="No necesito logotipo"></span></label>
+        <label class="ro"><input type="radio" name="has-logo" value="No logo, just text"> <span data-en="No logo, just text" data-es="Sin logotipo, solo texto"></span></label>
       </div>
     </div>
 
@@ -501,9 +501,10 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
     </div>
 
     <div class="field">
-      <label data-en="Do you have example websites or visual styles for inspiration? <span class='opt'>optional</span>" data-es="¿Tiene sitios web de ejemplo o estilos visuales para inspiración? <span class='opt'>opcional</span>"></label>
+      <label data-en="Do you have example websites or visual styles for inspiration? <span class='req'>*</span>" data-es="¿Tiene sitios web de ejemplo o estilos visuales para inspiración? <span class='req'>*</span>"></label>
       <div id="inspiration-desc" style="font-size:13px;color:var(--tg);line-height:1.65;margin-bottom:10px"></div>
       <textarea name="inspiration-urls" data-en-ph="Paste links or describe the styles you like…" data-es-ph="Pegue enlaces o describa los estilos que le gustan…"></textarea>
+      <div class="err" id="inspiration-err" style="display:none" data-en="Please share an inspiration site or URL, or use the option below to browse examples." data-es="Por favor comparta un sitio de inspiración o URL, o use la opción a continuación para ver ejemplos."></div>
     </div>
 
     <div class="field">
@@ -575,6 +576,7 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
         <div class="mopt" id="mopt-image"><div class="mor"><input type="radio" name="menu-type" value="Display my menu as an image or PDF"><span data-en="Display my menu as an image or PDF" data-es="Mostrar mi menú como imagen o PDF"></span></div><div class="mod" data-en="Note: not ADA compliant." data-es="Nota: no cumple con los estándares ADA."></div></div>
         <div class="mopt" id="mopt-other"><div class="mor"><input type="radio" name="menu-type" value="other"><span data-en="Other" data-es="Otro"></span></div></div>
       </div>
+      <div class="err" id="menu-type-err" style="display:none" data-en="Please choose how you'd like your menu page built." data-es="Por favor elija cómo le gustaría que construyamos su página de menú."></div>
       <div class="cond" id="menu-upload-wrap" style="margin-top:12px"><a href="https://spoton-website-contents.tiiny.site/" target="_blank" class="btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg><span data-en="Upload your menu here" data-es="Suba su menú aquí"></span></a></div>
       <div class="cond" id="menu-other-wrap" style="margin-top:10px"><input type="text" name="menu-type-other" data-en-ph="Describe how you'd like your menu displayed…" data-es-ph="Describa cómo le gustaría mostrar su menú…"></div>
     </div>
