@@ -415,6 +415,7 @@ function setup(){
       var owns=r.value.indexOf('already')>-1&&r.checked,needs=r.value.indexOf('need one')>-1&&r.checked;
       tog('domain-owned-wrap',owns);tog('domain-name-wrap',owns);tog('new-domain-wrap',needs);
       if(!owns)hide('transfer-code-wrap');
+      if(!needs){var domPrefInp2=document.querySelector('input[name="domain-preferred"]');if(domPrefInp2)domPrefInp2.style.borderColor='';if($('domain-preferred-err'))$('domain-preferred-err').style.display='none';}
       needNewDomain=needs;tog('autopublish-wrap',needs);
       selRG('hd-group',r);sendHeight();
     });
@@ -505,6 +506,17 @@ function setup(){
         inspirationNudgeDismissed=false;
         var inspErr=$('inspiration-err');
         if(inspErr)inspErr.style.display='none';
+      }
+    });
+  }
+
+  var domPrefInp=document.querySelector('input[name="domain-preferred"]');
+  if(domPrefInp){
+    domPrefInp.addEventListener('input',function(){
+      if(domPrefInp.value.trim()){
+        domPrefInp.style.borderColor='';
+        var domPrefErr=$('domain-preferred-err');
+        if(domPrefErr)domPrefErr.style.display='none';
       }
     });
   }
