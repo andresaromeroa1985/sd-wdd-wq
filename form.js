@@ -292,6 +292,24 @@ function validate(){
     var colorsOk=!!document.querySelectorAll('#colors-group input:checked').length;
     var colErr=$('colors-err');
     if(!colorsOk){if(colErr)colErr.style.display='block';ok=false;if(!firstBad&&colErr)firstBad=colErr;}else{if(colErr)colErr.style.display='none';}
+    // If "Other" is checked, the accompanying text field is required too
+    var colorsOtherCb=$('colors-other-cb');
+    var colorsOtherInp=$('colors-other-text');
+    var colorsOtherErr=$('colors-other-err');
+    if(colorsOtherCb&&colorsOtherCb.checked){
+      var colorsOtherV=colorsOtherInp?colorsOtherInp.value.trim():'';
+      if(!colorsOtherV){
+        if(colorsOtherInp)colorsOtherInp.style.borderColor='#f87171';
+        if(colorsOtherErr)colorsOtherErr.style.display='block';
+        ok=false;
+        if(!firstBad&&colorsOtherInp)firstBad=colorsOtherInp;
+      } else {
+        if(colorsOtherInp)colorsOtherInp.style.borderColor='';
+        if(colorsOtherErr)colorsOtherErr.style.display='none';
+      }
+    } else if(colorsOtherErr){
+      colorsOtherErr.style.display='none';
+    }
     var vibeOk=!!document.querySelector('input[name="vibe"]:checked');
     var vibeErr=$('vibe-err');
     if(!vibeOk){if(vibeErr)vibeErr.style.display='block';ok=false;if(!firstBad&&vibeErr)firstBad=vibeErr;}else{if(vibeErr)vibeErr.style.display='none';}
@@ -444,7 +462,17 @@ function setup(){
       cb.closest('.co').classList.toggle('sel',cb.checked);
     });
   });
-  on($('colors-other-cb'),'change',function(){tog('colors-other-wrap',this.checked);$('colors-other-opt').classList.toggle('sel',this.checked);if($('colors-err'))$('colors-err').style.display='none';sendHeight();});
+  on($('colors-other-cb'),'change',function(){
+    tog('colors-other-wrap',this.checked);
+    $('colors-other-opt').classList.toggle('sel',this.checked);
+    if($('colors-err'))$('colors-err').style.display='none';
+    if(!this.checked){
+      var cot=$('colors-other-text'),coe=$('colors-other-err');
+      if(cot)cot.style.borderColor='';
+      if(coe)coe.style.display='none';
+    }
+    sendHeight();
+  });
   document.querySelectorAll('#colors-group input').forEach(function(inp){if(inp.id==='colors-other-cb')return;on(inp,'change',function(){inp.closest('.co').classList.toggle('sel',inp.checked);if($('colors-err'))$('colors-err').style.display='none';});});
   document.querySelectorAll('input[name="vibe"]').forEach(function(r){on(r,'change',function(){tog('vibe-other-wrap',r.value==='Other'&&r.checked);selRG('vibe-group',r);if($('vibe-err'))$('vibe-err').style.display='none';sendHeight();});});
   on($('images-upload-cb'),'change',function(){tog('images-upload-wrap',this.checked);this.closest('.co').classList.toggle('sel',this.checked);if(document.querySelectorAll('#images-group input:checked').length&&$('images-err'))$('images-err').style.display='none';sendHeight();});
@@ -517,6 +545,17 @@ function setup(){
         domPrefInp.style.borderColor='';
         var domPrefErr=$('domain-preferred-err');
         if(domPrefErr)domPrefErr.style.display='none';
+      }
+    });
+  }
+
+  var colorsOtherInp2=$('colors-other-text');
+  if(colorsOtherInp2){
+    colorsOtherInp2.addEventListener('input',function(){
+      if(colorsOtherInp2.value.trim()){
+        colorsOtherInp2.style.borderColor='';
+        var coe2=$('colors-other-err');
+        if(coe2)coe2.style.display='none';
       }
     });
   }
