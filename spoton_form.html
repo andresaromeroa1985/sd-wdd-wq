@@ -481,7 +481,10 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
         <label class="co"><input type="checkbox" name="colors-website" value="The same colors as my current website"> <span data-en="The same colors as my current website" data-es="Los mismos colores que mi sitio web actual"></span></label>
         <label class="co" id="colors-other-opt"><input type="checkbox" name="colors-other-cb" id="colors-other-cb" value="Other"> <span data-en="Other" data-es="Otro"></span></label>
       </div>
-      <div class="cond" id="colors-other-wrap" style="margin-top:10px"><input type="text" name="colors-other-text" data-en-ph="Describe your preferred colors or palette…" data-es-ph="Describa sus colores o paleta preferida…"></div>
+      <div class="cond" id="colors-other-wrap" style="margin-top:10px">
+        <input type="text" id="colors-other-text" name="colors-other-text" data-en-ph="Describe your preferred colors or palette…" data-es-ph="Describa sus colores o paleta preferida…">
+        <div class="err" id="colors-other-err" style="display:none" data-en="Please describe your preferred colors." data-es="Por favor describa sus colores preferidos."></div>
+      </div>
       <div class="err" id="colors-err" style="display:none" data-en="Please select at least one color option." data-es="Por favor seleccione al menos una opción de color."></div>
     </div>
 
