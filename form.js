@@ -564,6 +564,10 @@ function setup(){
   }
 }
 
+// Google Apps Script Web App endpoint (deployed from the destination Sheet).
+// Replace PASTE_WEB_APP_URL_HERE with the URL Apps Script gives you after deploying.
+var FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbySxy6spV3_3613j4aT3BgV6E-DNdxySSBJGTsTiq3h35U0uJv27HVQWyEPWejL5QjZfQ/exec';
+
 document.getElementById('wf').addEventListener('submit', function(e) {
   e.preventDefault();
   if (!validate()) return;
@@ -571,25 +575,46 @@ document.getElementById('wf').addEventListener('submit', function(e) {
   var btn = $('btnSubmit');
   btn.disabled = true;
   btn.querySelector('span').textContent = lang === 'es' ? 'Enviando\u2026' : 'Sending\u2026';
-  var data = new FormData(form);
-  fetch(form.action, {
-    method: 'POST',
-    body: data,
-    headers: { 'Accept': 'application/json' }
-  }).then(function(r){ return r.json().then(function(j){ return {ok: r.ok, json: j}; }); })
-  .then(function(res) {
-    if (res.ok) {
-      window.location.href = 'https://andresaromeroa1985.github.io/sd-wdd-wq/thanks.html?lang=' + lang;
+
+  // Build a plain object from the form. For checkboxes, an unchecked box
+  // simply won't appear in FormData, so the Sheet cell stays blank.
+  var fd = new FormData(form);
+  var payload = {};
+  fd.forEach(function(value, key) {
+    // Handle repeated keys (multi-select checkboxes) by joining with "; "
+    if (payload[key] != null) {
+      payload[key] = payload[key] + '; ' + value;
     } else {
-      btn.disabled = false;
-      btn.querySelector('span').textContent = lang === 'es' ? 'Enviar cuestionario' : 'Submit questionnaire';
-      alert(lang === 'es' ? 'Hubo un error al enviar. Por favor intente de nuevo.' : 'There was an error submitting. Please try again.');
+      payload[key] = value;
     }
-  }).catch(function() {
+  });
+  payload._lang = lang;
+
+  function fail() {
     btn.disabled = false;
     btn.querySelector('span').textContent = lang === 'es' ? 'Enviar cuestionario' : 'Submit questionnaire';
     alert(lang === 'es' ? 'Hubo un error al enviar. Por favor intente de nuevo.' : 'There was an error submitting. Please try again.');
-  });
+  }
+
+  fetch(FORM_ENDPOINT, {
+    method: 'POST',
+    // No custom Content-Type header — that would trigger a CORS preflight
+    // that Apps Script doesn't handle. text/plain is the sweet spot;
+    // Apps Script reads e.postData.contents as the raw string either way.
+    body: JSON.stringify(payload)
+  }).then(function(r){
+    return r.text().then(function(txt){
+      var j;
+      try { j = JSON.parse(txt); } catch(e) { j = {}; }
+      return { ok: r.ok && j.ok !== false, json: j };
+    });
+  }).then(function(res) {
+    if (res.ok) {
+      window.location.href = 'https://andresaromeroa1985.github.io/sd-wdd-wq/thanks.html?lang=' + lang;
+    } else {
+      fail();
+    }
+  }).catch(fail);
 });
 
 setup();
