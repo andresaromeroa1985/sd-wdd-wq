@@ -345,8 +345,9 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
 
     <div class="cond" id="domain-owned-wrap">
       <div class="cond field" id="domain-name-wrap" style="margin-top:28px">
-        <label data-en="Your domain name" data-es="Su nombre de dominio"></label>
+        <label data-en="Your domain name <span class='req'>*</span>" data-es="Su nombre de dominio <span class='req'>*</span>"></label>
         <input type="text" name="domain-name" data-en-ph="e.g. yourbusiness.com" data-es-ph="ej. sunegocio.com">
+        <div class="err" id="domain-name-err" style="display:none" data-en="Please tell us your current domain name." data-es="Por favor indíquenos su nombre de dominio actual."></div>
       </div>
       <div class="field">
         <label data-en="Would you like to transfer your domain to us, or keep ownership? <span class='req'>*</span>" data-es="¿Le gustaría transferirnos su dominio o conservar la propiedad? <span class='req'>*</span>"></label>
