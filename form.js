@@ -256,7 +256,22 @@ function validate(){
   if(cur===2){
     if(!document.querySelector('input[name="has-website"]:checked'))ok=false;
     var hw=document.querySelector('input[name="has-website"]:checked');
-    if(hw&&hw.value==='Yes, I have an existing website'){if(!document.querySelector('input[name="domain-transfer"]:checked'))ok=false;}
+    if(hw&&hw.value==='Yes, I have an existing website'){
+      if(!document.querySelector('input[name="domain-transfer"]:checked'))ok=false;
+      // Existing website URL is required when client has an existing website
+      var exUrlInp=document.querySelector('input[name="existing-url"]');
+      var exUrlErr=$('existing-url-err');
+      var exUrlV=exUrlInp?exUrlInp.value.trim():'';
+      if(!exUrlV){
+        if(exUrlInp){exUrlInp.style.borderColor='#f87171';}
+        if(exUrlErr){exUrlErr.style.display='block';}
+        ok=false;
+        if(!firstBad&&exUrlInp)firstBad=exUrlInp;
+      } else {
+        if(exUrlInp){exUrlInp.style.borderColor='';}
+        if(exUrlErr){exUrlErr.style.display='none';}
+      }
+    }
     else if(hw){
       if(!document.querySelector('input[name="has-domain"]:checked'))ok=false;
       var hd=document.querySelector('input[name="has-domain"]:checked');
@@ -437,6 +452,7 @@ function setup(){
     on(r,'change',function(){
       var hw=r.value==='Yes, I have an existing website'&&r.checked;
       tog('existing-wrap',hw);tog('domain-q-wrap',!hw);tog('domain-owned-wrap',hw);tog('domain-name-wrap',!hw);
+      if(!hw){var exUrlInp2=document.querySelector('input[name="existing-url"]');if(exUrlInp2)exUrlInp2.style.borderColor='';if($('existing-url-err'))$('existing-url-err').style.display='none';}
       hide('transfer-code-wrap');
       document.querySelectorAll('input[name="domain-transfer"]').forEach(function(i){i.checked=false;});
       document.querySelectorAll('#dt-group .ro').forEach(function(o){o.classList.remove('sel');});
@@ -575,6 +591,17 @@ function setup(){
         domNameInp3.style.borderColor='';
         var domNameErr3=$('domain-name-err');
         if(domNameErr3)domNameErr3.style.display='none';
+      }
+    });
+  }
+
+  var exUrlInp3=document.querySelector('input[name="existing-url"]');
+  if(exUrlInp3){
+    exUrlInp3.addEventListener('input',function(){
+      if(exUrlInp3.value.trim()){
+        exUrlInp3.style.borderColor='';
+        var exUrlErr3=$('existing-url-err');
+        if(exUrlErr3)exUrlErr3.style.display='none';
       }
     });
   }
