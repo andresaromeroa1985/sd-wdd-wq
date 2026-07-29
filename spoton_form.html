@@ -309,9 +309,10 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
 
     <div class="cond" id="existing-wrap">
       <div class="field">
-        <label data-en="Current website URL" data-es="URL de su sitio web actual"></label>
+        <label data-en="Current website URL <span class='req'>*</span>" data-es="URL de su sitio web actual <span class='req'>*</span>"></label>
         <input type="url" name="existing-url" data-en-ph="https://www.yourbusiness.com" data-es-ph="https://www.sunegocio.com">
         <div class="hint" data-en="We'll use this as a reference during the design process." data-es="Lo usaremos como referencia durante el proceso de diseño."></div>
+        <div class="err" id="existing-url-err" style="display:none" data-en="Please share your current website URL." data-es="Por favor comparta la URL de su sitio web actual."></div>
       </div>
       <div class="field" style="background:#f8f9fb;border:1.5px solid #e0e3e9;border-radius:var(--r);padding:16px">
         <label style="margin-bottom:10px" data-en="Would you like us to use your current website's content and images? <span class='req'>*</span>" data-es="¿Le gustaría que usemos el contenido e imágenes de su sitio actual? <span class='req'>*</span>"></label>
