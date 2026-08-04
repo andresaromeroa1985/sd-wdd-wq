@@ -620,7 +620,7 @@ function setup(){
 
 // Google Apps Script Web App endpoint (deployed from the destination Sheet).
 // Replace PASTE_WEB_APP_URL_HERE with the URL Apps Script gives you after deploying.
-var FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbySxy6spV3_3613j4aT3BgV6E-DNdxySSBJGTsTiq3h35U0uJv27HVQWyEPWejL5QjZfQ/exec';
+var FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbzFpQxIjf2dZ0DwAtYp7IU6P008zFbPRzZEbeEwKQRFW4MxUqbhPAHvC3VhWOau0ZSguw/exec';
 
 document.getElementById('wf').addEventListener('submit', function(e) {
   e.preventDefault();
