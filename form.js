@@ -716,7 +716,18 @@ document.getElementById('wf').addEventListener('submit', function(e) {
   // Show the full-screen loading overlay
   var overlay = document.getElementById('loading-overlay');
   var loadingMsg = document.getElementById('loading-msg');
+  var loadingContent = document.getElementById('loading-content');
   if (loadingMsg) loadingMsg.textContent = lang === 'es' ? 'Enviando su cuestionario\u2026' : 'Sending your questionnaire\u2026';
+  if (loadingContent && btn) {
+    // Position the loading content right where the submit button is — the user just
+    // clicked it, so we know it's in their viewport. Since the form is embedded via
+    // iframe in Webflow with auto-height, position:fixed centering doesn't work as
+    // expected — we place the content at the button's document Y instead.
+    var el = btn, top = 0;
+    while (el) { top += el.offsetTop; el = el.offsetParent; }
+    // Position ~140px above the button so the spinner sits comfortably in view.
+    loadingContent.style.top = Math.max(60, top - 140) + 'px';
+  }
   if (overlay) overlay.classList.add('show');
 
   // Build a plain object from the form. For checkboxes, an unchecked box
