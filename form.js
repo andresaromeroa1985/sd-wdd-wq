@@ -235,6 +235,29 @@ function showInspirationNudge(onContinue) {
   });
 }
 
+// Domain validator — accepts spoton.com, www.spoton.com, https://spoton.com/
+// Rejects subdomains beyond www, bare words with no TLD, and anything with spaces
+function isValidDomain(raw){
+  if(!raw)return false;
+  var s=raw.trim().toLowerCase();
+  s=s.replace(/^https?:\/\//,''); // strip protocol
+  s=s.replace(/^www\./,''); // strip leading www
+  s=s.replace(/\/.*$/,''); // strip path
+  s=s.replace(/\?.*$/,''); // strip query
+  // must be exactly domain.tld — one dot, valid TLD (2+ letters)
+  return /^[a-z0-9][a-z0-9-]*\.[a-z]{2,}$/.test(s);
+}
+
+// About Us validator — requires 150+ chars AND at least 2 sentences
+function isValidAbout(raw){
+  if(!raw)return false;
+  var s=raw.trim();
+  if(s.length<150)return false;
+  // Count sentence-ending punctuation followed by a space or end-of-string
+  var sentences=(s.match(/[.!?]+(\s|$)/g)||[]).length;
+  return sentences>=2;
+}
+
 function validate(){
   var ok=true;
   var firstBad=null;
@@ -245,7 +268,11 @@ function validate(){
     if(bad){ok=false;if(!firstBad&&f)firstBad=f;}
   }
   if(cur===1){
-    req('f-bn','bizname');req('f-ba','bizaddr');req('f-bh','bizhours');req('f-about','about-biz');
+    req('f-bn','bizname');req('f-ba','bizaddr');req('f-bh','bizhours');
+    var aboutInp=$('about-biz'),aboutF=$('f-about'),aboutV=aboutInp?aboutInp.value:'';
+    var aboutOk=isValidAbout(aboutV);
+    if(aboutF)aboutF.classList.toggle('inv',!aboutOk);
+    if(!aboutOk){ok=false;if(!firstBad&&aboutF)firstBad=aboutF;}
     var fv=$('eforms')?$('eforms').value.trim():'';
     if(!fv){if($('eforms'))$('eforms').style.borderColor='#f87171';$('err-eforms').style.display='block';ok=false;if(!firstBad)firstBad=$('eforms');}
     else{if($('eforms'))$('eforms').style.borderColor='';$('err-eforms').style.display='none';}
@@ -262,7 +289,7 @@ function validate(){
       var exUrlInp=document.querySelector('input[name="existing-url"]');
       var exUrlErr=$('existing-url-err');
       var exUrlV=exUrlInp?exUrlInp.value.trim():'';
-      if(!exUrlV){
+      if(!exUrlV||!isValidDomain(exUrlV)){
         if(exUrlInp){exUrlInp.style.borderColor='#f87171';}
         if(exUrlErr){exUrlErr.style.display='block';}
         ok=false;
@@ -281,7 +308,7 @@ function validate(){
         var domNameInp=document.querySelector('input[name="domain-name"]');
         var domNameErr=$('domain-name-err');
         var domNameV=domNameInp?domNameInp.value.trim():'';
-        if(!domNameV){
+        if(!domNameV||!isValidDomain(domNameV)){
           if(domNameInp){domNameInp.style.borderColor='#f87171';}
           if(domNameErr){domNameErr.style.display='block';}
           ok=false;
@@ -296,7 +323,7 @@ function validate(){
         var prefInp=document.querySelector('input[name="domain-preferred"]');
         var prefErr=$('domain-preferred-err');
         var prefV=prefInp?prefInp.value.trim():'';
-        if(!prefV){
+        if(!prefV||!isValidDomain(prefV)){
           if(prefInp){prefInp.style.borderColor='#f87171';}
           if(prefErr){prefErr.style.display='block';}
           ok=false;
@@ -309,7 +336,15 @@ function validate(){
     }
   }
   if(cur===3){
-    if(!document.querySelector('input[name="has-logo"]:checked'))ok=false;
+    var hasLogoOk=!!document.querySelector('input[name="has-logo"]:checked');
+    var hasLogoErr=$('has-logo-err');
+    if(!hasLogoOk){
+      if(hasLogoErr)hasLogoErr.style.display='block';
+      ok=false;
+      if(!firstBad&&hasLogoErr)firstBad=hasLogoErr;
+    } else if(hasLogoErr){
+      hasLogoErr.style.display='none';
+    }
     var logoVal=document.querySelector('input[name="has-logo"]:checked');
     var needsLogoQ=logoVal&&(logoVal.value.indexOf('standard')>-1||logoVal.value.indexOf('custom')>-1);
     if(needsLogoQ){
@@ -388,8 +423,18 @@ function validate(){
     tpP.forEach(function(p){var cb=$(p[0]),inp=$(p[1]);if(!cb||!inp)return;if(cb.checked&&!inp.value.trim()){inp.classList.add('err-inp');ok=false;}else{inp.classList.remove('err-inp');}});
   }
   if(cur===6){
-    if(needNewDomain&&!document.querySelector('input[name="autopublish"]:checked'))ok=false;
-    if(!$('terms-agreed').checked){$('terms-opt').style.borderColor='#f87171';$('terms-err').style.display='block';ok=false;}
+    if(needNewDomain){
+      var apOk=!!document.querySelector('input[name="autopublish"]:checked');
+      var apErr=$('autopublish-err');
+      if(!apOk){
+        if(apErr)apErr.style.display='block';
+        ok=false;
+        if(!firstBad&&apErr)firstBad=apErr;
+      } else if(apErr){
+        apErr.style.display='none';
+      }
+    }
+    if(!$('terms-agreed').checked){$('terms-opt').style.borderColor='#f87171';$('terms-err').style.display='block';ok=false;if(!firstBad)firstBad=$('terms-opt');}
     else{$('terms-opt').style.borderColor='#e0e3e9';$('terms-err').style.display='none';}
   }
   if(!ok&&firstBad){setTimeout(function(){firstBad.scrollIntoView({behavior:'smooth',block:'center'});},80);}
@@ -481,6 +526,18 @@ function setup(){
       tog('custom-logo-wrap',r.value.indexOf('custom')>-1&&r.checked);
       tog('logo-notes-wrap',(r.value.indexOf('standard')>-1||r.value.indexOf('custom')>-1)&&r.checked);
       tog('no-logo-wrap',r.value==='No logo, just text'&&r.checked);
+      // Clear the has-logo error once any option is picked
+      if($('has-logo-err'))$('has-logo-err').style.display='none';
+      // "Same colors as my logo" only makes sense if the client has (or will have) a logo.
+      // Hide the option and uncheck it when they pick "No logo, just text".
+      var hasNoLogo=r.value==='No logo, just text'&&r.checked;
+      var colorsLogoOpt=$('colors-logo-opt');
+      var colorsLogoCb=$('colors-logo-cb');
+      if(colorsLogoOpt)colorsLogoOpt.style.display=hasNoLogo?'none':'';
+      if(hasNoLogo&&colorsLogoCb&&colorsLogoCb.checked){
+        colorsLogoCb.checked=false;
+        colorsLogoOpt.classList.remove('sel');
+      }
       selRG('logo-group',r);sendHeight();
     });
   });
@@ -555,7 +612,7 @@ function setup(){
       sendHeight();
     });
   });
-  document.querySelectorAll('input[name="autopublish"]').forEach(function(r){on(r,'change',function(){selRG('autopublish-group',r);});});
+  document.querySelectorAll('input[name="autopublish"]').forEach(function(r){on(r,'change',function(){selRG('autopublish-group',r);if($('autopublish-err'))$('autopublish-err').style.display='none';});});
   on($('terms-agreed'),'change',function(){
     $('terms-opt').classList.toggle('sel',this.checked);
     if(this.checked){$('terms-opt').style.borderColor='var(--blue)';$('terms-err').style.display='none';}
@@ -616,19 +673,51 @@ function setup(){
       }
     });
   }
+
+  // About Us — clear inv state as user types once it meets the bar
+  var aboutInp2=$('about-biz');
+  if(aboutInp2){
+    aboutInp2.addEventListener('input',function(){
+      if(isValidAbout(aboutInp2.value)){
+        var f=$('f-about');
+        if(f)f.classList.remove('inv');
+      }
+    });
+  }
+
+  // About Us examples modal
+  var examplesBtn=$('about-examples-btn'),examplesModal=$('about-examples-modal'),examplesClose=$('about-examples-close');
+  if(examplesBtn&&examplesModal){
+    on(examplesBtn,'click',function(){examplesModal.classList.add('show');});
+  }
+  if(examplesClose&&examplesModal){
+    on(examplesClose,'click',function(){examplesModal.classList.remove('show');});
+  }
+  if(examplesModal){
+    on(examplesModal,'click',function(e){if(e.target===examplesModal)examplesModal.classList.remove('show');});
+  }
 }
 
 // Google Apps Script Web App endpoint (deployed from the destination Sheet).
 // Replace PASTE_WEB_APP_URL_HERE with the URL Apps Script gives you after deploying.
 var FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxTygdTb8bE9iCel3gU9ddlYZT2im_aMhTQuTr18Lx_sAS-LWhkmKhoOhP0DlYnsiSrfA/exec';
 
+var isSubmitting = false;
 document.getElementById('wf').addEventListener('submit', function(e) {
   e.preventDefault();
+  if (isSubmitting) return; // hard guard against multi-clicks
   if (!validate()) return;
+  isSubmitting = true;
   var form = this;
   var btn = $('btnSubmit');
   btn.disabled = true;
   btn.querySelector('span').textContent = lang === 'es' ? 'Enviando\u2026' : 'Sending\u2026';
+
+  // Show the full-screen loading overlay
+  var overlay = document.getElementById('loading-overlay');
+  var loadingMsg = document.getElementById('loading-msg');
+  if (loadingMsg) loadingMsg.textContent = lang === 'es' ? 'Enviando su cuestionario\u2026' : 'Sending your questionnaire\u2026';
+  if (overlay) overlay.classList.add('show');
 
   // Build a plain object from the form. For checkboxes, an unchecked box
   // simply won't appear in FormData, so the Sheet cell stays blank.
@@ -645,6 +734,8 @@ document.getElementById('wf').addEventListener('submit', function(e) {
   payload._lang = lang;
 
   function fail() {
+    isSubmitting = false;
+    if (overlay) overlay.classList.remove('show');
     btn.disabled = false;
     btn.querySelector('span').textContent = lang === 'es' ? 'Enviar cuestionario' : 'Submit questionnaire';
     alert(lang === 'es' ? 'Hubo un error al enviar. Por favor intente de nuevo.' : 'There was an error submitting. Please try again.');
@@ -664,6 +755,7 @@ document.getElementById('wf').addEventListener('submit', function(e) {
     });
   }).then(function(res) {
     if (res.ok) {
+      // Keep overlay visible during redirect so no flash of empty page
       window.location.href = 'https://andresaromeroa1985.github.io/sd-wdd-wq/thanks.html?lang=' + lang;
     } else {
       fail();
