@@ -1,4 +1,9 @@
 var STEPS=6,cur=1,needNewDomain=false,featCount=3,lang='en';
+
+// Furthest step the client has reached. Steps up to here are navigable in both
+// directions via the sidebar and the progress bars; anything past it is locked,
+// so the stepper can't be used to skip ahead of the questions.
+var maxStep=1;
 function $(id){return document.getElementById(id);}
 function on(el,evt,fn){if(el)el.addEventListener(evt,fn);}
 function tog(id,v){var el=$(id);if(el)el.classList.toggle('on',!!v);}
@@ -168,12 +173,15 @@ function setLang(l){
 }
 
 function updProg(){
+  // A step is navigable if the client has already reached it. "Completed" means
+  // they got past it at some point, which is independent of where they are now —
+  // so going back to step 2 leaves steps 3-5 showing as done, and clickable.
   var dots=$('dots');dots.innerHTML='';
   for(var i=1;i<=STEPS;i++){
     var d=document.createElement('div');
-    var isDone=i<cur,isAct=i===cur;
-    d.className='dot'+(isDone?' done':isAct?' active':'');
-    if(isDone){(function(s){d.addEventListener('click',function(){jumpTo(s);});})(i);}
+    var isAct=i===cur,isDone=!isAct&&i<maxStep,isAhead=!isAct&&i===maxStep;
+    d.className='dot'+(isAct?' active':isDone?' done':isAhead?' ahead':'');
+    if(!isAct&&i<=maxStep){(function(s){d.addEventListener('click',function(){jumpTo(s);});})(i);}
     dots.appendChild(d);
   }
   var steps=SM[lang];
@@ -181,12 +189,12 @@ function updProg(){
   $('scounter').textContent=cur+' / '+STEPS;
   var sb=$('sbsteps');sb.innerHTML='';
   steps.forEach(function(s,i){
-    var n=i+1,isA=n===cur,isD=n<cur;
+    var n=i+1,isA=n===cur,isD=!isA&&n<maxStep,canGo=!isA&&n<=maxStep;
     var div=document.createElement('div');
-    div.className='ss'+(isD?' cl':'');
-    if(isD){(function(step){div.addEventListener('click',function(){jumpTo(step);});})(n);}
+    div.className='ss'+(canGo?' cl':'');
+    if(canGo){(function(step){div.addEventListener('click',function(){jumpTo(step);});})(n);}
     div.innerHTML='<div class="sn'+(isA?' active':isD?' done':'')+'">'+
-      (isD?'&#10003;':n)+'</div><div><div class="stt'+(!isA&&!isD?' m':'')+'">'+
+      (isD?'&#10003;':n)+'</div><div><div class="stt'+(!isA&&n>maxStep?' m':'')+'">'+
       s.l+'</div><div class="ssb">'+s.s+'</div></div>';
     sb.appendChild(div);
   });
@@ -202,7 +210,24 @@ function updProg(){
   sendHeight();
 }
 
-function jumpTo(n){cur=n;showStep(cur);scrollToTop();}
+function jumpTo(n){
+  if(n===cur||n<1||n>STEPS)return;
+
+  // Backward is always free — they've already answered what's behind them.
+  if(n<cur){cur=n;showStep(cur);scrollToTop();return;}
+
+  // Forward only as far as they've been, and only through steps that still
+  // validate. Without this check the stepper would be a way around validation:
+  // go back to step 1, clear a required field, click step 6, submit — and
+  // submit only re-checks the step it's on.
+  if(n>maxStep)return;
+  while(cur<n){
+    if(!validate()){showStep(cur);scrollToTop();return;}
+    cur++;
+  }
+  showStep(cur);
+  scrollToTop();
+}
 
 function showStep(n){
   for(var i=1;i<=STEPS;i++){var el=$('step'+i);if(el)el.classList.toggle('active',i===n);}
@@ -343,13 +368,18 @@ var UP_CSS=[
 '.up-done-t{font-size:12.5px;font-weight:500;color:#1a3a6e;margin-bottom:2px}',
 '.up-done-b{font-size:12px;color:#33507d;line-height:1.55}',
 '.up-warn{display:none;font-size:12px;line-height:1.55;margin-top:8px;padding:10px 12px;background:#fffbeb;border:1px solid #fde68a;border-radius:var(--r);color:#92400e}',
-'.up-warn.on{display:block}'
+'.up-warn.on{display:block}',
+
+/* Stepper: the "reached but not yet completed" progress bar. Sits between the
+   filled-in look of a completed step and the flat look of a locked one. */
+'.dot.ahead{background:rgba(23,105,255,0.22);cursor:pointer}',
+'.dot.ahead:hover{background:var(--blue);transform:scaleY(1.6)}'
 ].join('');
 
-function upInjectCSS(){
-  if($('up-css'))return;
+function injectRuntimeCSS(){
+  if($('form-runtime-css'))return;
   var s=document.createElement('style');
-  s.id='up-css';
+  s.id='form-runtime-css';
   s.textContent=UP_CSS;
   document.head.appendChild(s);
 }
@@ -625,8 +655,6 @@ function upNudge(cat){
 }
 
 function initUploaders(){
-  upInjectCSS();
-
   // Hidden fields for the submission payload
   var form=$('wf');
   if(form&&!$('up-count-field')){
@@ -930,7 +958,12 @@ function validate(){
   return ok;
 }
 
-function goNext(){if(!validate())return;cur++;showStep(cur);scrollToTop();sendHeight();}
+function goNext(){
+  if(!validate())return;
+  cur++;
+  if(cur>maxStep)maxStep=cur;
+  showStep(cur);scrollToTop();sendHeight();
+}
 function goBack(){if(cur===1)return;cur--;showStep(cur);scrollToTop();sendHeight();}
 
 function addFeat(){
@@ -975,6 +1008,10 @@ var _mo=new MutationObserver(function(){sendHeight();});
 _mo.observe(document.body,{childList:true,subtree:true,attributes:true,characterData:true});
 
 function setup(){
+  // Styles for everything form.js builds at runtime — the uploaders and the
+  // stepper's forward-navigable state.
+  injectRuntimeCSS();
+
   var tR=$('cb-rest'),tRo=$('opt-rest'),tRe=$('cb-ret'),tReo=$('opt-ret');
   on(tR,'change',function(){if(tR.checked){tRe.checked=false;tReo.classList.remove('sel');}tRo.classList.toggle('sel',tR.checked);tog('rest-sub-wrap',tR.checked);hide('ret-sub-wrap');sendHeight();});
   on(tRe,'change',function(){if(tRe.checked){tR.checked=false;tRo.classList.remove('sel');}tReo.classList.toggle('sel',tRe.checked);tog('ret-sub-wrap',tRe.checked);hide('rest-sub-wrap');sendHeight();});
