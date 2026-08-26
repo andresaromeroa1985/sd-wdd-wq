@@ -224,6 +224,38 @@ function updFeatCounter(){
   c.className=featCount>=6?'fc full':'fc';
 }
 
+// Auto-publish only applies when SpotOn registers the domain — we can't
+// auto-publish to a domain we don't control. This clears the question and any
+// stale answer whenever that stops being true, so step 6 never demands an
+// answer to a question the client can't see.
+function resetAutopublish(){
+  needNewDomain=false;
+  hide('autopublish-wrap');
+  document.querySelectorAll('input[name="autopublish"]').forEach(function(i){i.checked=false;});
+  document.querySelectorAll('#autopublish-group .ro').forEach(function(o){o.classList.remove('sel');});
+  var apErr=$('autopublish-err');
+  if(apErr)apErr.style.display='none';
+}
+
+// Wipe every domain sub-answer below the "do you have a website?" question.
+// Called whenever that top-level answer changes, in either direction — the
+// answers underneath it are no longer meaningful.
+function resetDomainAnswers(){
+  hide('new-domain-wrap');
+  document.querySelectorAll('input[name="has-domain"]').forEach(function(i){i.checked=false;});
+  document.querySelectorAll('#hd-group .ro').forEach(function(o){o.classList.remove('sel');});
+
+  var pref=document.querySelector('input[name="domain-preferred"]');
+  if(pref)pref.style.borderColor='';
+  if($('domain-preferred-err'))$('domain-preferred-err').style.display='none';
+
+  var dn=document.querySelector('input[name="domain-name"]');
+  if(dn)dn.style.borderColor='';
+  if($('domain-name-err'))$('domain-name-err').style.display='none';
+
+  resetAutopublish();
+}
+
 /* ═══════════════════════════════════════════════════════════════════════════
    INLINE FILE UPLOADER
    ───────────────────────────────────────────────────────────────────────────
@@ -958,7 +990,12 @@ function setup(){
       hide('transfer-code-wrap');
       document.querySelectorAll('input[name="domain-transfer"]').forEach(function(i){i.checked=false;});
       document.querySelectorAll('#dt-group .ro').forEach(function(o){o.classList.remove('sel');});
-      if(!hw){hide('domain-owned-wrap');hide('new-domain-wrap');document.querySelectorAll('input[name="has-domain"]').forEach(function(i){i.checked=false;});document.querySelectorAll('#hd-group .ro').forEach(function(o){o.classList.remove('sel');});}
+      if(!hw)hide('domain-owned-wrap');
+      // Reset the domain sub-questions either way. Switching TO "yes, I have an
+      // existing website" used to leave a stale "I need a domain" answer behind,
+      // which kept needNewDomain true — so step 6 still demanded an auto-publish
+      // answer for a domain we don't control, on a question that was hidden.
+      resetDomainAnswers();
       var iwo=$('images-website-opt');if(iwo)iwo.style.display=hw?'flex':'none';
       selRG('hw-group',r);sendHeight();
     });
@@ -971,7 +1008,11 @@ function setup(){
       if(!owns)hide('transfer-code-wrap');
       if(!owns){var domNameInp2=document.querySelector('input[name="domain-name"]');if(domNameInp2)domNameInp2.style.borderColor='';if($('domain-name-err'))$('domain-name-err').style.display='none';}
       if(!needs){var domPrefInp2=document.querySelector('input[name="domain-preferred"]');if(domPrefInp2)domPrefInp2.style.borderColor='';if($('domain-preferred-err'))$('domain-preferred-err').style.display='none';}
-      needNewDomain=needs;tog('autopublish-wrap',needs);
+      // Auto-publish is only offered when SpotOn is registering the domain.
+      // Switching away from that clears the question AND any answer already
+      // given, so a stale "yes, auto-publish" can't ride along in the payload.
+      if(needs){needNewDomain=true;show('autopublish-wrap');}
+      else resetAutopublish();
       selRG('hd-group',r);sendHeight();
     });
   });
