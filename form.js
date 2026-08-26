@@ -1263,6 +1263,22 @@ document.getElementById('wf').addEventListener('submit', function(e) {
   // Make sure the upload summary fields reflect the final state
   upSyncSummary();
 
+  // Guarantee this client has a Drive folder even if they uploaded nothing, so
+  // the team can drop assets in and the analyzer's recap doc has a home.
+  // Fired alongside the submission rather than after it: the page navigates
+  // away on success, which would cancel an in-flight request. Best-effort —
+  // a failure here must never block the submission.
+  var bizForFolder = upBiz();
+  if (bizForFolder) {
+    try {
+      fetch(UPLOAD_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify({ businessName: bizForFolder, ensureFolder: true })
+      }).catch(function(){});
+    } catch (err) {}
+  }
+
   // Show the full-screen loading overlay
   var overlay = document.getElementById('loading-overlay');
   var loadingMsg = document.getElementById('loading-msg');
