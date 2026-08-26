@@ -43,7 +43,7 @@ var T={
     extraPagesBody:"By continuing, you agree to the additional page fee. We'll send you a proposal to review and sign before any work begins.",
     featCounter:function(n){return n+' of 6 slots used';},
     imagesDisclaimer:"By selecting your own images, you declare you have copyright licensing for the imagery or authorize its use on your website.\n\nIf we don't receive images at time of processing, we'll use stock images and replace them later.",
-    inspirationDesc:'You can also upload a flyer, poster, or social media post using the link below.\n<a href="https://spoton-website-contents.tiiny.site/" target="_blank" style="color:var(--blue);font-weight:500">Upload inspiration files \u2197</a>\n\nTo view example websites made by us, <a href="https://websites-catalog.webflow.io/client-catalog" target="_blank" style="color:var(--blue);font-weight:500">click here \u2197</a>',
+    inspirationDesc:'You can also upload a flyer, poster, or social media post using the upload box further down this step.\n\nTo view example websites made by us, <a href="https://websites-catalog.webflow.io/client-catalog" target="_blank" style="color:var(--blue);font-weight:500">click here \u2197</a>',
     pageSpecificsHint:'Please tell us: which page, what content, and any external links (Yelp, TripAdvisor, reservations, press, etc.)<br><em>Example: Home \u2014 Include: About us, Featured dishes, Menu, Catering, Newsletter, Contact</em>',
     autopublishDesc:"Once your website draft is complete, our team will reach out to you at least 5 times to get your approval. If we're unable to reach you, your website will be auto-published to your domain so it can start ranking in Google's search engines.<br><br>If you prefer not to auto-publish, your subscription will simply be put on hold until you get back to us.",
     tcBody:'<strong>SpotOn Website Services — Terms &amp; Conditions</strong><br><br>By accepting these terms and conditions, you confirm that all the information you provide is true and accurate, and that you have read and agreed to the following:<br><br><strong>Copy Optimization.</strong> By agreeing to have your website content optimized, you are accepting the use of generative artificial intelligence in the process.<br><br><strong>Copyright License.</strong> By accepting these terms, you confirm that you have the proper copyright licenses for all the content you send us or approve for use on your website. This includes (but is not limited to) images, videos, fonts, logos, and text.<br><br><strong>Domain Transfer.</strong> By agreeing to transfer your domain, you are handing over ownership of the domain to SpotOn. You may request the return of the domain at any time. Once the request has been made and the transfer code provided, you will have a period of 15 calendar days to complete the transfer. If you do not do it within this period, you will lose the opportunity to recover it free of cost. Please note that if a domain has recently been purchased or transferred, we must wait 60 days, per ICANN norms, before being able to transfer again.<br><br><strong>Fees.</strong> Fees may change over time.<br><br><strong>Third-Party Integrations.</strong> We do not provide support for issues related to third-party integrations, nor can we guarantee they will always work correctly.<br><br><strong>Ongoing Support.</strong> Before your website is published, you can contact us anytime at <a href="mailto:websiteimp@spoton.com" style="color:var(--blue)">websiteimp@spoton.com</a> or <a href="https://calendar.app.google/1pvzRL4x8KP5dqPZA" target="_blank" style="color:var(--blue)">book a call</a> to speak with a website implementation specialist.<br><br>Once your website is live, please contact our support team at <a href="mailto:support@spoton.com" style="color:var(--blue)">support@spoton.com</a> or call <a href="tel:+18778144102" style="color:var(--blue)">(877) 814-4102</a> for further assistance.',
@@ -54,7 +54,26 @@ var T={
     inspirationNudgeBody:"That's totally fine — but we'd love for you to browse our website examples so our team has a better sense of your style.",
     inspirationNudgeCta:"View our website examples \u2197",
     inspirationNudgeContinue:"Continue without one",
-    inspirationErr:"Please share an inspiration site or URL — or visit our examples and describe a style you like."
+    inspirationErr:"Please share an inspiration site or URL — or visit our examples and describe a style you like.",
+    mockupTipBody:'\ud83d\udca1 If you have a mockup, wireframe, or are working with your own web designer, please share it with us — it helps us build your site exactly the way you envision it. You can paste a link below or add the files right here.',
+
+    /* ── Inline uploader ── */
+    upDropMain:'Drag &amp; drop files here',
+    upDropSub:'or <span class="up-link">browse your device</span>',
+    upDropHint:function(mb){return 'Images, PDFs and documents \u2014 up to '+mb+'MB per file';},
+    upBtnIdle:'Upload files',
+    upBtn:function(n){return 'Upload '+n+' file'+(n===1?'':'s');},
+    upBtnMore:'Add more files',
+    upProgress:function(i,n,name){return 'Uploading '+i+' of '+n+' \u2014 '+name;},
+    upDoneTitle:function(n){return n+' file'+(n===1?'':'s')+' uploaded';},
+    upDoneBody:"Saved to your project folder. You can keep adding files or move on.",
+    upRemove:'Remove',
+    upErrTooBig:function(names,mb){return 'Too large to upload (max '+mb+'MB each): '+names+'. Please resize or send them to websiteimp@spoton.com instead.';},
+    upErrFailed:function(names){return "These files didn't upload: "+names+'. Please try again, or email them to websiteimp@spoton.com.';},
+    upErrNoBiz:'Please enter your business name in step 1 before uploading.',
+    upTipTitle:'Name your food photos correctly',
+    upTipBody:'If you\u2019re uploading menu item photos, please <strong>rename each file to match the dish name</strong> before uploading.<br>For example: <code>Grilled Salmon.jpg</code>, <code>Caesar Salad.png</code>',
+    upNoFilesWarn:"You haven't uploaded any files yet. You can continue \u2014 but we'll start your build without them."
   },
   es:{
     topbarLabel:'Cuestionario de sitio web',
@@ -73,7 +92,7 @@ var T={
     extraPagesBody:'Al continuar, acepta el costo adicional por p\u00e1gina. Le enviaremos una propuesta para revisar y firmar antes de comenzar.',
     featCounter:function(n){return n+' de 6 espacios usados';},
     imagesDisclaimer:'Al seleccionar sus propias im\u00e1genes, declara que tiene licencia de derechos de autor sobre ellas o autoriza su uso en su sitio web.\n\nSi no recibimos im\u00e1genes al momento de procesar, usaremos im\u00e1genes de banco y las reemplazaremos despu\u00e9s.',
-    inspirationDesc:'Tambi\u00e9n puede subir un volante, p\u00f3ster o publicaci\u00f3n de redes sociales usando el enlace a continuaci\u00f3n.\n<a href="https://spoton-website-contents.tiiny.site/" target="_blank" style="color:var(--blue);font-weight:500">Subir archivos de inspiraci\u00f3n \u2197</a>\n\nPara ver ejemplos de sitios web hechos por nosotros, <a href="https://websites-catalog.webflow.io/client-catalog" target="_blank" style="color:var(--blue);font-weight:500">haga clic aqu\u00ed \u2197</a>',
+    inspirationDesc:'Tambi\u00e9n puede subir un volante, p\u00f3ster o publicaci\u00f3n de redes sociales usando el cuadro de carga m\u00e1s abajo en este paso.\n\nPara ver ejemplos de sitios web hechos por nosotros, <a href="https://websites-catalog.webflow.io/client-catalog" target="_blank" style="color:var(--blue);font-weight:500">haga clic aqu\u00ed \u2197</a>',
     pageSpecificsHint:'Por favor ind\u00edquenos: qu\u00e9 p\u00e1gina, qu\u00e9 contenido, y cualquier enlace externo (Yelp, TripAdvisor, reservaciones, prensa, etc.)<br><em>Ejemplo: Inicio \u2014 Incluir: Sobre nosotros, Platillos destacados, Men\u00fa, Catering, Newsletter, Contacto</em>',
     autopublishDesc:'Una vez que el borrador de su sitio web est\u00e9 listo, nuestro equipo lo contactar\u00e1 al menos 5 veces para obtener su aprobaci\u00f3n. Si no podemos comunicarnos con usted, su sitio web se publicar\u00e1 autom\u00e1ticamente para que comience a posicionarse en Google.<br><br>Si prefiere que no se publique autom\u00e1ticamente, su suscripci\u00f3n simplemente se pausar\u00e1 hasta que se comunique con nosotros.',
     tcBody:'<strong>SpotOn Servicios Web — T\u00e9rminos y Condiciones</strong><br><br>Al aceptar estos t\u00e9rminos y condiciones, usted confirma que toda la informaci\u00f3n que proporciona es verdadera y precisa, y que ha le\u00eddo y aceptado lo siguiente:<br><br><strong>Optimizaci\u00f3n de contenido.</strong> Al aceptar que el contenido de su sitio web sea optimizado, usted acepta el uso de inteligencia artificial generativa en el proceso.<br><br><strong>Licencia de derechos de autor.</strong> Al aceptar estos t\u00e9rminos, usted confirma que posee las licencias de derechos de autor adecuadas para todo el contenido que nos env\u00ede o apruebe para su uso en su sitio web. Esto incluye (pero no se limita a) im\u00e1genes, videos, fuentes, logotipos y texto.<br><br><strong>Transferencia de dominio.</strong> Al aceptar transferir su dominio, usted cede la propiedad del dominio a SpotOn. Puede solicitar la devoluci\u00f3n del dominio en cualquier momento. Una vez realizada la solicitud y proporcionado el c\u00f3digo de transferencia, tendr\u00e1 un per\u00edodo de 15 d\u00edas calendario para completar la transferencia. Si no lo hace dentro de este per\u00edodo, perder\u00e1 la oportunidad de recuperarlo sin costo. Tenga en cuenta que si un dominio ha sido comprado o transferido recientemente, debemos esperar 60 d\u00edas, seg\u00fan las normas de ICANN, antes de poder transferirlo nuevamente.<br><br><strong>Tarifas.</strong> Las tarifas pueden cambiar con el tiempo.<br><br><strong>Integraciones de terceros.</strong> No brindamos soporte para problemas relacionados con integraciones de terceros, ni podemos garantizar que siempre funcionen correctamente.<br><br><strong>Soporte continuo.</strong> Antes de que su sitio web sea publicado, puede contactarnos en cualquier momento en <a href="mailto:websiteimp@spoton.com" style="color:var(--blue)">websiteimp@spoton.com</a> o <a href="https://calendar.app.google/1pvzRL4x8KP5dqPZA" target="_blank" style="color:var(--blue)">agendar una llamada</a> para hablar con un especialista en implementaci\u00f3n de sitios web.<br><br>Una vez que su sitio web est\u00e9 activo, comun\u00edquese con nuestro equipo de soporte en <a href="mailto:support@spoton.com" style="color:var(--blue)">support@spoton.com</a> o llame al <a href="tel:+18778144102" style="color:var(--blue)">(877) 814-4102</a> para obtener m\u00e1s asistencia.',
@@ -84,7 +103,26 @@ var T={
     inspirationNudgeBody:"No hay problema — pero le recomendamos explorar nuestros ejemplos de sitios web para que nuestro equipo tenga una mejor idea de su estilo.",
     inspirationNudgeCta:"Ver nuestros ejemplos de sitios web \u2197",
     inspirationNudgeContinue:"Continuar sin uno",
-    inspirationErr:"Por favor comparta un sitio de inspiración o URL — o visite nuestros ejemplos y describa un estilo que le guste."
+    inspirationErr:"Por favor comparta un sitio de inspiración o URL — o visite nuestros ejemplos y describa un estilo que le guste.",
+    mockupTipBody:'\ud83d\udca1 Si tiene una maqueta, wireframe o est\u00e1 trabajando con su propio dise\u00f1ador web, por favor comp\u00e1rtalo con nosotros — nos ayuda a construir su sitio exactamente como lo imagina. Puede pegar un enlace abajo o agregar los archivos aqu\u00ed mismo.',
+
+    /* ── Inline uploader ── */
+    upDropMain:'Arrastre y suelte sus archivos aqu\u00ed',
+    upDropSub:'o <span class="up-link">busque en su dispositivo</span>',
+    upDropHint:function(mb){return 'Im\u00e1genes, PDFs y documentos \u2014 hasta '+mb+'MB por archivo';},
+    upBtnIdle:'Subir archivos',
+    upBtn:function(n){return 'Subir '+n+' archivo'+(n===1?'':'s');},
+    upBtnMore:'Agregar m\u00e1s archivos',
+    upProgress:function(i,n,name){return 'Subiendo '+i+' de '+n+' \u2014 '+name;},
+    upDoneTitle:function(n){return n+' archivo'+(n===1?'':'s')+(n===1?' subido':' subidos');},
+    upDoneBody:'Guardado en la carpeta de su proyecto. Puede seguir agregando archivos o continuar.',
+    upRemove:'Quitar',
+    upErrTooBig:function(names,mb){return 'Demasiado grande para subir (m\u00e1ximo '+mb+'MB cada uno): '+names+'. Por favor red\u00fazcalo o envíelo a websiteimp@spoton.com.';},
+    upErrFailed:function(names){return 'Estos archivos no se subieron: '+names+'. Por favor intente de nuevo, o env\u00edelos por correo a websiteimp@spoton.com.';},
+    upErrNoBiz:'Por favor ingrese el nombre de su negocio en el paso 1 antes de subir archivos.',
+    upTipTitle:'Nombre correctamente sus fotos de comida',
+    upTipBody:'Si va a subir fotos del men\u00fa, por favor <strong>renombre cada archivo con el nombre del platillo</strong> antes de subirlo.<br>Por ejemplo: <code>Tacos de Birria.jpg</code>, <code>Pozole Rojo.png</code>',
+    upNoFilesWarn:'A\u00fan no ha subido ning\u00fan archivo. Puede continuar \u2014 pero comenzaremos su sitio sin ellos.'
   }
 };
 
@@ -117,6 +155,7 @@ function applyLang(){
   if($('tc-body'))$('tc-body').innerHTML=t('tcBody');
   updFeatCounter();
   updPgCounter();
+  upApplyLang();
   updProg();
 }
 
@@ -183,6 +222,410 @@ function updFeatCounter(){
   if(!c)return;
   c.textContent=t('featCounter')(featCount);
   c.className=featCount>=6?'fc full':'fc';
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   INLINE FILE UPLOADER
+   ───────────────────────────────────────────────────────────────────────────
+   Replaces the old links out to spoton-website-contents.tiiny.site. Files now
+   upload from inside the questionnaire, straight to the same Google Apps Script
+   Web App the tiiny page used — so Drive folders, permissions and the receiving
+   script are unchanged. What's new:
+     · No new browser tab, so clients can't strand themselves mid-upload
+     · Business name is read from step 1 instead of being retyped
+     · Each file carries a category, so Drive can sort logo / photos / menu
+     · Per-file size cap with real error copy instead of a silent failure count
+     · An upload summary rides along in the submission payload
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+// Same endpoint the tiiny.site page posted to — writes into Google Drive.
+var UPLOAD_ENDPOINT='https://script.google.com/macros/s/AKfycbzq3beJUZe-GOb4SLexoOhyDtpdhapXYE5gAty-E4wMIhaP-wnw6QXqc9y6P7ENMAQ-aQ/exec';
+
+// Per-file ceiling. Apps Script chokes on very large base64 payloads, and phone
+// photos routinely land at 8-12MB, so this is generous but bounded.
+var MAX_FILE_MB=20;
+
+// Which uploader belongs where. Keyed by the id of the wrapper the old tiiny
+// link sat inside; anything unmatched falls back to 'inspiration'.
+var UP_BY_WRAP={
+  'logo-upload-wrap':'logo',
+  'upload-content-wrap':'content',
+  'images-upload-wrap':'photos',
+  'menu-upload-wrap':'menu'
+};
+
+// Categories that get the "name your food photos" tip.
+var UP_TIP_CATS={photos:1,menu:1};
+
+// Stable English labels sent to Apps Script. These drive Drive subfolder names,
+// so they must NOT be translated — a Spanish-language client's files still need
+// to land in the same folder a designer expects.
+var UP_DRIVE_LABEL={
+  logo:'Logo',
+  photos:'Photos',
+  menu:'Menu',
+  inspiration:'Inspiration',
+  content:'Website content'
+};
+
+// cat -> { sel:[File], done:[String], busy:Bool }
+var upState={};
+
+var UP_CSS=[
+'.up{margin-top:10px}',
+'.up-dz{position:relative;border:2px dashed #d0d8e4;border-radius:var(--rl);background:#f8f9fb;padding:24px 18px;text-align:center;cursor:pointer;transition:background .18s,border-color .18s}',
+'.up-dz:hover,.up-dz.drag{background:#f0f5ff;border-color:var(--blue)}',
+'.up-dz input[type=file]{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;cursor:pointer}',
+'.up-ico{width:44px;height:44px;margin:0 auto 10px;border-radius:10px;background:#fff;border:1.5px solid #e0e3e9;display:flex;align-items:center;justify-content:center;transition:border-color .18s}',
+'.up-dz:hover .up-ico{border-color:var(--blue)}',
+'.up-ico svg{width:20px;height:20px;stroke:var(--blue);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}',
+'.up-main{font-size:14px;font-weight:500;color:#111;margin-bottom:3px}',
+'.up-sub{font-size:12.5px;color:var(--tg)}',
+'.up-link{color:var(--blue);font-weight:500}',
+'.up-hint{font-size:11.5px;color:var(--tg);margin-top:6px}',
+'.up-tip{display:flex;gap:11px;align-items:flex-start;background:#f0f5ff;border-left:3px solid var(--blue);border-radius:0 var(--r) var(--r) 0;padding:12px 14px;margin-bottom:10px}',
+'.up-tip-ico{font-size:15px;line-height:1.3;flex-shrink:0}',
+'.up-tip-t{font-size:12.5px;font-weight:500;color:#1a3a6e;margin-bottom:3px}',
+'.up-tip-b{font-size:12px;color:#33507d;line-height:1.6}',
+'.up-tip-b code{font-family:var(--f);font-weight:500;color:var(--blue);font-size:11.5px}',
+'.up-list{display:flex;flex-direction:column;gap:6px;margin-top:10px}',
+'.up-item{display:flex;align-items:center;gap:10px;background:#fff;border:1.5px solid #e0e3e9;border-radius:var(--r);padding:9px 12px}',
+'.up-item.ok{border-color:rgba(23,105,255,0.35);background:#f8faff}',
+'.up-item-ico{font-size:14px;flex-shrink:0}',
+'.up-item-n{flex:1;font-size:12.5px;color:#333;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}',
+'.up-item-s{font-size:11px;color:var(--tg);flex-shrink:0}',
+'.up-item-x{background:none;border:none;cursor:pointer;color:#b8c0cc;font-size:15px;line-height:1;padding:2px 3px;border-radius:4px;font-family:var(--f)}',
+'.up-item-x:hover{color:#ef4444}',
+'.up-prog{display:none;margin-top:10px}',
+'.up-track{height:5px;background:#e8eaf0;border-radius:99px;overflow:hidden}',
+'.up-fill{height:100%;width:0;background:var(--blue);border-radius:99px;transition:width .25s ease}',
+'.up-progtxt{font-size:11.5px;color:var(--tg);margin-top:6px;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}',
+'.up-btn{margin-top:10px}',
+'.up-btn:disabled{background:#c8d6f5;cursor:not-allowed}',
+'.up-status{display:none;font-size:12px;line-height:1.55;margin-top:9px;padding:10px 12px;border-radius:var(--r)}',
+'.up-status.on{display:block}',
+'.up-status.bad{background:#fff5f5;border:1px solid #f5c2c2;color:#c0392b}',
+'.up-done{display:none;align-items:flex-start;gap:11px;margin-top:10px;padding:12px 14px;background:#f0f5ff;border:1.5px solid rgba(23,105,255,0.3);border-radius:var(--r)}',
+'.up-done.on{display:flex}',
+'.up-done-ico{width:22px;height:22px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}',
+'.up-done-t{font-size:12.5px;font-weight:500;color:#1a3a6e;margin-bottom:2px}',
+'.up-done-b{font-size:12px;color:#33507d;line-height:1.55}',
+'.up-warn{display:none;font-size:12px;line-height:1.55;margin-top:8px;padding:10px 12px;background:#fffbeb;border:1px solid #fde68a;border-radius:var(--r);color:#92400e}',
+'.up-warn.on{display:block}'
+].join('');
+
+function upInjectCSS(){
+  if($('up-css'))return;
+  var s=document.createElement('style');
+  s.id='up-css';
+  s.textContent=UP_CSS;
+  document.head.appendChild(s);
+}
+
+function upBiz(){
+  var el=$('bizname');
+  return el?el.value.trim():'';
+}
+
+function upFmtSize(b){
+  return b>1048576?(b/1048576).toFixed(1)+' MB':Math.max(1,Math.round(b/1024))+' KB';
+}
+
+function upFileIcon(f){
+  if(f.type&&f.type.indexOf('image/')===0)return '\ud83d\uddbc\ufe0f';
+  if(f.type==='application/pdf')return '\ud83d\udcc4';
+  return '\ud83d\udcce';
+}
+
+// Build one uploader widget in place of the given tiiny link.
+function upBuild(anchor,cat){
+  var host=document.createElement('div');
+  host.className='up';
+  host.id='up-'+cat;
+  host.setAttribute('data-up-cat',cat);
+
+  var tip=UP_TIP_CATS[cat]
+    ?'<div class="up-tip"><span class="up-tip-ico">\ud83d\udccc</span><div><div class="up-tip-t" id="up-tipt-'+cat+'"></div><div class="up-tip-b" id="up-tipb-'+cat+'"></div></div></div>'
+    :'';
+
+  host.innerHTML=tip+
+    '<div class="up-dz" id="up-dz-'+cat+'">'+
+      '<input type="file" multiple id="up-input-'+cat+'">'+
+      '<div class="up-ico"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>'+
+      '<div class="up-main" id="up-main-'+cat+'"></div>'+
+      '<div class="up-sub" id="up-sub-'+cat+'"></div>'+
+      '<div class="up-hint" id="up-hint-'+cat+'"></div>'+
+    '</div>'+
+    '<div class="up-list" id="up-list-'+cat+'"></div>'+
+    '<div class="up-prog" id="up-prog-'+cat+'">'+
+      '<div class="up-track"><div class="up-fill" id="up-fill-'+cat+'"></div></div>'+
+      '<div class="up-progtxt" id="up-progtxt-'+cat+'"></div>'+
+    '</div>'+
+    '<div class="up-done" id="up-done-'+cat+'">'+
+      '<div class="up-done-ico">\u2713</div>'+
+      '<div><div class="up-done-t" id="up-donet-'+cat+'"></div><div class="up-done-b" id="up-doneb-'+cat+'"></div></div>'+
+    '</div>'+
+    '<div class="up-status" id="up-status-'+cat+'"></div>'+
+    '<div class="up-warn" id="up-warn-'+cat+'"></div>'+
+    '<button type="button" class="btn up-btn" id="up-btn-'+cat+'" disabled></button>';
+
+  // Drop the old outbound link and the hint that told clients they'd be taken
+  // to another page — neither is true any more.
+  var sib=anchor.nextElementSibling;
+  if(sib&&sib.classList.contains('hint')){
+    var hintTxt=(sib.getAttribute('data-en')||'')+(sib.textContent||'');
+    if(/upload page|p\u00e1gina segura de carga|secure upload/i.test(hintTxt))sib.remove();
+  }
+  anchor.parentNode.replaceChild(host,anchor);
+
+  upState[cat]={sel:[],done:[],busy:false};
+  upWire(cat);
+  return host;
+}
+
+function upWire(cat){
+  var dz=$('up-dz-'+cat),input=$('up-input-'+cat),btn=$('up-btn-'+cat);
+
+  on(input,'change',function(){upAdd(cat,input.files);input.value='';});
+
+  on(dz,'dragover',function(e){e.preventDefault();dz.classList.add('drag');});
+  on(dz,'dragleave',function(){dz.classList.remove('drag');});
+  on(dz,'drop',function(e){
+    e.preventDefault();
+    dz.classList.remove('drag');
+    if(e.dataTransfer&&e.dataTransfer.files)upAdd(cat,e.dataTransfer.files);
+  });
+
+  on(btn,'click',function(){upSend(cat);});
+}
+
+function upAdd(cat,files){
+  var st=upState[cat];
+  if(!st||st.busy)return;
+  var tooBig=[],limit=MAX_FILE_MB*1048576;
+  for(var i=0;i<files.length;i++){
+    var f=files[i];
+    if(f.size>limit){tooBig.push(f.name);continue;}
+    // Skip exact duplicates already queued or already uploaded
+    var dupe=st.done.indexOf(f.name)>-1;
+    for(var j=0;j<st.sel.length&&!dupe;j++){
+      if(st.sel[j].name===f.name&&st.sel[j].size===f.size)dupe=true;
+    }
+    if(!dupe)st.sel.push(f);
+  }
+  if(tooBig.length)upStatus(cat,t('upErrTooBig')(tooBig.join(', '),MAX_FILE_MB));
+  else upStatus(cat,'');
+  upRender(cat);
+}
+
+function upRemove(cat,idx){
+  var st=upState[cat];
+  if(!st||st.busy)return;
+  st.sel.splice(idx,1);
+  upRender(cat);
+}
+
+function upStatus(cat,msg){
+  var el=$('up-status-'+cat);
+  if(!el)return;
+  el.textContent=msg||'';
+  el.className='up-status'+(msg?' on bad':'');
+}
+
+function upRender(cat){
+  var st=upState[cat],list=$('up-list-'+cat),btn=$('up-btn-'+cat);
+  if(!st||!list)return;
+
+  list.innerHTML='';
+
+  // Already-uploaded files, shown as confirmed and not removable
+  st.done.forEach(function(name){
+    var row=document.createElement('div');
+    row.className='up-item ok';
+    row.innerHTML='<span class="up-item-ico">\u2713</span><span class="up-item-n"></span>';
+    row.querySelector('.up-item-n').textContent=name;
+    list.appendChild(row);
+  });
+
+  // Queued files, still removable
+  st.sel.forEach(function(f,i){
+    var row=document.createElement('div');
+    row.className='up-item';
+    row.innerHTML='<span class="up-item-ico">'+upFileIcon(f)+'</span>'+
+      '<span class="up-item-n"></span>'+
+      '<span class="up-item-s">'+upFmtSize(f.size)+'</span>'+
+      '<button type="button" class="up-item-x">\u00d7</button>';
+    row.querySelector('.up-item-n').textContent=f.name;
+    var x=row.querySelector('.up-item-x');
+    x.title=t('upRemove');
+    x.addEventListener('click',function(){upRemove(cat,i);});
+    list.appendChild(row);
+  });
+
+  if(btn){
+    btn.disabled=st.sel.length===0||st.busy;
+    btn.textContent=st.sel.length
+      ?t('upBtn')(st.sel.length)
+      :(st.done.length?t('upBtnMore'):t('upBtnIdle'));
+  }
+
+  var done=$('up-done-'+cat);
+  if(done)done.classList.toggle('on',st.done.length>0);
+  if(st.done.length){
+    var dt=$('up-donet-'+cat),db=$('up-doneb-'+cat);
+    if(dt)dt.textContent=t('upDoneTitle')(st.done.length);
+    if(db)db.textContent=t('upDoneBody');
+  }
+
+  // Any successful upload clears the "you haven't uploaded anything" nudge
+  if(st.done.length){
+    var w=$('up-warn-'+cat);
+    if(w)w.classList.remove('on');
+  }
+
+  upSyncSummary();
+  sendHeight();
+}
+
+function upToBase64(file){
+  return new Promise(function(resolve,reject){
+    var r=new FileReader();
+    r.onload=function(){resolve(String(r.result).split(',')[1]);};
+    r.onerror=reject;
+    r.readAsDataURL(file);
+  });
+}
+
+function upSend(cat){
+  var st=upState[cat];
+  if(!st||st.busy||!st.sel.length)return;
+
+  var biz=upBiz();
+  if(!biz){upStatus(cat,t('upErrNoBiz'));return;}
+
+  st.busy=true;
+  upStatus(cat,'');
+
+  var btn=$('up-btn-'+cat),prog=$('up-prog-'+cat),fill=$('up-fill-'+cat),ptxt=$('up-progtxt-'+cat);
+  if(btn)btn.disabled=true;
+  if(prog)prog.style.display='block';
+  if(fill)fill.style.width='0%';
+
+  var queue=st.sel.slice(),total=queue.length,i=0,failed=[];
+
+  function step(){
+    if(i>=total){finish();return;}
+    var file=queue[i];
+    if(ptxt)ptxt.textContent=t('upProgress')(i+1,total,file.name);
+    upToBase64(file).then(function(b64){
+      return fetch(UPLOAD_ENDPOINT,{
+        method:'POST',
+        // text/plain keeps this a "simple" request, so no CORS preflight —
+        // Apps Script doesn't answer OPTIONS. It reads the raw body regardless.
+        headers:{'Content-Type':'text/plain'},
+        body:JSON.stringify({
+          businessName:biz,
+          category:UP_DRIVE_LABEL[cat]||cat,
+          fileName:file.name,
+          mimeType:file.type||'application/octet-stream',
+          data:b64
+        })
+      }).then(function(r){return r.json();});
+    }).then(function(j){
+      if(j&&j.status==='ok')st.done.push(file.name);
+      else failed.push(file.name);
+    }).catch(function(){
+      failed.push(file.name);
+    }).then(function(){
+      i++;
+      if(fill)fill.style.width=Math.round(i/total*100)+'%';
+      step();
+    });
+  }
+
+  function finish(){
+    st.busy=false;
+    // Keep only the files that failed, so the retry is one click
+    st.sel=queue.filter(function(f){return failed.indexOf(f.name)>-1;});
+    setTimeout(function(){if(prog)prog.style.display='none';},400);
+    if(failed.length)upStatus(cat,t('upErrFailed')(failed.join(', ')));
+    upRender(cat);
+  }
+
+  step();
+}
+
+// Roll every category's uploads into the two hidden fields that ride along with
+// the submission, so the Sheet row shows what actually arrived.
+function upSyncSummary(){
+  var countF=$('up-count-field'),listF=$('up-files-field');
+  if(!countF||!listF)return;
+  var total=0,parts=[];
+  Object.keys(upState).forEach(function(cat){
+    var names=upState[cat].done;
+    if(!names.length)return;
+    total+=names.length;
+    parts.push((UP_DRIVE_LABEL[cat]||cat)+': '+names.join('; '));
+  });
+  countF.value=String(total);
+  listF.value=parts.join(' | ');
+}
+
+function upApplyLang(){
+  Object.keys(upState).forEach(function(cat){
+    var m=$('up-main-'+cat);if(m)m.innerHTML=t('upDropMain');
+    var s=$('up-sub-'+cat);if(s)s.innerHTML=t('upDropSub');
+    var h=$('up-hint-'+cat);if(h)h.textContent=t('upDropHint')(MAX_FILE_MB);
+    var tt=$('up-tipt-'+cat);if(tt)tt.textContent=t('upTipTitle');
+    var tb=$('up-tipb-'+cat);if(tb)tb.innerHTML=t('upTipBody');
+    var w=$('up-warn-'+cat);if(w)w.textContent=t('upNoFilesWarn');
+    upRender(cat);
+  });
+}
+
+// Non-blocking nudge: the client asked for something they were meant to upload
+// but hasn't uploaded anything. Per the "track, don't block" decision this never
+// stops them — it just makes the gap visible before they move on.
+function upNudge(cat){
+  var st=upState[cat],w=$('up-warn-'+cat);
+  if(!st||!w)return;
+  w.classList.toggle('on',st.done.length===0);
+}
+
+function initUploaders(){
+  upInjectCSS();
+
+  // Hidden fields for the submission payload
+  var form=$('wf');
+  if(form&&!$('up-count-field')){
+    var c=document.createElement('input');
+    c.type='hidden';c.name='uploaded-file-count';c.id='up-count-field';c.value='0';
+    form.appendChild(c);
+    var l=document.createElement('input');
+    l.type='hidden';l.name='uploaded-files';l.id='up-files-field';l.value='';
+    form.appendChild(l);
+  }
+
+  // Swap every outbound tiiny link for an in-place uploader
+  var links=[].slice.call(document.querySelectorAll('a[href*="tiiny.site"]'));
+  links.forEach(function(a){
+    var cat='inspiration';
+    for(var wrapId in UP_BY_WRAP){
+      if(a.closest('#'+wrapId)){cat=UP_BY_WRAP[wrapId];break;}
+    }
+    // Only one uploader per category; if a second link maps to the same one,
+    // just drop the stray link.
+    if(upState[cat]){a.remove();return;}
+    upBuild(a,cat);
+  });
+
+  // The mockup blurb pointed at "the upload page linked above" — no such page now.
+  document.querySelectorAll('[data-en]').forEach(function(el){
+    if((el.getAttribute('data-en')||'').indexOf('upload page linked above')>-1){
+      el.setAttribute('data-en',T.en.mockupTipBody);
+      el.setAttribute('data-es',T.es.mockupTipBody);
+    }
+  });
 }
 
 // --- Inspiration nudge dialog ---
@@ -298,6 +741,9 @@ function validate(){
         if(exUrlInp){exUrlInp.style.borderColor='';}
         if(exUrlErr){exUrlErr.style.display='none';}
       }
+      // Non-blocking: they said they'd send us new content but uploaded nothing
+      var ucSel=document.querySelector('input[name="use-existing-content"]:checked');
+      if(ucSel&&ucSel.value.indexOf('provide')>-1)upNudge('content');
     }
     else if(hw){
       if(!document.querySelector('input[name="has-domain"]:checked'))ok=false;
@@ -346,6 +792,8 @@ function validate(){
       hasLogoErr.style.display='none';
     }
     var logoVal=document.querySelector('input[name="has-logo"]:checked');
+    // Non-blocking: they said they have a logo but never uploaded it
+    if(logoVal&&logoVal.value.indexOf('have a logo')>-1)upNudge('logo');
     var needsLogoQ=logoVal&&(logoVal.value.indexOf('standard')>-1||logoVal.value.indexOf('custom')>-1);
     if(needsLogoQ){
       if(!document.querySelector('input[name="has-tagline"]:checked'))ok=false;
@@ -382,9 +830,11 @@ function validate(){
     var vibeErr=$('vibe-err');
     if(!vibeOk){if(vibeErr)vibeErr.style.display='block';ok=false;if(!firstBad&&vibeErr)firstBad=vibeErr;}else{if(vibeErr)vibeErr.style.display='none';}
     // CHANGE 3: Inspiration field is required — show nudge dialog if empty and not yet dismissed
+    // Files uploaded to the inspiration drop zone count as an answer.
     var inspVal=document.querySelector('textarea[name="inspiration-urls"]');
     var inspErr=$('inspiration-err');
-    if(inspVal&&!inspVal.value.trim()&&!inspirationNudgeDismissed){
+    var inspUploaded=upState.inspiration&&upState.inspiration.done.length>0;
+    if(inspVal&&!inspVal.value.trim()&&!inspUploaded&&!inspirationNudgeDismissed){
       ok=false;
       if(inspErr)inspErr.style.display='block';
       // Only show the nudge if all other step 3 errors are already resolved
@@ -404,6 +854,10 @@ function validate(){
     if(imagesErr)imagesErr.style.display=imagesOk?'none':'block';
     if(!imagesOk){ok=false;if(!firstBad&&imagesErr)firstBad=imagesErr;}
 
+    // Non-blocking: they chose to supply their own images but uploaded none
+    var iuCb=$('images-upload-cb');
+    if(iuCb&&iuCb.checked)upNudge('photos');
+
     var pagesErr=$('pages-err'),pagesOk=!!document.querySelectorAll('.pcb:checked').length;
     if(pagesErr)pagesErr.style.display=pagesOk?'none':'block';
     if(!pagesOk){ok=false;if(!firstBad&&pagesErr)firstBad=pagesErr;}
@@ -414,6 +868,9 @@ function validate(){
       var menuTypeOk=!!document.querySelector('input[name="menu-type"]:checked');
       if(menuTypeErr)menuTypeErr.style.display=menuTypeOk?'none':'block';
       if(!menuTypeOk){ok=false;if(!firstBad&&menuTypeErr)firstBad=menuTypeErr;}
+      // Non-blocking: menu-as-image was chosen but no menu file arrived
+      var mt=document.querySelector('input[name="menu-type"]:checked');
+      if(mt&&mt.value.indexOf('image')>-1)upNudge('menu');
     } else if(menuTypeErr){
       menuTypeErr.style.display='none';
     }
@@ -696,10 +1153,12 @@ function setup(){
   if(examplesModal){
     on(examplesModal,'click',function(e){if(e.target===examplesModal)examplesModal.classList.remove('show');});
   }
+
+  // Replace the outbound tiiny.site upload links with in-place drop zones
+  initUploaders();
 }
 
 // Google Apps Script Web App endpoint (deployed from the destination Sheet).
-// Replace PASTE_WEB_APP_URL_HERE with the URL Apps Script gives you after deploying.
 var FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxTygdTb8bE9iCel3gU9ddlYZT2im_aMhTQuTr18Lx_sAS-LWhkmKhoOhP0DlYnsiSrfA/exec';
 
 var isSubmitting = false;
@@ -707,11 +1166,24 @@ document.getElementById('wf').addEventListener('submit', function(e) {
   e.preventDefault();
   if (isSubmitting) return; // hard guard against multi-clicks
   if (!validate()) return;
+
+  // Don't let a submission race an upload that's still running
+  var stillUploading = Object.keys(upState).some(function(c){ return upState[c].busy; });
+  if (stillUploading) {
+    alert(lang === 'es'
+      ? 'Sus archivos todav\u00eda se est\u00e1n subiendo. Por favor espere unos segundos e intente de nuevo.'
+      : 'Your files are still uploading. Please wait a few seconds and try again.');
+    return;
+  }
+
   isSubmitting = true;
   var form = this;
   var btn = $('btnSubmit');
   btn.disabled = true;
   btn.querySelector('span').textContent = lang === 'es' ? 'Enviando\u2026' : 'Sending\u2026';
+
+  // Make sure the upload summary fields reflect the final state
+  upSyncSummary();
 
   // Show the full-screen loading overlay
   var overlay = document.getElementById('loading-overlay');
